@@ -1,62 +1,109 @@
-import React from "react";
+// Cart.js
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart, updateQuantity } from "../../redux/cartSlice";
 
-function CartArea() {
+const Cart = () => {
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+
+  const handleModalToggle = () => {
+    const modal = document.getElementById("exampleModal");
+    const hasToggle = modal.hasAttribute("data-bs-toggle");
+
+    if (!hasToggle) {
+      modal.setAttribute("data-bs-toggle", "modal");
+      modal.setAttribute("data-bs-target", "#exampleModal");
+    } else {
+      modal.removeAttribute("data-bs-toggle");
+      modal.removeAttribute("data-bs-target");
+    }
+  };
+
+  // Calculate total product amount
+  const productAmount = cartItems.reduce(
+    (total, item) => total + item.totalPrice,
+    0
+  );
+
+  // GST percentage
+  const gstPercentage = 1.8; // Change this to your actual GST percentage
+
+  // Calculate GST amount
+  const gstAmount = (productAmount * gstPercentage) / 100;
+
+  // Total amount with GST included
+  const totalAmount = productAmount + gstAmount;
+
+  // Processing fee (set to 0 for now)
+  const processingFee = 0; // Change this to your actual processing fee
+
+  // Calculate grand total
+  const grandTotal = totalAmount + processingFee;
+
+  const handleQuantityChange = (itemId, quantity) => {
+    dispatch(updateQuantity({ itemId, quantity }));
+  };
+
   return (
-    <div>
-      {" "}
-      <section id='cart_main_area' className='section_padding'>
+    <>
+      <section id='cart_main_area' className='mt-lg-5 pt-5'>
         <div className='container'>
           <div className='row'>
             <div className='col-lg-12'>
               <div className='cart_groomers_area_wrapper'>
-                <div className='cart_tabel_area table-responsive'>
-                  <table className='table'>
-                    <thead>
-                      <tr>
-                        <th>Image</th>
-                        <th>Product name</th>
-                        <th>Unit price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <img src='assets/img/shop/cart-1.png' alt='img' />
-                        </td>
-                        <td>Automatic dog blue leash</td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <form action='#!' className='product_count_form_two'>
-                            <div className='product_count_one'>
-                              <div className='plus-minus-input'>
-                                <div className='input-group-button'>
+                <div className='cart_tabel_area'>
+                  <div className='table-responsive'>
+                    <table className='table'>
+                      <thead>
+                        <tr>
+                          <th>Image</th>
+                          <th>Product name</th>
+                          <th>Unit price</th>
+                          <th>Quantity</th>
+                          <th>Total</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cartItems.map((item, index) => (
+                          <tr key={index}>
+                            <td>
+                              <img src={item.imageSrc} alt='img' />
+                            </td>
+                            <td>{item.productName}</td>
+                            <td>{item.unitPrice}</td>
+                            <td>
+                              <div className='product_count_one'>
+                                <div className='plus-minus-input'>
                                   <button
                                     type='button'
                                     className='button'
-                                    data-quantity='minus'
-                                    data-field='quantity'
+                                    onClick={() =>
+                                      handleQuantityChange(
+                                        item.id,
+                                        item.quantity - 1
+                                      )
+                                    }
                                   >
                                     <i
                                       className='fa fa-minus'
                                       aria-hidden='true'
                                     ></i>
                                   </button>
-                                </div>
-                                <input
-                                  className='form-control'
-                                  type='number'
-                                  name='quantity'
-                                  value='0'
-                                />
-                                <div className='input-group-button'>
+                                  <p className='form-control w-25 mx-2 '>
+                                    {" "}
+                                    {item.quantity}
+                                  </p>
                                   <button
                                     type='button'
                                     className='button'
-                                    data-quantity='plus'
-                                    data-field='quantity'
+                                    onClick={() =>
+                                      handleQuantityChange(
+                                        item.id,
+                                        item.quantity + 1
+                                      )
+                                    }
                                   >
                                     <i
                                       className='fa fa-plus'
@@ -65,251 +112,248 @@ function CartArea() {
                                   </button>
                                 </div>
                               </div>
-                            </div>
-                          </form>
-                        </td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <i className='fas fa-trash'></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src='assets/img/shop/cart-2.png' alt='img' />
-                        </td>
-                        <td>Automatic dog blue leash</td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <form action='#!' className='product_count_form_two'>
-                            <div className='product_count_one'>
-                              <div className='plus-minus-input'>
-                                <div className='input-group-button'>
-                                  <button
-                                    type='button'
-                                    className='button'
-                                    data-quantity='minus'
-                                    data-field='quantity'
-                                  >
-                                    <i
-                                      className='fa fa-minus'
-                                      aria-hidden='true'
-                                    ></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className='form-control'
-                                  type='number'
-                                  name='quantity'
-                                  value='0'
-                                />
-                                <div className='input-group-button'>
-                                  <button
-                                    type='button'
-                                    className='button'
-                                    data-quantity='plus'
-                                    data-field='quantity'
-                                  >
-                                    <i
-                                      className='fa fa-plus'
-                                      aria-hidden='true'
-                                    ></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <i className='fas fa-trash'></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src='assets/img/shop/cart-3.png' alt='img' />
-                        </td>
-                        <td>Automatic dog blue leash</td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <form action='#!' className='product_count_form_two'>
-                            <div className='product_count_one'>
-                              <div className='plus-minus-input'>
-                                <div className='input-group-button'>
-                                  <button
-                                    type='button'
-                                    className='button'
-                                    data-quantity='minus'
-                                    data-field='quantity'
-                                  >
-                                    <i
-                                      className='fa fa-minus'
-                                      aria-hidden='true'
-                                    ></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className='form-control'
-                                  type='number'
-                                  name='quantity'
-                                  value='0'
-                                />
-                                <div className='input-group-button'>
-                                  <button
-                                    type='button'
-                                    className='button'
-                                    data-quantity='plus'
-                                    data-field='quantity'
-                                  >
-                                    <i
-                                      className='fa fa-plus'
-                                      aria-hidden='true'
-                                    ></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <i className='fas fa-trash'></i>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src='assets/img/shop/cart-4.png' alt='img' />
-                        </td>
-                        <td>Automatic dog blue leash</td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <form action='#!' className='product_count_form_two'>
-                            <div className='product_count_one'>
-                              <div className='plus-minus-input'>
-                                <div className='input-group-button'>
-                                  <button
-                                    type='button'
-                                    className='button'
-                                    data-quantity='minus'
-                                    data-field='quantity'
-                                  >
-                                    <i
-                                      className='fa fa-minus'
-                                      aria-hidden='true'
-                                    ></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className='form-control'
-                                  type='number'
-                                  name='quantity'
-                                  value='0'
-                                />
-                                <div className='input-group-button'>
-                                  <button
-                                    type='button'
-                                    className='button'
-                                    data-quantity='plus'
-                                    data-field='quantity'
-                                  >
-                                    <i
-                                      className='fa fa-plus'
-                                      aria-hidden='true'
-                                    ></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </td>
-                        <td>Tk. 1,200.00</td>
-                        <td>
-                          <i className='fas fa-trash'></i>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div className='cart_tabel_bottom'>
-                    <div className='cart_submit_btn'>
-                      <a href='#!' className='btn btn_theme btn_md'>
-                        Continue shopping
-                      </a>
-                    </div>
-                    <div className='cart_right_side'>
-                      <form action='#!' id='subscribe_form1'>
-                        <div className='input-group'>
-                          <input
-                            type='text'
-                            className='form-control'
-                            placeholder='Your coupon code'
-                            required
-                          />
-                          <button
-                            className='btn btn_theme btn_md'
-                            type='submit'
-                          >
-                            Enter coupon
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+                            </td>
+                            <td>{item.totalPrice}</td>
+                            <td>
+                              <i
+                                className='fas fa-trash'
+                                onClick={() =>
+                                  dispatch(removeFromCart(item.id))
+                                }
+                              ></i>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='cart_bottom_area'>
-            <div className='row'>
-              <div className='col-lg-3'>
-                <div className='cart_note_area'>
-                  <form action='#!'>
-                    <div className='form-group'>
-                      <textarea
-                        rows='8'
-                        className='form-control'
-                        placeholder='Add a note to your order '
-                      ></textarea>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div className='col-lg-4 offset-lg-5'>
-                <div className='cart_area_total_wrapper'>
-                  <div className='cart_total_item bg_cart_item'>
-                    <h5>
-                      Automatic dog blue leash <span>$1,200</span>
-                    </h5>
-                  </div>
-                  <div className='cart_total_item'>
-                    <h5>
-                      Red dog bed <span>$1,800</span>
-                    </h5>
-                  </div>
-                  <div className='cart_total_area'>
-                    <h4>
-                      Total amount: <span>$400</span>
-                    </h4>
-                    <h4 className='cart_voucher_amount'>
-                      Voucher (happy60): <span>-$60</span>
-                    </h4>
-                  </div>
-                  <div className='cart_total_area bg_cart_item'>
-                    <h4>
-                      Grand total: <span>$340</span>
-                    </h4>
-                  </div>
-                </div>
-                <div className='cart_proce_btn'>
-                  <a href='checkout.html' className='btn btn_theme btn_md'>
-                    Proceed to checkout
-                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
+      {/* checkout */}
+      <section id='checkout_main_area' className='section_padding'>
+        <div className='container'>
+          <div className='row align-items-center'>
+            <div className='col-lg-6'>
+              <div className='cart_area_total_wrapper'>
+                <div className='cart_total_item bg_cart_item'>
+                  <h5>
+                    Product Amount :<span>₹{productAmount}</span>
+                  </h5>
+                </div>
+                <div className='cart_total_item justify-content-evenly'>
+                  <h5>
+                    GST :<span>₹{gstAmount.toFixed(2)}</span>
+                  </h5>
+                </div>
+                <div className='cart_total_area '>
+                  <h4 className='justify-content-between d-flex'>
+                    Total amount : <span> ₹{totalAmount.toFixed(2)}</span>
+                  </h4>
+                  <h4 className='cart_voucher_amount justify-content-between d-flex'>
+                    Processing Fee :
+                    <span>
+                      {processingFee === 0 ? "Free" : `₹${processingFee}`}
+                    </span>
+                  </h4>
+                </div>
+                <div className='cart_total_area bg_cart_item'>
+                  <h4 className='justify-content-between d-flex'>
+                    Grand total : <span>₹{grandTotal.toFixed(2)}</span>
+                  </h4>
+                </div>
+              </div>
+            </div>{" "}
+            <div className='col-lg-6'>
+              <div className='my_acount_submit'>
+                <button
+                  type='button'
+                  className='btn btn_theme btn_md w-100  py-lg-4'
+                  onClick={handleModalToggle}
+                  data-bs-toggle='modal'
+                  data-bs-target='#exampleModal'
+                >
+                  Confrim to Place Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* modal */}
 
-export default CartArea;
+      <div
+        className='modal fade'
+        id='exampleModal'
+        tabIndex='-1'
+        aria-labelledby='exampleModalLabel'
+        aria-hidden='true'
+      >
+        <div className=' modal-dialog modal-dialog-scrollable  modal-lg'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h5 className='modal-title' id='exampleModalLabel'>
+                Confirm Order
+              </h5>
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div className='modal-body'>
+              {" "}
+              <div className='shipping_addres_area_main'>
+                <div className='shipping_addres_main_form_area'>
+                  <h2>Shipping address</h2>
+                  <div className='shipping_address_form'>
+                    <form action='#!'>
+                      <div className='row'>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='First name*'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Last name*'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Email address (Optional)'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Mobile number*'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='User name*'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Password*'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-12'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Street address'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Apartment, Suite, House no (optional)'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <select className='form-select form-control'>
+                              <option selected>City</option>
+                              <option value='1'>Khulna</option>
+                              <option value='2'>Dhaka</option>
+                              <option value='3'>Barisal</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <select className='form-select form-control'>
+                              <option selected>Country</option>
+                              <option value='1'>Khulna</option>
+                              <option value='2'>Dhaka</option>
+                              <option value='3'>Barisal</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-group'>
+                            <input
+                              type='text'
+                              className='form-control'
+                              placeholder='Zip code'
+                            />
+                          </div>
+                        </div>
+                        <div className='col-lg-6'>
+                          <div className='form-check'>
+                            <input
+                              className='form-check-input'
+                              type='checkbox'
+                              value=''
+                              id='flexCheckDefault'
+                            />
+                            <label
+                              className='form-check-label'
+                              for='flexCheckDefault'
+                            >
+                              Save this information in address book
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='modal-footer'>
+              <div className='my_acount_submit'>
+                <button
+                  type='button'
+                  className='btn btn_theme btn_md w-100'
+                  onClick={handleModalToggle}
+                  data-bs-toggle='modal'
+                  data-bs-target='#exampleModal'
+                >
+                  Place Order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Cart;

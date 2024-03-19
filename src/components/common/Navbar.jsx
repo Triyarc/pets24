@@ -7,6 +7,21 @@ function Navbar() {
     setIsOverlayVisible(!isOverlayVisible);
   };
 
+  // logout
+  function clearAuthenticationCookie() {
+    document.cookie =
+      "loggedIn=false;path=/login;";
+  }
+
+  // Function to handle logout
+  function logout() {
+    // Clear the authentication cookie
+    clearAuthenticationCookie();
+
+    // Redirect to the login page or any other appropriate page
+    window.location.href = "/login"; // Replace "/login" with your actual login page URL
+  }
+
   return (
     <div>
       <header className='main_header_arae'>
@@ -25,7 +40,7 @@ function Navbar() {
           <div className='main-navbar'>
             <div className='container'>
               <nav className='navbar navbar-expand-md navbar-light'>
-                <a className='navbar-brand' href='index.html'>
+                <a className='navbar-brand' href='/'>
                   <img src='assets/img/logo.png' alt='logo' />
                 </a>
                 <div
@@ -80,11 +95,6 @@ function Navbar() {
                         <li className='nav-item'>
                           <a href='cart' className='nav-link'>
                             Cart
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='checkout' className='nav-link'>
-                            Checkout
                           </a>
                         </li>
                       </ul>
@@ -165,6 +175,12 @@ function Navbar() {
                         Contact
                       </a>
                     </li>
+                    <button
+                      className='btn btn-outline-dark'
+                      onClick={() => logout()}
+                    >
+                      Logout
+                    </button>
                   </ul>
                   <div className='others-options d-flex align-items-center'>
                     <div className='option-item'>

@@ -1,8 +1,8 @@
-import "./App.css";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Service from "./pages/Service";
 import Contact from "./pages/Contact";
@@ -10,26 +10,62 @@ import ProductShop from "./pages/ProductShop";
 import ProductDetails from "./pages/ProductDetails";
 import ErrorBoundry from "./pages/ErrorBoundry";
 import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
+import Login from "./pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
     <div className='App'>
       <Navbar />
-      <Router>
+      <BrowserRouter>
         <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/login' element={<Home />} />
-          <Route exact path='/service' element={<Service />} />
-          <Route exact path='/product' element={<ProductShop />} />
-          <Route exact path='/product-detail' element={<ProductDetails />} />
-          <Route exact path='/cart' element={<Cart />} />
-          <Route exact path='/checkout' element={<Checkout />} />
-          <Route exact path='/about-us' element={<About />} />
-          <Route exact path='/contact-us' element={<Contact />} />
-          <Route exact path='/404' element={<ErrorBoundry />} />
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/login' element={<Login />} />
+          <Route
+            path='/service'
+            element={
+              <ProtectedRoute>
+                <Service />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/product'
+            element={
+              <ProtectedRoute>
+                <ProductShop />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/product-detail'
+            element={
+              <ProtectedRoute>
+                <ProductDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/cart'
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/about-us' element={<About />} />
+          <Route path='/contact-us' element={<Contact />} />
+          <Route path='/404' element={<ErrorBoundry />} />
+          <Route path='*' element={<ErrorBoundry />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
       <Footer />
     </div>
   );
