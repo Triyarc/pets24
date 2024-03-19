@@ -2,23 +2,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../../redux/cartSlice";
+import CheckoutArea from "./CheckoutArea";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-
-  const handleModalToggle = () => {
-    const modal = document.getElementById("exampleModal");
-    const hasToggle = modal.hasAttribute("data-bs-toggle");
-
-    if (!hasToggle) {
-      modal.setAttribute("data-bs-toggle", "modal");
-      modal.setAttribute("data-bs-target", "#exampleModal");
-    } else {
-      modal.removeAttribute("data-bs-toggle");
-      modal.removeAttribute("data-bs-target");
-    }
-  };
 
   // Calculate total product amount
   const productAmount = cartItems.reduce(
@@ -172,7 +160,6 @@ const Cart = () => {
                 <button
                   type='button'
                   className='btn btn_theme btn_md w-100  py-lg-4'
-                  onClick={handleModalToggle}
                   data-bs-toggle='modal'
                   data-bs-target='#exampleModal'
                 >
@@ -183,175 +170,8 @@ const Cart = () => {
           </div>
         </div>
       </section>
-      {/* modal */}
 
-      <div
-        className='modal fade'
-        id='exampleModal'
-        tabIndex='-1'
-        aria-labelledby='exampleModalLabel'
-        aria-hidden='true'
-      >
-        <div className=' modal-dialog modal-dialog-scrollable  modal-lg'>
-          <div className='modal-content'>
-            <div className='modal-header'>
-              <h5 className='modal-title' id='exampleModalLabel'>
-                Confirm Order
-              </h5>
-              <button
-                type='button'
-                className='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
-            </div>
-            <div className='modal-body'>
-              {" "}
-              <div className='shipping_addres_area_main'>
-                <div className='shipping_addres_main_form_area'>
-                  <h2>Shipping address</h2>
-                  <div className='shipping_address_form'>
-                    <form action='#!'>
-                      <div className='row'>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='First name*'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Last name*'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Email address (Optional)'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Mobile number*'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='User name*'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Password*'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-12'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Street address'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Apartment, Suite, House no (optional)'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <select className='form-select form-control'>
-                              <option selected>City</option>
-                              <option value='1'>Khulna</option>
-                              <option value='2'>Dhaka</option>
-                              <option value='3'>Barisal</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <select className='form-select form-control'>
-                              <option selected>Country</option>
-                              <option value='1'>Khulna</option>
-                              <option value='2'>Dhaka</option>
-                              <option value='3'>Barisal</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-group'>
-                            <input
-                              type='text'
-                              className='form-control'
-                              placeholder='Zip code'
-                            />
-                          </div>
-                        </div>
-                        <div className='col-lg-6'>
-                          <div className='form-check'>
-                            <input
-                              className='form-check-input'
-                              type='checkbox'
-                              value=''
-                              id='flexCheckDefault'
-                            />
-                            <label
-                              className='form-check-label'
-                              for='flexCheckDefault'
-                            >
-                              Save this information in address book
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='modal-footer'>
-              <div className='my_acount_submit'>
-                <button
-                  type='button'
-                  className='btn btn_theme btn_md w-100'
-                  onClick={handleModalToggle}
-                  data-bs-toggle='modal'
-                  data-bs-target='#exampleModal'
-                >
-                  Place Order
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CheckoutArea />
     </>
   );
 };

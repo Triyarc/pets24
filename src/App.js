@@ -14,11 +14,15 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const isAuthenticated = document.cookie.includes("loggedIn=true");
+
   return (
     <div className='App'>
-      <Navbar />
+      {isAuthenticated && <Navbar />}
+
       <BrowserRouter>
         <Routes>
+          <Route path='/login' element={<Login />} />
           <Route
             path='/'
             element={
@@ -27,7 +31,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path='/login' element={<Login />} />
           <Route
             path='/service'
             element={
@@ -66,7 +69,7 @@ function App() {
           <Route path='*' element={<ErrorBoundry />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
+      {isAuthenticated && <Footer />}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import SubscribeArea from "../components/common/SubscribeArea";
 import Banner from "../components/common/Banner";
 
 function Login() {
-    var pageName = "My-Account"
+    var pageName = "Login / Registration"
   return (
     <div>
       <Banner pageName={pageName}/>

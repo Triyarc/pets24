@@ -25,37 +25,40 @@ function AccountArea() {
 
     // Perform validation for the changed input field
     const newErrors = { ...loginErrors };
-    newErrors[name] = value.trim() ? "" : `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
+    newErrors[name] = value.trim()
+      ? ""
+      : `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
     setLoginErrors(newErrors);
   };
 
   const validateLoginForm = () => {
     let isValid = true;
     const newErrors = { ...loginErrors };
-  
+
     Object.keys(loginData).forEach((key) => {
       if (!loginData[key].trim()) {
-        newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required`;
+        newErrors[key] = `${
+          key.charAt(0).toUpperCase() + key.slice(1)
+        } is required`;
         isValid = false;
-      } else if (key === 'email') {
+      } else if (key === "email") {
         if (!/^[a-zA-Z]\w*@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(loginData[key])) {
           newErrors[key] = "Invalid email format";
           isValid = false;
         } else {
           newErrors[key] = "";
         }
-      } else if (key === 'password' && loginData[key].trim().length < 8) {
+      } else if (key === "password" && loginData[key].trim().length < 8) {
         newErrors[key] = "Password must be at least 8 characters long";
         isValid = false;
       } else {
         newErrors[key] = "";
       }
     });
-  
+
     setLoginErrors(newErrors);
     return isValid;
   };
-  
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
@@ -88,7 +91,9 @@ function AccountArea() {
 
     // Perform validation for the changed input field
     const newErrors = { ...registrationErrors };
-    newErrors[name] = value.trim() ? "" : `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
+    newErrors[name] = value.trim()
+      ? ""
+      : `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
     setRegistrationErrors(newErrors);
   };
 
@@ -158,7 +163,7 @@ function AccountArea() {
             headers: { Authorization: `Bearer ${response.access_token}` },
           }
         );
-        
+
         console.log(res);
         document.cookie = "loggedIn=true;path=/";
         window.location.href = "/";
@@ -168,7 +173,6 @@ function AccountArea() {
     },
   });
 
-
   return (
     <div>
       <section id='my_account_main_area' className='section_padding_bottom'>
@@ -176,7 +180,7 @@ function AccountArea() {
           <div className='row'>
             <div className='col-lg-6 offset-lg-3'>
               <div className='section_heading'>
-                <h2>My account</h2>
+                <h2>Login / Registration</h2>
                 <p>
                   Tempor aute culpa consectetur labore deserunt cupidatat
                   voluptate. Esse adipisicing in deserunt adipisicing duis.
@@ -306,7 +310,6 @@ function AccountArea() {
           </div>
         </div>
       </section>
-      
     </div>
   );
 }

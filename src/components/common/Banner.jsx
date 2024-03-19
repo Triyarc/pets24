@@ -9,7 +9,7 @@ function Banner({pageName}) {
           <div className='row'>
             <div className='col-lg-12'>
               <div className='common_banner_content'>
-                <h2>Shop</h2>
+                <h2>{pageName}</h2>
                 <ul>
                   <li>
                     <a href='/'>Home</a>
