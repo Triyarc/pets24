@@ -10,7 +10,7 @@ function Navbar() {
   // logout
   function clearAuthenticationCookie() {
     document.cookie =
-      "loggedIn=false;path=/login;";
+      "loggedIn=false;path=/;";
   }
 
   // Function to handle logout
