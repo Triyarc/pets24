@@ -3,6 +3,8 @@ import React, { useState } from "react";
 function Navbar() {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
+  const isAuthenticated = document.cookie.includes('loggedIn=true');
+
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };
@@ -55,7 +57,7 @@ function Navbar() {
                     </li>
                     <li className='nav-item'>
                       <a href='about-us' className='nav-link'>
-                        About us{" "}
+                        About us{' '}
                       </a>
                     </li>
                     <li className='nav-item'>
@@ -175,12 +177,31 @@ function Navbar() {
                         Contact
                       </a>
                     </li>
-                    <button
-                      className='btn btn-outline-dark'
-                      onClick={() => logout()}
-                    >
-                      Logout
-                    </button>
+                    {isAuthenticated ? (
+                      <button
+                        className='btn btn-outline-dark'
+                        onClick={() => logout()}
+                      >
+                        Logout
+                      </button>
+                    ) : (
+                      <>
+                        {' '}
+                        <button
+                          className='btn btn-outline-dark me-2'
+                          onClick={() => logout()}
+                        >
+                          Login
+                        </button>
+                        <button
+                          className='btn btn-outline-dark'
+                          onClick={() => logout()}
+                        >
+                          Signup
+                        </button>
+                      </>
+                    )}
+                   
                   </ul>
                   <div className='others-options d-flex align-items-center'>
                     <div className='option-item'>
@@ -189,7 +210,7 @@ function Navbar() {
                         className='search-box'
                         onClick={toggleOverlay}
                       >
-                        {" "}
+                        {' '}
                         <img src='assets/img/icon/search.png' alt='icon' />
                       </a>
                     </div>
@@ -200,7 +221,7 @@ function Navbar() {
                         data-bs-target='#offcanvasRight'
                         aria-controls='offcanvasRight'
                       >
-                        {" "}
+                        {' '}
                         <img src='assets/img/icon/menu.png' alt='icon' />
                       </a>
                     </div>
@@ -224,7 +245,7 @@ function Navbar() {
                     <div className='responsive_icon_dot_flex'>
                       <div className='option-item'>
                         <a href='#' className='search-box'>
-                          {" "}
+                          {' '}
                           <img src='assets/img/icon/search.png' alt='icon' />
                         </a>
                       </div>
@@ -235,7 +256,7 @@ function Navbar() {
                           data-bs-target='#offcanvasRight'
                           aria-controls='offcanvasRight'
                         >
-                          {" "}
+                          {' '}
                           <img src='assets/img/icon/menu.png' alt='icon' />
                         </a>
                       </div>
