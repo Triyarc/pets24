@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaRegUserCircle } from 'react-icons/fa';
 
 function Navbar() {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -177,31 +178,6 @@ function Navbar() {
                         Contact
                       </a>
                     </li>
-                    {isAuthenticated ? (
-                      <button
-                        className='btn btn-outline-dark'
-                        onClick={() => logout()}
-                      >
-                        Logout
-                      </button>
-                    ) : (
-                      <>
-                        {' '}
-                        <button
-                          className='btn btn-outline-dark me-2'
-                          onClick={() => logout()}
-                        >
-                          Login
-                        </button>
-                        <button
-                          className='btn btn-outline-dark'
-                          onClick={() => logout()}
-                        >
-                          Signup
-                        </button>
-                      </>
-                    )}
-                   
                   </ul>
                   <div className='others-options d-flex align-items-center'>
                     <div className='option-item'>
@@ -214,17 +190,42 @@ function Navbar() {
                         <img src='assets/img/icon/search.png' alt='icon' />
                       </a>
                     </div>
-                    <div className='option-item'>
-                      <a
-                        href='#'
-                        data-bs-toggle='offcanvas'
-                        data-bs-target='#offcanvasRight'
-                        aria-controls='offcanvasRight'
-                      >
-                        {' '}
-                        <img src='assets/img/icon/menu.png' alt='icon' />
-                      </a>
-                    </div>
+                    <ul className='navbar-nav'>
+                      {isAuthenticated ? (
+                        <li className='nav-item'>
+                          <a href='#' className='nav-link'>
+                            <FaRegUserCircle style={{fontSize:"35px"}}/>
+                          </a>
+                          <ul className='dropdown-menu'>
+                            <li className='nav-item'>
+                              <a
+                                href='adoption.html'
+                                className='nav-link'
+                                onClick={() => logout()}
+                              >
+                                Logout
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      ) : (
+                        <>
+                          {' '}
+                          <button
+                            className='btn btn-outline-dark me-2'
+                            onClick={() => (window.location.href = '/login')}
+                          >
+                            Login
+                          </button>
+                          <button
+                            className='btn btn-outline-dark'
+                            onClick={() => (window.location.href = '/signup')}
+                          >
+                            Signup
+                          </button>
+                        </>
+                      )}
+                    </ul>
                   </div>
                 </div>
               </nav>
