@@ -13,6 +13,11 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import ProtectedRoute from './ProtectedRoute';
 import SignUp from './pages/SignUp';
+import Adoption from './pages/Adoption';
+import ShopList from './pages/ShopList';
+import Mating from './pages/Mating';
+import ShopDetails from './pages/ShopDetails';
+import ProfileDetails from './pages/ProfileDetails';
 
 function App() {
   const isAuthenticated = document.cookie.includes('loggedIn=true');
@@ -29,6 +34,12 @@ function App() {
           <Route path='/service' element={<Service />} />
           <Route path='/product' element={<ProductShop />} />
           <Route path='/product-detail' element={<ProductDetails />} />
+          <Route path='/adoption' element={<Adoption />} />
+          <Route path='/mating' element={<Mating />} />
+          <Route path='/pet-shop-list' element={<ShopList />} />
+          {/* inputs */}
+          <Route path='/shop-details' element={<ShopDetails />} />
+          <Route path='/profile-details' element={<ProfileDetails />} />
           <Route
             path='/cart'
             element={

@@ -6,22 +6,15 @@ function ServicesAndPrice() {
       {" "}
       <section id='pet_service_price'>
         <div className='container'>
-          <div className='row'>
-            <div className='col-lg-6 offset-lg-3'>
-              <div className='section_heading'>
-                <h2>Pet services and prices</h2>
-                <p>
-                  Tempor aute culpa consectetur labore deserunt cupidatat
-                  voluptate. Esse adipisicing in deserunt adipisicing duis.
-                </p>
-              </div>
-            </div>
+          <div className='text-center'>
+            <h2>Pet services</h2>
           </div>
+
           <div className='row'>
             <div className='col-lg-12'>
               <div className='pet_price_wrapper'>
                 <div className='row'>
-                  <div className='col-lg-6 offset-lg-3'>
+                  <div className='col '>
                     <nav>
                       <div className='nav nav-tabs' id='nav-tab' role='tablist'>
                         <button

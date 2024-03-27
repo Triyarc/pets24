@@ -48,13 +48,22 @@ const CheckoutDetails = () => {
       // Check if the value is a string and not empty
       if (typeof value === "string" && value.trim()) {
         newErrors[key] = "";
+      } else if (value instanceof File) {
+        // For file inputs, just check if the file is selected
+        if (!value) {
+          newErrors[key] = `${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          } is required`;
+          isValid = false;
+        } else {
+          newErrors[key] = "";
+        }
       } else {
         newErrors[key] = `${
           key.charAt(0).toUpperCase() + key.slice(1)
         } is required`;
         isValid = false;
       }
-
       if (key === "email" && value.trim() && !isValidEmail(value)) {
         newErrors.email = "Invalid email format";
         isValid = false;
@@ -105,18 +114,17 @@ const CheckoutDetails = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log(formData)
     e.preventDefault();
     if (validateForm()) {
       const element = document.querySelector(".btn-close");
       console.log("Form submitted successfully:", formData);
       // Clear form fields
       setFormData({
-        firstName: "",
-        lastName: "",
+        userName: "",
         email: "",
         mobileNumber: "",
         userName: "",
-        password: "",
         streetAddress: "",
         apartment: "",
         city: "",
@@ -332,7 +340,7 @@ const CheckoutDetails = () => {
                           type='submit'
                           className='btn btn_theme btn_md w-100'
                         >
-                          Place Order
+                          Submit Information
                         </button>
                       </div>
                     </div>

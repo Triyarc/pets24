@@ -1,13 +1,11 @@
 import React from "react";
-import "../../style/product.css";
 
-function ProductArea() {
+function MatingPetsArea() {
   const shopItems = [
     {
       id: 1,
       imgSrc: "assets/img/shop/shop-1.png",
       name: "Automatic dog blue leash",
-      badge: "In stock",
       originalPrice: "Tk. 500.00/KG",
       discountedPrice: "Tk. 300.00/KG",
       rating: 729,
@@ -114,6 +112,7 @@ function ProductArea() {
   ];
   return (
     <div>
+      {" "}
       <section id='our_shop_main' className='section_padding'>
         <div className='container'>
           <button
@@ -399,15 +398,17 @@ function ProductArea() {
                             <a href='shop-details.html'>
                               <img src={item.imgSrc} alt='img' />
                             </a>
-                            <span
-                              className={`shop_badge ${
-                                item.badge === "In stock"
-                                  ? "in_stock"
-                                  : "in_sold"
-                              }`}
-                            >
-                              {item.badge}
-                            </span>
+                            {item.badge && (
+                              <span
+                                className={`shop_badge ${
+                                  item.badge === "In stock"
+                                    ? "in_stock"
+                                    : "in_sold"
+                                }`}
+                              >
+                                {item.badge}
+                              </span>
+                            )}
                           </div>
                           <div className='shop_item_content'>
                             <h3>
@@ -711,4 +712,4 @@ function ProductArea() {
   );
 }
 
-export default ProductArea;
+export default MatingPetsArea;

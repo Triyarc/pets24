@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaRegUserCircle } from "react-icons/fa";
 
 function Navbar() {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
-  const isAuthenticated = document.cookie.includes('loggedIn=true');
+  const isAuthenticated = document.cookie.includes("loggedIn=true");
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible);
@@ -12,8 +12,7 @@ function Navbar() {
 
   // logout
   function clearAuthenticationCookie() {
-    document.cookie =
-      "loggedIn=false;path=/;";
+    document.cookie = "loggedIn=false;path=/;";
   }
 
   // Function to handle logout
@@ -57,8 +56,13 @@ function Navbar() {
                       </a>
                     </li>
                     <li className='nav-item'>
-                      <a href='about-us' className='nav-link'>
-                        About us{' '}
+                      <a href='mating' className='nav-link'>
+                        Mating
+                      </a>
+                    </li>
+                    <li className='nav-item'>
+                      <a href='adoption' className='nav-link'>
+                        Adoption
                       </a>
                     </li>
                     <li className='nav-item'>
@@ -103,75 +107,14 @@ function Navbar() {
                       </ul>
                     </li>
                     <li className='nav-item'>
-                      <a href='#' className='nav-link'>
-                        Adoption
-                        <i className='fas fa-angle-down'></i>
+                      <a href='pet-shop-list' className='nav-link'>
+                        Pet Shop
                       </a>
-                      <ul className='dropdown-menu'>
-                        <li className='nav-item'>
-                          <a href='adoption.html' className='nav-link'>
-                            Adoption
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='adoption-details.html' className='nav-link'>
-                            Adoption Details
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
+                    </li>{" "}
                     <li className='nav-item'>
-                      <a href='#' className='nav-link'>
-                        Pages
-                        <i className='fas fa-angle-down'></i>
+                      <a href='about-us' className='nav-link'>
+                        About us{" "}
                       </a>
-                      <ul className='dropdown-menu'>
-                        <li className='nav-item'>
-                          <a href='event.html' className='nav-link'>
-                            Event
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='event-details.html' className='nav-link'>
-                            Event Details
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='gallery.html' className='nav-link'>
-                            Gallery
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='pricing.html' className='nav-link'>
-                            Pricing
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='groomers.html' className='nav-link'>
-                            Groomers
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='testimonial.html' className='nav-link'>
-                            Testimonial
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='login' className='nav-link'>
-                            My account
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='contact-us' className='nav-link'>
-                            Contact
-                          </a>
-                        </li>
-                        <li className='nav-item'>
-                          <a href='error.html' className='nav-link'>
-                            404 Error
-                          </a>
-                        </li>
-                      </ul>
                     </li>
                     <li className='nav-item'>
                       <a href='contact-us' className='nav-link'>
@@ -180,21 +123,21 @@ function Navbar() {
                     </li>
                   </ul>
                   <div className='others-options d-flex align-items-center'>
-                    <div className='option-item'>
+                    {/* <div className='option-item'>
                       <a
                         href='#'
                         className='search-box'
                         onClick={toggleOverlay}
                       >
-                        {' '}
+                        {" "}
                         <img src='assets/img/icon/search.png' alt='icon' />
                       </a>
-                    </div>
+                    </div> */}
                     <ul className='navbar-nav'>
                       {isAuthenticated ? (
                         <li className='nav-item'>
                           <a href='#' className='nav-link'>
-                            <FaRegUserCircle style={{fontSize:"35px"}}/>
+                            <FaRegUserCircle style={{ fontSize: "35px" }} />
                           </a>
                           <ul className='dropdown-menu'>
                             <li className='nav-item'>
@@ -210,16 +153,16 @@ function Navbar() {
                         </li>
                       ) : (
                         <>
-                          {' '}
+                          {" "}
                           <button
                             className='btn btn-outline-dark me-2'
-                            onClick={() => (window.location.href = '/login')}
+                            onClick={() => (window.location.href = "/login")}
                           >
                             Login
                           </button>
                           <button
                             className='btn btn-outline-dark'
-                            onClick={() => (window.location.href = '/signup')}
+                            onClick={() => (window.location.href = "/signup")}
                           >
                             Signup
                           </button>
@@ -246,7 +189,7 @@ function Navbar() {
                     <div className='responsive_icon_dot_flex'>
                       <div className='option-item'>
                         <a href='#' className='search-box'>
-                          {' '}
+                          {" "}
                           <img src='assets/img/icon/search.png' alt='icon' />
                         </a>
                       </div>
@@ -257,7 +200,7 @@ function Navbar() {
                           data-bs-target='#offcanvasRight'
                           aria-controls='offcanvasRight'
                         >
-                          {' '}
+                          {" "}
                           <img src='assets/img/icon/menu.png' alt='icon' />
                         </a>
                       </div>

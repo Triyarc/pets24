@@ -1,0 +1,8 @@
+
+
+@media only screen and (max-width: 500px) {
+
+    .pet_shop_img a img{
+        height: 150px;
+    }
+}

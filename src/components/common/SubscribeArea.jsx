@@ -3,7 +3,7 @@ import React from "react";
 function SubscribeArea() {
   return (
     <div>
-      <section id='subscribe_area'>
+      <section id='subscribe_area' className="mt-lg-5 pt-lg-5">
         <div className='container'>
           <div className='subscribe_wrapper'>
             <div className='row align-items-center'>

@@ -10,9 +10,9 @@ function Service() {
   return (
     <div>
       <Banner pageName={pageName}/>
-      <ServiceCard />
+      {/* <ServiceCard /> */}
       <ServicesAndPrice />
-      <GroomersCard />
+      {/* <GroomersCard /> */}
       <SubscribeArea />
     </div>
   );

@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,9 +15,10 @@ root.render(
     <GoogleOAuthProvider clientId='660933486766-v55kimec6i5sdpo2824c8qqnqfj4j2jo.apps.googleusercontent.com'>
       <Provider store={store}>
         <App />
+        <ToastContainer />
       </Provider>
     </GoogleOAuthProvider>
-    ;
+    
   </React.StrictMode>
 );
 
