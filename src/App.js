@@ -7,7 +7,6 @@ import About from './pages/About';
 import Service from './pages/Service';
 import Contact from './pages/Contact';
 import ProductShop from './pages/ProductShop';
-import ProductDetails from './pages/ProductDetails';
 import ErrorBoundry from './pages/ErrorBoundry';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
@@ -16,8 +15,9 @@ import SignUp from './pages/SignUp';
 import Adoption from './pages/Adoption';
 import ShopList from './pages/ShopList';
 import Mating from './pages/Mating';
-import ShopDetails from './pages/ShopDetails';
-import ProfileDetails from './pages/ProfileDetails';
+import ShopDetails from './pages/formInfo/ShopDetails';
+import ProfileDetails from './pages/formInfo/ProfileDetails';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   const isAuthenticated = document.cookie.includes('loggedIn=true');
