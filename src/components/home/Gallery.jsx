@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'
+
 
 function Gallery() {
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openLightbox = (index) => {
+    setPhotoIndex(index);
+    setIsOpen(true);
+  };
+
+  const images = [
+    'https://via.placeholder.com/600x400/ff0000',
+    'https://via.placeholder.com/600x400/00ff00',
+    'https://via.placeholder.com/600x400/0000ff',
+    'https://via.placeholder.com/600x400/ff0000',
+    'https://via.placeholder.com/600x400/00ff00',
+    'https://via.placeholder.com/600x400/0000ff',
+    'https://via.placeholder.com/600x400/ff0000',
+    'https://via.placeholder.com/600x400/00ff00',
+    'https://via.placeholder.com/600x400/0000ff',
+    'https://via.placeholder.com/600x400/ff0000',
+    'https://via.placeholder.com/600x400/00ff00',
+    'https://via.placeholder.com/600x400/0000ff',
+  ];
   
   return (
     <div>
@@ -18,7 +43,7 @@ function Gallery() {
               </div>
             </div>
           </div>
-          <div className='row popup-gallery'>
+          {/* <div className='row popup-gallery'>
             <div className='col-lg-4 col-md-12 col-sm-12 col-12'>
               <div className='gallery_item_wrapper'>
                 <img
@@ -117,7 +142,30 @@ function Gallery() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <div>
+      <div className="gallery">
+        {images.map((imageUrl, index) => (
+          <img
+            key={index}
+            src={imageUrl}
+            alt={`Image ${index + 1}`}
+            className="thumbnail"
+            onClick={() => openLightbox(index)}
+          />
+        ))}
+      </div>
+      {isOpen && (
+        <Lightbox
+          mainSrc={images[photoIndex]}
+          nextSrc={images[(photoIndex + 1) % images.length]}
+          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
+          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
+        />
+      )}
+    </div>
         </div>
       </section>
     </div>

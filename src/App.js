@@ -18,6 +18,7 @@ import Mating from './pages/Mating';
 import ShopDetails from './pages/formInfo/ShopDetails';
 import ProfileDetails from './pages/formInfo/ProfileDetails';
 import ProductDetails from './pages/ProductDetails';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   const isAuthenticated = document.cookie.includes('loggedIn=true');
@@ -40,6 +41,7 @@ function App() {
           {/* inputs */}
           <Route path='/shop-details' element={<ShopDetails />} />
           <Route path='/profile-details' element={<ProfileDetails />} />
+          <Route path='/profile' element={<UserProfile />} />
           <Route
             path='/cart'
             element={
