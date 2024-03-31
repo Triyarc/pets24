@@ -22,6 +22,7 @@ import AdoptionPost from "./pages/formInfo/AdoptionPost";
 import MatingPost from "./pages/formInfo/MatingPost";
 import PetGallery from "./pages/formInfo/PetGallery";
 import Loader from "./components/common/Loader";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route path='/adoption-post' element={<AdoptionPost />} />
             <Route path='/mating-post' element={<MatingPost />} />
             <Route path='/pet-gallery' element={<PetGallery />} />
+            <Route path='/profile' element={<UserProfile />} />
             <Route
               path='/cart'
               element={
