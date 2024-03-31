@@ -19,9 +19,6 @@ function Navbar() {
   function logout() {
     // Clear the authentication cookie
     clearAuthenticationCookie();
-
-    // Redirect to the login page or any other appropriate page
-    window.location.href = "/login"; // Replace "/login" with your actual login page URL
   }
 
   return (

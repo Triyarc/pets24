@@ -15,7 +15,6 @@ function ShopDetails() {
     city: "",
     country: "",
     zipCode: "",
-    saveInformation: false,
   });
 
   const [formErrors, setFormErrors] = useState({
@@ -210,8 +209,7 @@ function ShopDetails() {
         city: "",
         country: "",
         zipCode: "",
-        saveInformation: false,
-      });
+          });
       const fileInputs = document.querySelectorAll('input[type="file"]');
       fileInputs.forEach((input) => {
         input.value = ""; // Clear the value
@@ -275,6 +273,7 @@ function ShopDetails() {
                       type='file'
                       className='form-control'
                       id='shopCoverPhoto'
+                      accept='.jpg, .jpeg, .png'
                       name='shopCoverPhoto'
                       placeholder='Shop Cover Photo*'
                       onChange={handleFileChange}
@@ -293,6 +292,7 @@ function ShopDetails() {
                       type='file'
                       className='form-control'
                       id='shopLogo'
+                      accept='.jpg, .jpeg, .png'
                       name='shopLogo'
                       onChange={handleFileChange}
                     />
@@ -440,24 +440,6 @@ function ShopDetails() {
                     {formErrors.zipCode && (
                       <span style={{ color: "red" }}>{formErrors.zipCode}</span>
                     )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='checkbox'
-                      id='flexCheckDefault'
-                      name='saveInformation'
-                      checked={formData.saveInformation}
-                      onChange={handleChange}
-                    />
-                    <label
-                      className='form-check-label'
-                      htmlFor='flexCheckDefault'
-                    >
-                      Agree to save this information
-                    </label>
                   </div>
                 </div>
               </div>

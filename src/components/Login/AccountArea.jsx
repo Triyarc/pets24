@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { FaGoogle } from "react-icons/fa";
 import axios from "axios";
+import apiCall from "../../apiCall";
+import { local_host } from "../../env";
+import { useNavigate   } from "react-router-dom";
 
 function AccountArea() {
   // State and validation for login section
@@ -14,6 +17,7 @@ function AccountArea() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChangeLogin = (e) => {
     const { name, value } = e.target;
@@ -68,8 +72,6 @@ function AccountArea() {
     }
   };
 
-
-
   // Google login
   const login = useGoogleLogin({
     onSuccess: async (response) => {
@@ -80,10 +82,23 @@ function AccountArea() {
             headers: { Authorization: `Bearer ${response.access_token}` },
           }
         );
-
         console.log(res);
+        if (res.status == 200) {
+          const googleData = {
+            name: res.data.given_name,
+            email: res.data.email,
+            social_id: res.data.sub,
+          };
+          const responseData = await apiCall({
+            method: "POST",
+            apiUrl: `${local_host}/api/v1/social_login`,
+            payload: googleData,
+          });
+
+          document.cookie = `auth_token=${responseData.parameters.token};path=/`;
+        }
         document.cookie = "loggedIn=true;path=/";
-        window.location.href = "/";
+        navigate("/");
       } catch (err) {
         console.log(err);
       }
@@ -162,7 +177,6 @@ function AccountArea() {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       </section>

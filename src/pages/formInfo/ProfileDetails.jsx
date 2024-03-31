@@ -6,27 +6,26 @@ function ProfileDetails() {
     ownerName: "",
     gender: "",
     ownerPhoto: "",
-    shopDescription: "",
     email: "",
     mobileNumber: "",
     streetAddress: "",
     apartment: "",
     city: "",
     country: "",
+    state:"",
     zipCode: "",
-    saveInformation: false,
   });
 
   const [formErrors, setFormErrors] = useState({
     ownerName: "",
     gender: "",
     ownerPhoto: "",
-    shopDescription: "",
     email: "",
     mobileNumber: "",
     apartment: "",
     streetAddress: "",
     city: "",
+    state:"",
     country: "",
     zipCode: "",
   });
@@ -191,17 +190,15 @@ function ProfileDetails() {
       setFormData({
         ownerName: "",
         gender: "",
-
         ownerPhoto: "",
-        shopDescription: "",
         email: "",
         mobileNumber: "",
         streetAddress: "",
         apartment: "",
         city: "",
+        state:"",
         country: "",
         zipCode: "",
-        saveInformation: false,
       });
       const fileInputs = document.querySelectorAll('input[type="file"]');
       fileInputs.forEach((input) => {
@@ -266,29 +263,12 @@ function ProfileDetails() {
                       className='form-control'
                       id='ownerPhoto'
                       name='ownerPhoto'
+                      accept='.jpg, .jpeg, .png'
                       onChange={handleFileChange}
                     />
                     {formErrors.ownerPhoto && (
                       <span style={{ color: "red" }}>
                         {formErrors.ownerPhoto}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className='col-lg-12'>
-                  <div className='form-group'>
-                    <textarea
-                      rows='5'
-                      className='form-control'
-                      placeholder='Shop Description*'
-                      name='shopDescription'
-                      value={formData.shopDescription}
-                      onChange={handleChange}
-                    ></textarea>
-                    {formErrors.shopDescription && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.shopDescription}
                       </span>
                     )}
                   </div>
@@ -325,7 +305,7 @@ function ProfileDetails() {
                     )}
                   </div>
                 </div>
-                <div className='col-lg-12'>
+                <div className='col-lg-6'>
                   <div className='form-group'>
                     <input
                       type='text'
@@ -381,6 +361,21 @@ function ProfileDetails() {
                 </div>
                 <div className='col-lg-6'>
                   <div className='form-group'>
+                    <input
+                      type='text'
+                      className='form-control'
+                      placeholder='state'
+                      name='state'
+                      value={formData.state}
+                      onChange={handleChange}
+                    />
+                    {formErrors.state && (
+                      <span style={{ color: "red" }}>{formErrors.state}</span>
+                    )}
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
                     <select
                       className='form-select form-control'
                       name='country'
@@ -412,24 +407,6 @@ function ProfileDetails() {
                     {formErrors.zipCode && (
                       <span style={{ color: "red" }}>{formErrors.zipCode}</span>
                     )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='checkbox'
-                      id='flexCheckDefault'
-                      name='saveInformation'
-                      checked={formData.saveInformation}
-                      onChange={handleChange}
-                    />
-                    <label
-                      className='form-check-label'
-                      htmlFor='flexCheckDefault'
-                    >
-                      Agree to Save this information 
-                    </label>
                   </div>
                 </div>
               </div>
