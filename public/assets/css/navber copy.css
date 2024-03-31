@@ -172,8 +172,56 @@
     border-bottom: 1px dashed #ffd1d1;
     margin: 0;
 }
+.bg-color{
+color: var(--main-color);
+}
 
+.mobile_toggleResposive{
+    border: 2px solid #ffab8d;
+    border-radius: 9px;
+}
+.navbar-nav .nav-link {
+    padding-right: 6px;
+    padding-left: 18px;
+    padding-top: 15px;
+}
 
+.main-navbar .navbar .navbar-nav .nav-item .dropdown-menu li a {
+    padding: 0;
+    display: inline-block;
+    color: var(--black-color);
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+}
+a.nav-link {
+    display: block;
+    float: left;
+    width: 100%;
+    padding: 1em 5%;
+    margin: 0;
+    text-align: left;
+    color: #677294;
+    border-top: 1px solid #dbeefd;
+    text-decoration: none;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: -2px;
+    border-top: 0px !important;
+    content: "\f107"; /* Unicode character for Font Awesome's down arrow */
+    font-family: "Font Awesome 5 Free"; /* Specify the Font Awesome font family */
+    font-weight: 900; /* Adjust font weight as needed */
+}
+
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow:none;
+}
 
 /* .main-navbar .navbar .navbar-nav .nav-item a:before {
     content: "";
@@ -604,8 +652,8 @@
     cursor: pointer;
     z-index: 9991;
     position: absolute;
-    right: 5px;
-    top: -42px;
+    right: 35px;
+    top: -46px;
     font-weight: 400
 }
 
@@ -1331,80 +1379,6 @@
     }
 }
 
-@media (max-width: 1200px) {
-    .bg-color{
-        color: var(--main-color);
-        }
-        
-        .mobile_toggleResposive{
-            border: 2px solid #ffab8d;
-            border-radius: 9px;
-        }
-        .navbar-nav .nav-link {
-            padding-right: 6px;
-            padding-left: 18px;
-            padding-top: 15px;
-        }
-        
-        .main-navbar .navbar .navbar-nav .nav-item .dropdown-menu li a {
-            padding: 0;
-            display: inline-block;
-            color: var(--black-color);
-            font-size: 16px;
-            font-weight: 500;
-            position: relative;
-            padding-bottom: 5px;
-        }
-        a.nav-link {
-            display: block;
-            float: left;
-            width: 100%;
-            padding: 1em 5%;
-            margin: 0;
-            text-align: left;
-            color: #677294;
-            border-top: 1px solid #dbeefd;
-            text-decoration: none;
-        }
-        
-        .dropdown-toggle::after {
-            display: inline-block;
-            margin-left: .255em;
-            vertical-align: -2px;
-            border-top: 0px !important;
-            content: "\f107"; /* Unicode character for Font Awesome's down arrow */
-            font-family: "Font Awesome 5 Free"; /* Specify the Font Awesome font family */
-            font-weight: 900; /* Adjust font weight as needed */
-        }
-        
-        .navbar-toggler:focus {
-            text-decoration: none;
-            outline: 0;
-            box-shadow:none;
-        }
-        
-        .navbar-nav .dropdown-menu {
-            position: relative !important;
-            top: 100%;
-            left: 0;
-            bottom: auto;
-            padding: 0px !important;
-            border:none;
-            transform: translate(0, 0);
-            min-width: 100%;
-            transform: translate3d(0px, 2px, 0px) !important;
-            margin: 0;
-            padding: 0.5rem 0;
-            max-height: 200px; /* Adjust the max-height as needed */
-            overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
-        }
-        .dropdown-menu.show .nav-item .nav-link {
-            padding-right: 6px;
-            padding-left: 50px;
-            padding-top: 15px;
-        }
-}
-
 @media only screen and (min-width:1200px) and (max-width:1399px) {
     .main-navbar .navbar .navbar-nav .nav-item {
         margin-left: 10px;
@@ -1436,61 +1410,4 @@
 }
 .social_icon_header_item a img{
 
-}
-
-.accordion-button.collapsed{
-    padding: 20px !important;
-}
-.accordion-button[aria-expanded="true"] {
-    padding: 20px !important;
-    background-color: #ffab8d !important;
-}
-.accordion-body{
-    padding: 20px !important;
-}
-#accordionExample .accordion-item {
-    background-color: #fff;
-    border: none;
-    border-bottom: none !important;
-}
-.opacity-50 i{
-    border: 1px solid currentColor;
-    border-radius: 20%;
-    padding: 1rem;
-    background-color: var(--main-color);
-    color: #fff;
-}
-.mobile-icon{
-    transform: rotate(90deg);
-}
-.review-image{
-    width: 40px;
-    height: 40px;
-    border-radius: 123px;
-    margin-right: 9px;
-}
-.review-text{
-    font-size: 12px;
-    padding: 0px;
-    margin: 0px;
-    line-height: 17px;
-}
-.padding-right{
-    margin-left:45px;
-}
-.profile-logo-img {
-    height: 257px;
-    border: 5px solid var(--main-color);
-    border-radius: 11px;
-}
-.col-first{
-    width: 555px;
-}
-.nearBy {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--main-color);
-}
-.profile-partcard{
-    color: var(--main-color);
 }

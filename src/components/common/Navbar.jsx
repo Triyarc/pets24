@@ -133,7 +133,7 @@ function Navbar() {
                     <ul className='navbar-nav'>
                       {isAuthenticated ? (
                         <li className='nav-item'>
-                          <a href='#' className='nav-link'>
+                          <a href='profile' className='nav-link'>
                             <FaRegUserCircle style={{ fontSize: "35px" }} />
                           </a>
                           <ul className='dropdown-menu'>
@@ -180,8 +180,67 @@ function Navbar() {
                   <div className='circle circle-three'></div>
                 </div>
               </div>
+              <div className='dot-menu toggle_bar'>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="fas fa-bars bg-color"></i>
+                </button>
+              </div>
+
+              <div class="collapse navbar-collapse mobile_toggleResposive" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a href="/" class="nav-link active">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="mating" class="nav-link">Mating</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="adoption" class="nav-link">Adoption</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                      <li class="nav-item">
+                        <a href="service" class="nav-link">Service</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="service-details.html" class="nav-link">Service Details</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Shop
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="shopDropdown">
+                      <li class="nav-item">
+                        <a href="product" class="nav-link">Shop</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="product-detail" class="nav-link">Shop Details</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="cart" class="nav-link">Cart</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pet-shop-list" class="nav-link">Pet Shop</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="about-us" class="nav-link">About us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="contact-us" class="nav-link">Contact</a>
+                  </li>
+                </ul>
+              </div>
+
+
               <div className='container'>
-                <div className='option-inner'>
+                {/* <div className='option-inner'>
                   <div className='others-options'>
                     <div className='responsive_icon_dot_flex'>
                       <div className='option-item'>
@@ -203,7 +262,8 @@ function Navbar() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
+
               </div>
             </div>
           </div>
