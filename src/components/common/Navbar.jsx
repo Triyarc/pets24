@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 
 function Navbar() {
@@ -20,6 +20,8 @@ function Navbar() {
     // Clear the authentication cookie
     clearAuthenticationCookie();
   }
+
+
 
   return (
     <div>

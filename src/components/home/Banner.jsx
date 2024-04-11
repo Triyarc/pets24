@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Banner() {
+
   return (
     <div>
       {" "}
       <section id='home_banner'>
         <div className='container'>
-          <div className='row'>
+          <div className='row '>
             <div className='col-lg-6'>
               <div className='main_banner_text_wrapper'>
                 <h1>
@@ -36,7 +37,7 @@ function Banner() {
                 </div>
               </div>
             </div>
-            <div className='col-lg-6'>
+            <div className='col-lg-6 d-lg-block d-none'>
               <div className='main_banner_img_left'>
                 <img
                   src='assets/img/common/banner_left.png'

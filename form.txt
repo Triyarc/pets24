@@ -1,0 +1,315 @@
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+import apiCall from "../../apiCall";
+import { local_host } from "../../env";
+
+function ProfileDetails() {
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [state, setState] = useState("");
+
+  function validateZipCode(value) {
+    let validZipcode = /^[1-9][0-9]{5}$/.test(value);
+    if (!value) {
+      return "Zip code is required";
+    } else if (validZipcode) {
+      let pincode = {
+        pincode: value,
+      };
+      apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/get_city_state_from_pincode`,
+        payload: pincode,
+      }).then((res) => {
+        console.log(res);
+        setCity(res.parameters.city);
+      });
+
+      return "Enter Valid";
+    }
+    return "";
+  }
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("User Name is required"),
+    gender: Yup.string().required("Gender is required"),
+    profile_image: Yup.mixed().required("Owner Photo is required"),
+    email_id: Yup.string()
+      .email("Invalid email format")
+      .required("Email address is required"),
+    phone_number: Yup.string()
+      .required("Mobile number is required")
+      .matches(/^[6-9]\d{9}$/, "Invalid phone number"),
+    address_line2: Yup.string().required("Street is required"),
+    address_line1: Yup.string().required("Appartment No is required"),
+    state: Yup.string().required("State is required"),
+    city: Yup.string().required("City is required"),
+    country: Yup.string(),
+    pincode: Yup.string()
+      .required("Zip code is required")
+      .test("zip-code", "Invalid zip code", validateZipCode),
+  });
+
+  return (
+    <div className='container pt-md-5'>
+      <div className='shipping_addres_area_main'>
+        <div className='shipping_addres_main_form_area'>
+          <h2>Profile Information</h2>
+          <div className='shipping_address_form'>
+            <Formik
+              initialValues={{
+                name: "",
+                gender: "",
+                profile_image: "",
+                email_id: "",
+                phone_number: "",
+                address_line2: "",
+                address_line1: "",
+                state: "",
+                city: "",
+                country: "",
+                pincode: "",
+              }}
+              validationSchema={validationSchema}
+              onSubmit={(values, { setSubmitting }) => {
+                const formDataToSend = new FormData();
+                Object.entries(values).forEach(([key, value]) => {
+                  if (value instanceof File) {
+                    formDataToSend.append(key, value);
+                  } else {
+                    formDataToSend.append(key, value.trim());
+                  }
+                });
+
+                apiCall({
+                  method: "POST",
+                  apiUrl: `${local_host}/api/v1/update_profile`,
+                  payload: formDataToSend,
+                })
+                  .then(() => {
+                    console.log("Form submitted successfully:", formDataToSend);
+                    // Clear form fields
+                    setSubmitting(false);
+                  })
+                  .catch((error) => {
+                    console.error("Error submitting form:", error);
+                    // Handle error, show message or log as needed
+                    toast.error(
+                      "Error submitting form. Please try again later."
+                    );
+                    setSubmitting(false);
+                  });
+              }}
+              validateOnChange={true}
+            >
+              {({ isSubmitting }) => (
+                <Form>
+                  <div className='row'>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <label className='p-1'>Fill valid Zip Code</label>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          placeholder='Zip code'
+                          name='pincode'
+                          max='6'
+                        />
+                        <ErrorMessage
+                          name='pincode'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <label className='p-1'>User Photo</label>
+                        <Field
+                          type='file'
+                          className='form-control'
+                          name='profile_image'
+                          accept='.jpg, .jpeg, .png'
+                          placeholder='Profile Image'
+                        />
+                        <ErrorMessage
+                          name='profile_image'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='row'>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          name='name'
+                          placeholder='Username'
+                        />
+                        <ErrorMessage
+                          name='name'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>{" "}
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          as='select' // Updated to use select for dropdown
+                          className='form-control'
+                          name='gender'
+                        >
+                          <option value='' disabled>
+                            Select Gender
+                          </option>
+                          <option value='male'>Male</option>
+                          <option value='female'>Female</option>
+                          <option value='other'>Other</option>
+                        </Field>
+                        <ErrorMessage
+                          name='gender'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='email'
+                          className='form-control'
+                          name='email_id'
+                          placeholder='Email Address'
+                        />
+                        <ErrorMessage
+                          name='email_id'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='tel'
+                          className='form-control'
+                          name='phone_number'
+                          placeholder='Phone Number (optional)'
+                        />
+                        <ErrorMessage
+                          name='phone_number'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          name='address_line1'
+                          placeholder='Appartment No'
+                        />
+                        <ErrorMessage
+                          name='address_line1'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          name='address_line2'
+                          placeholder='Street Address'
+                        />
+                        <ErrorMessage
+                          name='address_line2'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          name='city'
+                          value={city}
+                          readOnly
+                          placeholder='City'
+                        />
+                        <ErrorMessage
+                          name='city'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>{" "}
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          name='state'
+                          readonly
+                          placeholder='State'
+                        />
+                        <ErrorMessage
+                          name='state'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>{" "}
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <Field
+                          type='text'
+                          className='form-control'
+                          value='India'
+                          name='country'
+                          readonly
+                          disabled
+                        />
+                        <ErrorMessage
+                          name='country'
+                          component='div'
+                          style={{ color: "red" }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className='modal-footer'>
+                    <div className='my_acount_submit'>
+                      <button
+                        type='submit'
+                        className='btn btn_theme btn_md w-100'
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Submitting..." : "Submit"}
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProfileDetails;

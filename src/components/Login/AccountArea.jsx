@@ -4,7 +4,8 @@ import { FaGoogle } from "react-icons/fa";
 import axios from "axios";
 import apiCall from "../../apiCall";
 import { local_host } from "../../env";
-import { useNavigate   } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AccountArea() {
   // State and validation for login section
@@ -63,10 +64,21 @@ function AccountArea() {
     return isValid;
   };
 
-  const handleSubmitLogin = (e) => {
+  const handleSubmitLogin = async (e) => {
     e.preventDefault();
     if (validateLoginForm()) {
-      console.log("Logging in...", loginData);
+      const responseData = await apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/login`,
+        payload: loginData,
+      });
+      if (responseData.success == true) {
+        document.cookie = `auth_token=${responseData.parameters.token};path=/`;
+        document.cookie = "loggedIn=true;path=/";
+        navigate("/");
+      }else if(responseData.success == false){
+        toast.error(responseData.message)
+      }
     } else {
       console.log("Login form has errors. Please fix them.");
     }
@@ -95,10 +107,14 @@ function AccountArea() {
             payload: googleData,
           });
 
-          document.cookie = `auth_token=${responseData.parameters.token};path=/`;
+          if (responseData.success == true) {
+            document.cookie = `auth_token=${responseData.parameters.token};path=/`;
+            document.cookie = "loggedIn=true;path=/";
+            navigate("/");
+          }else if(responseData.success == false){
+            toast.error(responseData.message)
+          }
         }
-        document.cookie = "loggedIn=true;path=/";
-        navigate("/");
       } catch (err) {
         console.log(err);
       }

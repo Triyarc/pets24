@@ -1,4 +1,13 @@
 import axios from "axios";
+import { getCookieValue } from "./cokkies";
+
+const authToken = getCookieValue("auth_token");
+
+const header = {
+  headers: {
+    Authorization: "Bearer " + authToken,
+  },
+};
 
 export default function apiCall({ method, apiUrl, payload, id }) {
   return new Promise(async (resolve, reject) => {
@@ -9,7 +18,11 @@ export default function apiCall({ method, apiUrl, payload, id }) {
           response = await axios.get(apiUrl);
           break;
         case "POST":
-          response = await axios.post(apiUrl, payload);
+          if (authToken) {
+            response = await axios.post(apiUrl, payload, header);
+          } else {
+            response = await axios.post(apiUrl, payload);
+          }
           break;
         case "PUT":
           response = await axios.put(`${apiUrl}/${id}`, payload);

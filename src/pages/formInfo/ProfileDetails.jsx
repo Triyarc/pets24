@@ -1,215 +1,92 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+import apiCall from "../../apiCall";
+import { local_host } from "../../env";
 import { toast } from "react-toastify";
 
 function ProfileDetails() {
-  const [formData, setFormData] = useState({
-    ownerName: "",
-    gender: "",
-    ownerPhoto: "",
-    email: "",
-    mobileNumber: "",
-    streetAddress: "",
-    apartment: "",
-    city: "",
-    country: "",
-    state:"",
-    zipCode: "",
+  const [cityValue, setCityValue] = useState(false);
+
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      gender: "",
+      profile_image: "",
+      email_id: "",
+      phone_number: "",
+      address_line1: "",
+      address_line2: "",
+      state: "",
+      city: "",
+      country: "India",
+      pincode: "",
+    },
   });
+  const { register, control, handleSubmit, formState, watch, setValue, reset } =
+    form;
+  const { errors } = formState;
 
-  const [formErrors, setFormErrors] = useState({
-    ownerName: "",
-    gender: "",
-    ownerPhoto: "",
-    email: "",
-    mobileNumber: "",
-    apartment: "",
-    streetAddress: "",
-    city: "",
-    state:"",
-    country: "",
-    zipCode: "",
-  });
+  const watchPincode = watch("pincode");
+  const watchCity = watch("city");
+  const watchState = watch("state");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (e.target.type === "file") {
-      // Handle file input separately
-      handleFileChange(e);
-    } else {
-      const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-
-      const newErrors = { ...formErrors };
-      newErrors[name] = value.trim()
-        ? ""
-        : `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
-
-      setFormErrors(newErrors);
-    }
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    const newErrors = { ...formErrors };
-    newErrors[name] = value.trim()
-      ? ""
-      : `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
-
-    setFormErrors(newErrors);
-  };
-
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    const file = files[0];
-
-    // Check if file is selected
-    if (file) {
-      // Check file extension
-      const allowedExtensions = ["jpeg", "jpg", "png"];
-      const fileExtension = file.name.split(".").pop().toLowerCase();
-      if (!allowedExtensions.includes(fileExtension)) {
-        toast.error("Provide Valid File Format");
-        // Clear the file input
-        e.target.value = null;
-        return;
-      }
-
-      // File is valid, update the state
-      setFormData({
-        ...formData,
-        [name]: file,
-      });
-    }
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = { ...formErrors };
-
-    Object.entries(formData).forEach(([key, value]) => {
-      // Check if the value is a string and not empty
-      if (typeof value === "string" && value.trim()) {
-        newErrors[key] = "";
-      } else if (value instanceof File) {
-        // For file inputs, just check if the file is selected
-        if (!value) {
-          newErrors[key] = `${
-            key.charAt(0).toUpperCase() + key.slice(1)
-          } is required`;
-          isValid = false;
+  const setCityValueFn = (filedValue) => {
+    let pincode = {
+      pincode: filedValue,
+    };
+    if (cityValue === false) {
+      apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/get_city_state_from_pincode`,
+        payload: pincode,
+      }).then((res) => {
+        if (res?.parameters == null) {
+          toast.error("Invalid Zip-Code");
         } else {
-          newErrors[key] = "";
+          setValue("city", res?.parameters?.city);
+          setValue("state", res?.parameters?.state);
+          setCityValue(true);
         }
+      });
+    }
+  };
+
+  const onSubmit = (data) => {
+    console.log("form Submitted", data);
+    const formData = new FormData();
+
+    Object.keys(data).forEach((key) => {
+      if (key === "profile_image" && data[key][0] instanceof File) {
+        formData.append(key, data[key][0]);
       } else {
-        newErrors[key] = `${
-          key.charAt(0).toUpperCase() + key.slice(1)
-        } is required`;
-        isValid = false;
-      }
-
-      if (key === "email" && value.trim() && !isValidEmail(value)) {
-        newErrors.email = "Invalid email format";
-        isValid = false;
-      }
-
-      // Check for ownerName minimum length
-      if (key === "ownerName" && value.trim().length < 3) {
-        newErrors.ownerName = "Provid Valid ownerName";
-        isValid = false;
-      }
-
-      if (key === "shopDescription" && value.trim().length == 0) {
-        newErrors.shopDescription = "Provid Valid shopDescription";
-        isValid = false;
-      }
-
-      if (key === "shopDescription" && value.trim().length < 20) {
-        newErrors.shopDescription = "Minimum of 5 words";
-        isValid = false;
-      }
-
-      // Check if shopDescription contains only alphabetic characters
-      if (key === "shopDescription" && !/^[a-zA-Z0-9\s]+$/.test(value.trim())) {
-        newErrors.shopDescription = "Provid Valid shopDescription";
-        isValid = false;
-      }
-
-      // Check if zipCode has exactly 6 characters
-      if (key === "zipCode") {
-        const trimmedValue = value.trim();
-        if (trimmedValue.length === 0) {
-          newErrors.zipCode = "Zipcode is required";
-          isValid = false;
-        } else if (trimmedValue.length !== 6) {
-          newErrors.zipCode = "Zipcode must be exactly 6 characters";
-          isValid = false;
-        } else {
-          newErrors.zipCode = "";
-        }
+        formData.append(key, data[key]);
       }
     });
 
-    // Check if any form field is empty
-    if (
-      Object.values(formData).some(
-        (value) => typeof value === "string" && !value.trim()
-      )
-    ) {
-      isValid = false;
-    }
-
-    setFormErrors(newErrors);
-    return isValid;
-  };
-
-  const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      const formDataToSend = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value instanceof File) {
-          formDataToSend.append(key, value);
-        } else {
-          formDataToSend.append(key, value.trim());
+    apiCall({
+      method: "POST",
+      apiUrl: `${local_host}/api/v1/update_profile`,
+      payload: formData,
+    })
+      .then((res) => {
+        if (res?.success == true) {
+          toast.success("submitted Successfully");
+          reset();
+        } else if (res?.success == false) {
+          toast.error("Something went wrong");
         }
+      })
+      .catch(() => {
+        toast.error("Error submitting form. Please try again later.");
       });
-
-      // Send formDataToSend to your API or perform further actions
-
-      console.log("Form submitted successfully:", formDataToSend);
-
-      // Clear form fields
-      setFormData({
-        ownerName: "",
-        gender: "",
-        ownerPhoto: "",
-        email: "",
-        mobileNumber: "",
-        streetAddress: "",
-        apartment: "",
-        city: "",
-        state:"",
-        country: "",
-        zipCode: "",
-      });
-      const fileInputs = document.querySelectorAll('input[type="file"]');
-      fileInputs.forEach((input) => {
-        input.value = ""; // Clear the value
-      });
-
-      // Optionally, close modal or perform other actions
-    } else {
-      console.log("Form has errors. Please fix them.");
-    }
   };
+
+  useEffect(() => {
+    if (watchPincode?.length < 6) {
+      setCityValue(false);
+    }
+  }, [watchPincode]);
 
   return (
     <div className='container pt-md-5'>
@@ -217,199 +94,266 @@ function ProfileDetails() {
         <div className='shipping_addres_main_form_area'>
           <h2>Profile Information</h2>
           <div className='shipping_address_form'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className='row'>
                 <div className='col-lg-6'>
                   <div className='form-group'>
+                    <label for='pincode' className='p-1'>
+                      Fill valid Zip Code
+                    </label>
+
                     <input
                       type='text'
+                      id='pincode'
                       className='form-control'
-                      placeholder='Owner Name*'
-                      name='ownerName'
-                      value={formData.ownerName}
-                      onChange={handleChange}
+                      {...register("pincode", {
+                        pattern: {
+                          value: /^[1-9][0-9]{5}$/,
+                          message: "valid pincode",
+                        },
+                        required: { value: true, message: "Zip-Code required" },
+                        validate: (filedValue) => {
+                          setCityValueFn(filedValue);
+                        },
+                      })}
                     />
-                    {formErrors.ownerName && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.ownerName}
-                      </span>
-                    )}
+                    <p className='text-danger'>{errors.pincode?.message}</p>
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='form-group'>
-                    <select
-                      className='form-select form-control'
-                      name='gender'
-                      value={formData.gender}
-                      onChange={handleChange}
-                    >
-                      <option value='' disabled selected>
-                        gender
-                      </option>
-                      <option value='Male'>Male</option>
-                      <option value='Female'>Female</option>
-                    </select>
-                    {formErrors.gender && (
-                      <span style={{ color: "red" }}>{formErrors.gender}</span>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label htmlFor='ownerPhoto'>Owner Photo*</label>
+                    <label for='profile_image' className='p-1'>
+                      Profile Image (optional)
+                    </label>
+
                     <input
                       type='file'
+                      id='profile_image'
                       className='form-control'
-                      id='ownerPhoto'
-                      name='ownerPhoto'
                       accept='.jpg, .jpeg, .png'
-                      onChange={handleFileChange}
+                      {...register("profile_image", {
+                        required: {
+                          value: true,
+                          message: "Profile Image required",
+                        },
+                      })}
                     />
-                    {formErrors.ownerPhoto && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.ownerPhoto}
-                      </span>
-                    )}
+                    <p className='text-danger'>
+                      {errors.profile_image?.message}
+                    </p>
                   </div>
                 </div>
+
                 <div className='col-lg-6'>
                   <div className='form-group'>
+                    <label for='name' className='p-1'>
+                      User Name
+                    </label>
+
                     <input
                       type='text'
+                      id='name'
                       className='form-control'
-                      placeholder='Email address*'
-                      name='email'
-                      value={formData.email}
-                      onChange={handleChange}
+                      {...register("name", {
+                        required: {
+                          value: true,
+                          message: "User Name required",
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z ]{3,}$/,
+                          message: "Only in Alphabetic of 3 letter ",
+                        },
+                      })}
                     />
-                    {formErrors.email && (
-                      <span style={{ color: "red" }}>{formErrors.email}</span>
-                    )}
+
+                    <p className='text-danger'>{errors.name?.message}</p>
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='form-group'>
+                    <label for='email_id' className='p-1'>
+                      E-mail
+                    </label>
+
                     <input
                       type='text'
+                      id='email_id'
                       className='form-control'
-                      placeholder='Mobile number*'
-                      name='mobileNumber'
-                      value={formData.mobileNumber}
-                      onChange={handleChange}
+                      {...register("email_id", {
+                        required: { value: true, message: "E-mail required" },
+                        pattern: {
+                          value: /^[a-zA-Z]\w*@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+                          message: "Provid Valid Email",
+                        },
+                      })}
                     />
-                    {formErrors.mobileNumber && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.mobileNumber}
-                      </span>
-                    )}
+
+                    <p className='text-danger'>{errors.email_id?.message}</p>
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='form-group'>
-                    <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Street address'
-                      name='streetAddress'
-                      value={formData.streetAddress}
-                      onChange={handleChange}
-                    />
-                    {formErrors.streetAddress && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.streetAddress}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Apartment, Suite, House no*'
-                      name='apartment'
-                      value={formData.apartment}
-                      onChange={handleChange}
-                    />
-                    {formErrors.apartment && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.apartment}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <select
-                      className='form-select form-control'
-                      name='city'
-                      value={formData.city}
-                      onChange={handleChange}
-                    >
-                      <option value='' disabled selected>
-                        City
-                      </option>
-                      <option value='Khulna'>Khulna</option>
-                      <option value='Dhaka'>Dhaka</option>
-                      <option value='Barisal'>Barisal</option>
-                    </select>
-                    {formErrors.city && (
-                      <span style={{ color: "red" }}>{formErrors.city}</span>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <input
-                      type='text'
-                      className='form-control'
-                      placeholder='state'
-                      name='state'
-                      value={formData.state}
-                      onChange={handleChange}
-                    />
-                    {formErrors.state && (
-                      <span style={{ color: "red" }}>{formErrors.state}</span>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <select
-                      className='form-select form-control'
-                      name='country'
-                      value={formData.country}
-                      onChange={handleChange}
-                    >
-                      <option value='' disabled selected>
-                        Country
-                      </option>
-                      <option value='Khulna'>Khulna</option>
-                      <option value='Dhaka'>Dhaka</option>
-                      <option value='Barisal'>Barisal</option>
-                    </select>
-                    {formErrors.country && (
-                      <span style={{ color: "red" }}>{formErrors.country}</span>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
+                    <label for='phone_number' className='p-1'>
+                      Phone Number
+                    </label>
+
                     <input
                       type='number'
+                      id='phone_number'
                       className='form-control'
-                      placeholder='Zip code'
-                      name='zipCode'
-                      value={formData.zipCode}
-                      onChange={handleChange}
+                      {...register("phone_number", {
+                        required: {
+                          value: true,
+                          message: "Phone Number required",
+                        },
+                        pattern: {
+                          value: /^[6-9]\d{9}$/,
+                          message: "Provid Valid Phone Number",
+                        },
+                      })}
                     />
-                    {formErrors.zipCode && (
-                      <span style={{ color: "red" }}>{formErrors.zipCode}</span>
+
+                    <p className='text-danger'>
+                      {errors.phone_number?.message}
+                    </p>
+                  </div>
+                </div>
+
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='gender' className='p-1'>
+                      Gender*
+                    </label>
+                    <select
+                      as='select' // Updated to use select for dropdown
+                      className='form-control'
+                      name='gender'
+                      {...register("gender", {
+                        required: {
+                          value: true,
+                          message: "Gender required",
+                        },
+                      })}
+                    >
+                      <option value=''>Select Gender</option>
+                      <option value='male'>Male</option>
+                      <option value='female'>Female</option>
+                      <option value='other'>Other</option>
+                    </select>
+                    <p className='text-danger '>{errors.gender?.message}</p>
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='address_line1' className='p-1'>
+                      Appartment No*
+                    </label>
+
+                    <input
+                      type='text'
+                      id='address_line1'
+                      className='form-control'
+                      {...register("address_line1", {
+                        required: {
+                          value: true,
+                          message: "Appartment No required",
+                        },
+                      })}
+                    />
+
+                    <p className='text-danger'>
+                      {errors.address_line1?.message}
+                    </p>
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='address_line2' className='p-1'>
+                      Street*
+                    </label>
+
+                    <input
+                      type='text'
+                      id='address_line2'
+                      className='form-control'
+                      {...register("address_line2", {
+                        required: {
+                          value: true,
+                          message: "Street required",
+                        },
+                      })}
+                    />
+
+                    <p className='text-danger'>
+                      {errors.address_line2?.message}
+                    </p>
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='city' className='p-1'>
+                      city
+                    </label>
+
+                    <input
+                      type='text'
+                      id='city'
+                      className='form-control'
+                      {...register("city", {
+                        required: {
+                          value: true,
+                          message: "City required",
+                        },
+                      })}
+                    />
+                    {watchCity ? (
+                      ""
+                    ) : (
+                      <p className='text-danger'>{errors.city?.message}</p>
                     )}
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='state' className='p-1'>
+                      State
+                    </label>
+
+                    <input
+                      type='text'
+                      id='state'
+                      className='form-control'
+                      {...register("state", {
+                        required: {
+                          value: true,
+                          message: "State required",
+                        },
+                      })}
+                    />
+                    {watchState ? (
+                      ""
+                    ) : (
+                      <p className='text-danger'>{errors.state?.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='country' className='p-1'>
+                      Country
+                    </label>
+
+                    <input
+                      type='text'
+                      id='country'
+                      className='form-control'
+                      value='India'
+                      disabled
+                    />
                   </div>
                 </div>
               </div>
+
               <div className='modal-footer'>
                 <div className='my_acount_submit'>
                   <button type='submit' className='btn btn_theme btn_md w-100'>
@@ -418,6 +362,7 @@ function ProfileDetails() {
                 </div>
               </div>
             </form>
+            <DevTool control={control} />
           </div>
         </div>
       </div>
