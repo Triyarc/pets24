@@ -2,9 +2,9 @@ import React from "react";
 
 function PricingCard() {
   return (
-    <div>
+    <div id='our_pricing_area'>
       {" "}
-      <section id='our_pricing_area' className='section_padding'>
+      <section className='section_padding'>
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6 offset-lg-3'>
@@ -17,13 +17,16 @@ function PricingCard() {
               </div>
             </div>
           </div>
-          <div className='row'>
-            <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
+          <div className='row justify-content-center'>
+            <div className='col-lg-5 col-md-6 col-sm-12 col-12'>
               <div className='our_pricing_wrapper'>
                 <div className='our_pricing_top'>
-                  <h3>Basic plan</h3>
-                  <h2>
-                    $199.00<sub>/Per month</sub>
+                  <h3>Kennel plan</h3>
+                  {/* <h2>
+                    ₹ 399.00<sub>/ 6 month</sub>
+                  </h2> */}
+                   <h2>
+                   Free Registration <br></br><sub> Till May-2024</sub>
                   </h2>
                   <p>
                     Occaecat ex consectetur eu irure non dolore in anim nostrud
@@ -34,32 +37,35 @@ function PricingCard() {
                 <div className='our_pricing_bottom'>
                   <ul>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Occaecat ex
-                      consectetur{" "}
-                    </li>
-                    <li>
-                      <i className='fas fa-check-circle'></i> Non dolore in anim
-                      nostrud{" "}
-                    </li>
-                    <li>
-                      <i className='fas fa-check-circle'></i> Est veniam nisi
-                      empor mollit{" "}
+                      <i className='fas fa-check-circle'></i> Unlimited Post
                     </li>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Velit nisi commodo
-                      proi{" "}
+                      <i className='fas fa-check-circle'></i> Cover All Pet
+                      Service
+                    </li>
+                    <li className='active'>
+                      <i className='fas fa-check-circle'></i> Maintain With
+                      DashBoard
+                    </li>
+                    <li className='active'>
+                      <i className='fas fa-check-circle'></i> Order Service
+                      Available
+                    </li>
+                    <li className='active'>
+                      <i className='fas fa-check-circle'></i> Maintain with
+                      Employee
                     </li>
                     <li>
-                      <i className='fas fa-check-circle'></i> Occaecat ex
-                      consectetur{" "}
+                      <i className='fas fa-times-circle'></i> Post Pet
+                      accesories
                     </li>
-                    <li className='active'>
-                      <i className='fas fa-check-circle'></i> Non dolore in anim
-                      nostrud{" "}
+                    <li>
+                      <i className='fas fa-times-circle'></i> Post Pet Food
+                      Product
                     </li>
-                    <li className='active'>
-                      <i className='fas fa-check-circle'></i> Est veniam nisi
-                      empor mollit{" "}
+                    <li>
+                      <i className='fas  fa-times-circle'></i> Order Product
+                      Online
                     </li>
                   </ul>
                   <div className='our_pricing_btn'>
@@ -73,12 +79,15 @@ function PricingCard() {
                 </div>
               </div>
             </div>
-            <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
+            <div className='col-lg-5 col-md-6 col-sm-12 col-12'>
               <div className='our_pricing_wrapper'>
                 <div className='our_pricing_top pricing_active'>
-                  <h3>Premium plan</h3>
-                  <h2>
-                    $299.00<sub>/Per month</sub>
+                  <h3>Pet Shop plan</h3>
+                  {/* <h2>
+                    ₹ 599.00<sub>/ 6 month</sub>
+                  </h2> */}
+                     <h2>
+                   Free Registration <br></br><sub> Till May-2024</sub>
                   </h2>
                   <p>
                     Occaecat ex consectetur eu irure non dolore in anim nostrud
@@ -89,32 +98,35 @@ function PricingCard() {
                 <div className='our_pricing_bottom'>
                   <ul>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Occaecat ex
-                      consectetur{" "}
+                      <i className='fas fa-check-circle'></i> Unlimited Post
                     </li>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Non dolore in anim
-                      nostrud{" "}
+                      <i className='fas fa-check-circle'></i> Cover All Pet
+                      Service
                     </li>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Est veniam nisi
-                      empor mollit{" "}
-                    </li>
-                    <li>
-                      <i className='fas fa-check-circle'></i> Velit nisi commodo
-                      proi{" "}
-                    </li>
-                    <li>
-                      <i className='fas fa-check-circle'></i> Occaecat ex
-                      consectetur{" "}
+                      <i className='fas fa-check-circle'></i> Maintain With
+                      DashBoard
                     </li>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Non dolore in anim
-                      nostrud{" "}
+                      <i className='fas fa-check-circle'></i> Order Service
+                      Available
                     </li>
                     <li className='active'>
-                      <i className='fas fa-check-circle'></i> Est veniam nisi
-                      empor mollit{" "}
+                      <i className='fas fa-check-circle'></i> Maintain with
+                      Employee
+                    </li>
+                    <li className='active'>
+                      <i className='fas fa-check-circle'></i> Post Pet
+                      accesories
+                    </li>
+                    <li className='active'>
+                      <i className='fas fa-check-circle'></i> Post Pet Food
+                      Product
+                    </li>
+                    <li className='active'>
+                      <i className='fas fa-check-circle'></i> Order Product
+                      Online
                     </li>
                   </ul>
                   <div className='our_pricing_btn'>
@@ -125,7 +137,7 @@ function PricingCard() {
                 </div>
               </div>
             </div>
-            <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
+            {/* <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
               <div className='our_pricing_wrapper'>
                 <div className='our_pricing_top'>
                   <h3>Pro plan</h3>
@@ -179,7 +191,7 @@ function PricingCard() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

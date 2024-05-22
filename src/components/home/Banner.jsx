@@ -17,8 +17,8 @@ function Banner() {
                   Reprehenderit non fugiat pariatur ex laboris aute consectetur
                   tempor proident cupidatat et quis reprehenderit consequat.
                 </p>
-                <a href='about.html' className='btn btn_theme btn_md'>
-                  Learn more
+                <a href='#our_pricing_area' className='btn btn_theme btn_md'>
+                  Join Our Plan
                 </a>
 
                 <div className='banner_main_services'>

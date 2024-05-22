@@ -3,9 +3,7 @@ import { toast } from "react-toastify";
 
 function ShopDetails() {
   const [formData, setFormData] = useState({
-    ownerName: "",
     shopName: "",
-    shopCoverPhoto: "",
     shopLogo: "",
     shopDescription: "",
     email: "",
@@ -18,9 +16,7 @@ function ShopDetails() {
   });
 
   const [formErrors, setFormErrors] = useState({
-    ownerName: "",
     shopName: "",
-    shopCoverPhoto: "",
     shopLogo: "",
     shopDescription: "",
     email: "",
@@ -118,11 +114,6 @@ function ShopDetails() {
         isValid = false;
       }
 
-      // Check for ownerName minimum length
-      if (key === "ownerName" && value.trim().length < 3) {
-        newErrors.ownerName = "Provid Valid ownerName";
-        isValid = false;
-      }
 
 
       // Check if shopName contains only alphabetic characters
@@ -197,9 +188,7 @@ function ShopDetails() {
 
       // Clear form fields
       setFormData({
-        ownerName: "",
         shopName: "",
-        shopCoverPhoto: "",
         shopLogo: "",
         shopDescription: "",
         email: "",
@@ -226,27 +215,10 @@ function ShopDetails() {
     <div className='container pt-md-5'>
       <div className='shipping_addres_area_main'>
         <div className='shipping_addres_main_form_area'>
-          <h2>Pet Shop Registration Details</h2>
+          <h2>Registration From</h2>
           <div className='shipping_address_form'>
             <form onSubmit={handleSubmit}>
               <div className='row'>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Owner Name*'
-                      name='ownerName'
-                      value={formData.ownerName}
-                      onChange={handleChange}
-                    />
-                    {formErrors.ownerName && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.ownerName}
-                      </span>
-                    )}
-                  </div>
-                </div>
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <input
@@ -264,27 +236,7 @@ function ShopDetails() {
                     )}
                   </div>
                 </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label htmlFor='shopCoverPhoto'>
-                      Shop Cover Photo* (provide landscape photo)
-                    </label>
-                    <input
-                      type='file'
-                      className='form-control'
-                      id='shopCoverPhoto'
-                      accept='.jpg, .jpeg, .png'
-                      name='shopCoverPhoto'
-                      placeholder='Shop Cover Photo*'
-                      onChange={handleFileChange}
-                    />
-                    {formErrors.shopCoverPhoto && (
-                      <span style={{ color: "red" }}>
-                        {formErrors.shopCoverPhoto}
-                      </span>
-                    )}
-                  </div>
-                </div>
+             
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label htmlFor='shopLogo'>Shop Logo*</label>

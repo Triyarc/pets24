@@ -25,7 +25,6 @@ import Loader from "./components/common/Loader";
 import UserProfile from "./pages/UserProfile";
 
 function App() {
-
   return (
     <div className='App'>
       <Loader />
