@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import loader from '../../assets/img/loader.gif'
 function Loader() {
+
   return (
     <div id="preloader">
     <div id="status">
-        <img src="assets/img/loader.gif" alt="img"/>
+        <img src={loader} alt="img"/>
     </div>
 </div>
   )

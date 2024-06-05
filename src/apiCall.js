@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookieValue } from "./cokkies";
+import { local_host } from "./env";
 
 const authToken = getCookieValue("auth_token");
 

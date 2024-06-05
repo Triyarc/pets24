@@ -1,119 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import apiCall from "../../apiCall";
+import { local_host } from "../../env";
+import { useNavigate } from "react-router-dom";
 
 function MatingPetsArea() {
-  const shopItems = [
-    {
-      id: 1,
-      imgSrc: "assets/img/shop/shop-1.png",
-      name: "Automatic dog blue leash",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 2,
-      imgSrc: "assets/img/shop/shop-2.png",
-      name: "Cat toilet bowl",
-      badge: "Sold",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 3,
-      imgSrc: "assets/img/shop/shop-3.png",
-      name: "Bowl with rubber toy",
-      badge: "20% off",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 4,
-      imgSrc: "assets/img/shop/shop-4.png",
-      name: "Automatic dog blue leash",
-      badge: "In stock",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 5,
-      imgSrc: "assets/img/shop/shop-5.png",
-      name: "Cat toilet bowl",
-      badge: "Sold",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 6,
-      imgSrc: "assets/img/shop/shop-6.png",
-      name: "Bowl with rubber toy",
-      badge: "20% off",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 7,
-      imgSrc: "assets/img/shop/shop-7.png",
-      name: "Automatic dog blue leash",
-      badge: "In stock",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 8,
-      imgSrc: "assets/img/shop/shop-8.png",
-      name: "Cat toilet bowl",
-      badge: "Sold",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 9,
-      imgSrc: "assets/img/shop/shop-9.png",
-      name: "Bowl with rubber toy",
-      badge: "20% off",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 10,
-      imgSrc: "assets/img/shop/shop-10.png",
-      name: "Automatic dog blue leash",
-      badge: "In stock",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 11,
-      imgSrc: "assets/img/shop/shop-11.png",
-      name: "Cat toilet bowl",
-      badge: "Sold",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-    {
-      id: 12,
-      imgSrc: "assets/img/shop/shop-12.png",
-      name: "Bowl with rubber toy",
-      badge: "20% off",
-      originalPrice: "Tk. 500.00/KG",
-      discountedPrice: "Tk. 300.00/KG",
-      rating: 729,
-    },
-  ];
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
+  const handleClick = (props) => {
+    navigate(`/pet-details/mating/${props}`)
+  };
+
+  useEffect(() => {
+    return () => {
+      apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/list_mating`,
+      }).then((res) => {
+        setData(res.parameters.data.data);
+      });
+    };
+  }, []);
+
   return (
-    <div>
+     <div>
       {" "}
-      <section id='our_shop_main' className='section_padding'>
+      <section id='our_shop_main' className='section_padding pt-5 '>
         <div className='container'>
           <button
             className='btn btn-primary filter-btn d-lg-none pa_filter_btn'
@@ -126,7 +38,7 @@ function MatingPetsArea() {
           </button>
           <div className='row'>
             {/* filter lg */}
-            <div className='col-lg-3 d-none d-md-none d-lg-block'>
+            {/* <div className='col-lg-3 d-none d-md-none d-lg-block'>
               <div className='sidebar_boxed_wrapper'>
                 <div className='sidebar_common_heading'>
                   <h3>Filter by price</h3>
@@ -377,28 +289,31 @@ function MatingPetsArea() {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* product */}
-            <div className='col-lg-9'>
+            <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>
                 <div className='shop_heading_sort_area'>
                   <div className='shop_main_area_heading'>
-                    <h3>We found {shopItems.length} items</h3>
+                    <h3>We found {data.length} items</h3>
                   </div>
                 </div>
                 <div className='shop_item_wrapper'>
                   <div className='row'>
-                    {shopItems.map((item) => (
+                    {data?.map((item) => (
                       <div
-                        className='col-lg-4 col-md-6 col-sm-12 col-12'
+                        className='col-lg-3 col-md-6 col-sm-12 col-12'
                         key={item.id}
                       >
-                        <div className='shop_main_item'>
+                        <div
+                          className='shop_main_item'
+                          onClick={()=>{handleClick(item.id)}}
+                        >
                           <div className='shop_item_img'>
-                            <a href='shop-details.html'>
-                              <img src={item.imgSrc} alt='img' />
+                            <a href=''>
+                              <img src={item.petPhoto[0]} alt='img' />
                             </a>
-                            {item.badge && (
+                            {/* {item.badge && (
                               <span
                                 className={`shop_badge ${
                                   item.badge === "In stock"
@@ -408,21 +323,19 @@ function MatingPetsArea() {
                               >
                                 {item.badge}
                               </span>
-                            )}
+                            )} */}
                           </div>
                           <div className='shop_item_content'>
                             <h3>
-                              <a href='shop-details.html'>{item.name}</a>
+                              <a href=''>{item.pets_name}</a>
                             </h3>
                             <div className='shop_item_price'>
-                              <p>{item.originalPrice}</p>
-                              <h5>{item.discountedPrice}</h5>
-                            </div>
-                            <div className='shop_item_rating'>
-                              {Array.from({ length: 5 }, (_, index) => (
-                                <i key={index} className='fas fa-star'></i>
-                              ))}
-                              <span>{item.rating}</span>
+                              <h5>
+                                DOB : <span>{item.dob}</span>
+                              </h5>
+                              <h5>
+                                Gender : <span>{item.gender}</span>
+                              </h5>
                             </div>
                           </div>
                         </div>

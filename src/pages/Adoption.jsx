@@ -7,7 +7,7 @@ function Adoption() {
   var pageName = "Adoption";
   return (
     <div>
-      <Banner pageName={pageName} />
+      {/* <Banner pageName={pageName} /> */}
       <AdoptionPetsArea/>
       <SubscribeArea/>
     </div>

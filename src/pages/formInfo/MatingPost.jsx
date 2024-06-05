@@ -6,6 +6,7 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { toast } from "react-toastify";
 import PetGallery from "./PetGallery";
+import DatePicker from 'react-datepicker';
 
 function MatingPost() {
   const [cityValue, setCityValue] = useState(false);
@@ -296,19 +297,24 @@ function MatingPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='dob' className='p-1'>
-                      Date Of Birth
+                      Date Of Yaer
                     </label>
 
-                    <input
-                      type='date'
-                      id='dob'
-                      className='form-control'
-                      {...register("dob", {
-                        required: {
-                          value: true,
-                          message: "Date Of Birth required",
-                        },
-                      })}
+                    <Controller
+                    className="w-100"
+                      name='dob'
+                      control={control}
+                      render={({ field }) => (
+                        <DatePicker
+                            {...field}
+                            selected={field.value}
+                            onChange={(date) => setValue('dob', date)}
+                            dateFormat="MM/yyyy"
+                            className="form-control w-100"
+                            showMonthYearPicker
+                        />
+                    )}
+                      rules={{ required: true }}
                     />
 
                     <p className='text-danger'>{errors.dob?.message}</p>

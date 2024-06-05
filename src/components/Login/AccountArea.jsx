@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { FaGoogle } from "react-icons/fa";
 import axios from "axios";
@@ -6,9 +6,11 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getCookieValue } from "../../cokkies";
 
 function AccountArea() {
-  // State and validation for login section
+  const redirection_path = getCookieValue("redirection_path");
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -75,9 +77,14 @@ function AccountArea() {
       if (responseData.success == true) {
         document.cookie = `auth_token=${responseData.parameters.token};path=/`;
         document.cookie = "loggedIn=true;path=/";
-        navigate("/");
-      }else if(responseData.success == false){
-        toast.error(responseData.message)
+        if(redirection_path == "false" || redirection_path == "null"){
+          navigate("/");
+        }else{
+          navigate(redirection_path)
+        }
+        
+      } else if (responseData.success == false) {
+        toast.error(responseData.message);
       }
     } else {
       console.log("Login form has errors. Please fix them.");
@@ -111,8 +118,8 @@ function AccountArea() {
             document.cookie = `auth_token=${responseData.parameters.token};path=/`;
             document.cookie = "loggedIn=true;path=/";
             navigate("/");
-          }else if(responseData.success == false){
-            toast.error(responseData.message)
+          } else if (responseData.success == false) {
+            toast.error(responseData.message);
           }
         }
       } catch (err) {
@@ -120,6 +127,10 @@ function AccountArea() {
       }
     },
   });
+
+  setTimeout(() => {
+    document.cookie = "redirection_path=null;path=/";
+  }, 300000);
 
   return (
     <div>

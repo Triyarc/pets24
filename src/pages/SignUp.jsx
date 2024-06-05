@@ -56,8 +56,7 @@ function SignUp() {
       newErrors.username = "Username only in alphabetic";
       isValid = false;
     } else if (!/^[a-zA-Z]{3,}$/.test(registrationData.username)) {
-      newErrors.username =
-        "Username must be at least 2 characters long";
+      newErrors.username = "Username must be at least 2 characters long";
       isValid = false;
     } else {
       newErrors.username = "";
@@ -91,46 +90,44 @@ function SignUp() {
     return isValid;
   };
 
- // submit
-const handleSubmitRegistration = async (e) => {
-  e.preventDefault();
-  if (validateRegistrationForm()) {
-    console.log("Registering...", registrationData);
-    try {
-      const responseData = await apiCall({
-        method:"POST",
-        apiUrl: `${local_host}/api/v1/user_register`,
-        payload: registrationData
-      });
-      console.log("Response Data:", responseData);
-                navigate("/");
-
-    } catch (error) {
-      console.error("Error occurred:", error);
+  // submit
+  const handleSubmitRegistration = async (e) => {
+    e.preventDefault();
+    if (validateRegistrationForm()) {
+      console.log("Registering...", registrationData);
+      try {
+        const responseData = await apiCall({
+          method: "POST",
+          apiUrl: `${local_host}/api/v1/user_register`,
+          payload: registrationData,
+        });
+        console.log("Response Data:", responseData);
+        navigate("/login");
+      } catch (error) {
+        console.error("Error occurred:", error);
+      }
+    } else {
+      console.log("Registration form has errors. Please fix them.");
     }
-  } else {
-    console.log("Registration form has errors. Please fix them.");
-  }
-};
+  };
 
-
-    // Google login
-    const login = useGoogleLogin({
-      onSuccess: async (response) => {
-        try {
-          const res = await axios.get(
-            "https://www.googleapis.com/oauth2/v3/userinfo",
-            {
-              headers: { Authorization: `Bearer ${response.access_token}` },
-            }
-          );
-          console.log(res);
-          document.cookie = "loggedIn=true;path=/";
-        } catch (err) {
-          console.log(err);
-        }
-      },
-    });
+  // Google login
+  const login = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: { Authorization: `Bearer ${response.access_token}` },
+          }
+        );
+        console.log(res);
+        document.cookie = "loggedIn=true;path=/";
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
 
   return (
     <div>
@@ -237,14 +234,14 @@ const handleSubmitRegistration = async (e) => {
                         </button>
                       </form>
                       <div className='my_acount_submit'>
-                      <button
-                        type='button'
-                        className='btn btn-danger btn-block'
-                        onClick={() => login()}
-                      >
-                        <FaGoogle /> Log in with Google
-                      </button>
-                    </div>
+                        <button
+                          type='button'
+                          className='btn btn-danger btn-block'
+                          onClick={() => login()}
+                        >
+                          <FaGoogle /> Log in with Google
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

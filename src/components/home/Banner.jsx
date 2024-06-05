@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import main_Banner from '../../assets/img/common/banner_left.png'
+import sub_Banner_one from '../../assets/img/icon/banner-1.png'
+import sub_Banner_two from '../../assets/img/icon/banner-2.png'
+import sub_Banner_three from '../../assets/img/icon/banner-3.png'
 
 function Banner() {
 
@@ -23,15 +27,15 @@ function Banner() {
 
                 <div className='banner_main_services'>
                   <div className='banner_main_service_item'>
-                    <img src='assets/img/icon/banner-1.png' alt='img' />
+                    <img src={sub_Banner_one} alt='img' />
                     <h5>Vet Service</h5>
                   </div>
                   <div className='banner_main_service_item'>
-                    <img src='assets/img/icon/banner-2.png' alt='img' />
+                    <img src={sub_Banner_two} alt='img' />
                     <h5>Special care</h5>
                   </div>
                   <div className='banner_main_service_item'>
-                    <img src='assets/img/icon/banner-3.png' alt='img' />
+                    <img src={sub_Banner_three} alt='img' />
                     <h5>Adoption</h5>
                   </div>
                 </div>
@@ -40,7 +44,7 @@ function Banner() {
             <div className='col-lg-6 d-lg-block d-none'>
               <div className='main_banner_img_left'>
                 <img
-                  src='assets/img/common/banner_left.png'
+                  src={main_Banner}
                   alt='img'
                   className='animation-img-one'
                 />

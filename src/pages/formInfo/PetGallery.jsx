@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
-import { toast } from "react-toastify";
 
 function PetGallery({ images, setImages,setImageItems }) {
 

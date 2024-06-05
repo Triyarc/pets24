@@ -1,12 +1,24 @@
 import React from "react";
 
 function Footer() {
-    const scrollToTop = () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth' // Smooth scrolling behavior
-        });
-      };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Smooth scrolling behavior
+    });
+  };
+
+  window.addEventListener("scroll", function () {
+    var goTop = document.querySelector(".go-top");
+    if (window.scrollY > 600) {
+      goTop.classList.add("active");
+     
+    } else {
+      goTop.classList.remove("active");
+    }
+  });
+ 
+
   return (
     <div>
       {" "}
@@ -141,7 +153,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className='go-top'  onClick={scrollToTop}>
+      <div className='go-top' onClick={scrollToTop}>
         <i className='fas fa-chevron-up'></i>
         <i className='fas fa-chevron-up'></i>
       </div>

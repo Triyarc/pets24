@@ -6,6 +6,9 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { toast } from "react-toastify";
 import PetGallery from "./PetGallery";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 function AdoptionPost() {
   const [cityValue, setCityValue] = useState(false);
   const [images, setImages] = useState([]);
@@ -31,6 +34,7 @@ function AdoptionPost() {
       city: "",
       state: "",
       description: "",
+      district:"",
       country: "India",
     },
   });
@@ -64,6 +68,7 @@ function AdoptionPost() {
 
   const watchZipCode = watch("zipCode");
   const watchCity = watch("city");
+  const watchDistrict = watch("district");
   const watchState = watch("state");
   const watchCertificate = watch("certificate");
 
@@ -81,6 +86,7 @@ function AdoptionPost() {
           toast.error("Invalid Zip-Code");
         } else {
           setValue("city", res?.parameters?.city);
+          setValue("district", res?.parameters?.district);
           setValue("state", res?.parameters?.state);
           setCityValue(true);
         }
@@ -118,7 +124,6 @@ function AdoptionPost() {
         formData.append(key, data[key]);
       }
     });
-
 
     apiCall({
       method: "POST",
@@ -281,7 +286,6 @@ function AdoptionPost() {
                       <option value=''>Select Gender</option>
                       <option value='male'>Male</option>
                       <option value='female'>Female</option>
-                      <option value='other'>Other</option>
                     </select>
                     <p className='text-danger '>{errors.gender?.message}</p>
                   </div>
@@ -289,19 +293,23 @@ function AdoptionPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='dob' className='p-1'>
-                      Date Of Birth
+                      Birth in year
                     </label>
-
-                    <input
-                      type='date'
-                      id='dob'
-                      className='form-control'
-                      {...register("dob", {
-                        required: {
-                          value: true,
-                          message: "Date Of Birth required",
-                        },
-                      })}
+                    <Controller
+                    className="w-100"
+                      name='dob'
+                      control={control}
+                      render={({ field }) => (
+                        <DatePicker
+                            {...field}
+                            selected={field.value}
+                            onChange={(date) => setValue('dob', date)}
+                            dateFormat="MM/yyyy"
+                            className="form-control w-100"
+                            showMonthYearPicker
+                        />
+                    )}
+                      rules={{ required: true }}
                     />
 
                     <p className='text-danger'>{errors.dob?.message}</p>
@@ -345,28 +353,7 @@ function AdoptionPost() {
                     <p className='text-danger'>{errors.weight?.message}</p>
                   </div>
                 </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='dob' className='p-1'>
-                      Date Of Birth
-                    </label>
 
-                    <input
-                      type='date'
-                      id='dob'
-                      className='form-control'
-                      {...register("dob", {
-                        required: {
-                          value: true,
-                          message: "Date Of Birth required",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>{errors.dob?.message}</p>
-                  </div>
-                </div>
-                    
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='certificate' className='p-1'>
@@ -417,57 +404,6 @@ function AdoptionPost() {
                     </div>
                   </div>
                 )}
-
-                {/* <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='email_id' className='p-1'>
-                      E-mail
-                    </label>
-
-                    <input
-                      type='text'
-                      id='email_id'
-                      className='form-control'
-                      {...register("email_id", {
-                        required: { value: true, message: "E-mail required" },
-                        pattern: {
-                          value: /^[a-zA-Z]\w*@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-                          message: "Provid Valid Email",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>{errors.email_id?.message}</p>
-                  </div>
-                </div> */}
-
-                {/* <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='phone_number' className='p-1'>
-                      Phone Number
-                    </label>
-
-                    <input
-                      type='number'
-                      id='phone_number'
-                      className='form-control'
-                      {...register("phone_number", {
-                        required: {
-                          value: true,
-                          message: "Phone Number required",
-                        },
-                        pattern: {
-                          value: /^[6-9]\d{9}$/,
-                          message: "Provid Valid Phone Number",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>
-                      {errors.phone_number?.message}
-                    </p>
-                  </div>
-                </div> */}
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='zipCode' className='p-1'>
@@ -560,6 +496,30 @@ function AdoptionPost() {
                       ""
                     ) : (
                       <p className='text-danger'>{errors.city?.message}</p>
+                    )}
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='district' className='p-1'>
+                      district
+                    </label>
+
+                    <input
+                      type='text'
+                      id='district'
+                      className='form-control'
+                      {...register("district", {
+                        required: {
+                          value: true,
+                          message: "district required",
+                        },
+                      })}
+                    />
+                    {watchDistrict ? (
+                      ""
+                    ) : (
+                      <p className='text-danger'>{errors.district?.message}</p>
                     )}
                   </div>
                 </div>

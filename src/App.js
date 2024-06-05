@@ -23,11 +23,21 @@ import MatingPost from "./pages/formInfo/MatingPost";
 import PetGallery from "./pages/formInfo/PetGallery";
 import Loader from "./components/common/Loader";
 import UserProfile from "./pages/UserProfile";
+import PetDetails from "./pages/PetDetails";
+import './App.css'
+import ProfileUpdate from "./pages/ProfileUpdate";
 
 function App() {
+  const [timmer, setTimmer] = useState(true);
+
+  useEffect(() => {
+    setTimeout(function () {
+      setTimmer(false);
+    }, 2000);
+  }, []);
   return (
     <div className='App'>
-      <Loader />
+      {timmer && <Loader />}
       <>
         <Navbar />
         <BrowserRouter>
@@ -35,19 +45,27 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/' element={<Home />} />
+            {/* profile */}
+            <Route path='/profile-details' element={<ProfileDetails />} />
+            <Route path='/profile' element={<UserProfile />} />
+            <Route path='/profileTwo' element={<ProfileUpdate />} />
+            {/* shop */}
+            <Route path='/pet-shop-list' element={<ShopList />} />
+            <Route path='/shop-form-details' element={<ShopDetails />} />
+            {/* adoption */}
+            <Route path='/adoption' element={<Adoption />} />
+            <Route path='/adoption-post' element={<AdoptionPost />} />
+            <Route path='/pet-details/adoption/:id' element={<PetDetails />} />
+            <Route path='/pet-details/Mating/:id' element={<PetDetails />} />
+
+            {/* mating */}
+            <Route path='/mating' element={<Mating />} />
+            <Route path='/mating-post' element={<MatingPost />} />
+            {/* service */}
             <Route path='/service' element={<Service />} />
+            {/* product */}
             <Route path='/product' element={<ProductShop />} />
             <Route path='/product-detail' element={<ProductDetails />} />
-            <Route path='/adoption' element={<Adoption />} />
-            <Route path='/mating' element={<Mating />} />
-            <Route path='/pet-shop-list' element={<ShopList />} />
-            {/* inputs */}
-            <Route path='/shop-details' element={<ShopDetails />} />
-            <Route path='/profile-details' element={<ProfileDetails />} />
-            <Route path='/adoption-post' element={<AdoptionPost />} />
-            <Route path='/mating-post' element={<MatingPost />} />
-            <Route path='/pet-gallery' element={<PetGallery />} />
-            <Route path='/profile' element={<UserProfile />} />
             <Route
               path='/cart'
               element={
@@ -56,6 +74,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path='/pet-gallery' element={<PetGallery />} />
             <Route path='/about-us' element={<About />} />
             <Route path='/contact-us' element={<Contact />} />
             <Route path='/404' element={<ErrorBoundry />} />

@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
-
+import logo from '../../assets/img/logo.png'
 function Navbar() {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const isAuthenticated = document.cookie.includes("loggedIn=true");
+
+  
+
+  window.addEventListener("scroll", function () {
+    var navbarArea = document.querySelector(".navbar-area");
+    if (window.scrollY > 10) {
+      navbarArea.classList.add("is-sticky");
+    } else {
+      navbarArea.classList.remove("is-sticky");
+    }
+  });
+
+  // Scroll to Top Button
+
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible);
@@ -21,8 +35,6 @@ function Navbar() {
     clearAuthenticationCookie();
   }
 
-
-
   return (
     <div>
       <header className='main_header_arae'>
@@ -32,7 +44,7 @@ function Navbar() {
               <div className='main-responsive-menu'>
                 <div className='logo'>
                   <a href='/'>
-                    <img src='assets/img/logo.png' alt='logo' />
+                    <img src={logo} alt='logo' />
                   </a>
                 </div>
               </div>
@@ -42,7 +54,7 @@ function Navbar() {
             <div className='container'>
               <nav className='navbar navbar-expand-md navbar-light'>
                 <a className='navbar-brand' href='/'>
-                  <img src='assets/img/logo.png' alt='logo' />
+                  <img src={logo} alt='logo' />
                 </a>
                 <div
                   className='collapse navbar-collapse mean-menu'
@@ -55,12 +67,12 @@ function Navbar() {
                       </a>
                     </li>
                     <li className='nav-item'>
-                      <a href='mating' className='nav-link'>
+                      <a href='/mating' className='nav-link'>
                         Mating
                       </a>
                     </li>
                     <li className='nav-item'>
-                      <a href='adoption' className='nav-link'>
+                      <a href='/adoption' className='nav-link'>
                         Adoption
                       </a>
                     </li>
@@ -71,12 +83,12 @@ function Navbar() {
                       </a>
                       <ul className='dropdown-menu'>
                         <li className='nav-item'>
-                          <a href='service' className='nav-link'>
+                          <a href='/service' className='nav-link'>
                             Service
                           </a>
                         </li>
                         <li className='nav-item'>
-                          <a href='service-details.html' className='nav-link'>
+                          <a href='/service-details.html' className='nav-link'>
                             Service Details
                           </a>
                         </li>
@@ -89,34 +101,34 @@ function Navbar() {
                       </a>
                       <ul className='dropdown-menu'>
                         <li className='nav-item'>
-                          <a href='product' className='nav-link'>
+                          <a href='/product' className='nav-link'>
                             Shop
                           </a>
                         </li>
                         <li className='nav-item'>
-                          <a href='product-detail' className='nav-link'>
+                          <a href='/product-detail' className='nav-link'>
                             Shop Details
                           </a>
                         </li>
                         <li className='nav-item'>
-                          <a href='cart' className='nav-link'>
+                          <a href='/cart' className='nav-link'>
                             Cart
                           </a>
                         </li>
                       </ul>
                     </li>
                     <li className='nav-item'>
-                      <a href='pet-shop-list' className='nav-link'>
+                      <a href='/pet-shop-list' className='nav-link'>
                         Pet Shop
                       </a>
                     </li>{" "}
                     <li className='nav-item'>
-                      <a href='about-us' className='nav-link'>
+                      <a href='/about-us' className='nav-link'>
                         About us{" "}
                       </a>
                     </li>
                     <li className='nav-item'>
-                      <a href='contact-us' className='nav-link'>
+                      <a href='/contact-us' className='nav-link'>
                         Contact
                       </a>
                     </li>
@@ -183,63 +195,112 @@ function Navbar() {
                 </div>
               </div>
               <div className='dot-menu toggle_bar'>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="fas fa-bars bg-color"></i>
+                <button
+                  class='navbar-toggler'
+                  type='button'
+                  data-bs-toggle='collapse'
+                  data-bs-target='#navbarNav'
+                  aria-controls='navbarNav'
+                  aria-expanded='false'
+                  aria-label='Toggle navigation'
+                >
+                  <i class='fas fa-bars bg-color'></i>
                 </button>
               </div>
 
-              <div class="collapse navbar-collapse mobile_toggleResposive" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a href="/" class="nav-link active">Home</a>
+              <div
+                class='collapse navbar-collapse mobile_toggleResposive'
+                id='navbarNav'
+              >
+                <ul class='navbar-nav'>
+                  <li class='nav-item'>
+                    <a href='/' class='nav-link active'>
+                      Home
+                    </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="mating" class="nav-link">Mating</a>
+                  <li class='nav-item'>
+                    <a href='mating' class='nav-link'>
+                      Mating
+                    </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="adoption" class="nav-link">Adoption</a>
+                  <li class='nav-item'>
+                    <a href='adoption' class='nav-link'>
+                      Adoption
+                    </a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <li class='nav-item dropdown'>
+                    <a
+                      class='nav-link dropdown-toggle'
+                      href='#'
+                      id='servicesDropdown'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
                       Services
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                      <li class="nav-item">
-                        <a href="service" class="nav-link">Service</a>
+                    <ul
+                      class='dropdown-menu'
+                      aria-labelledby='servicesDropdown'
+                    >
+                      <li class='nav-item'>
+                        <a href='service' class='nav-link'>
+                          Service
+                        </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="service-details.html" class="nav-link">Service Details</a>
+                      <li class='nav-item'>
+                        <a href='service-details.html' class='nav-link'>
+                          Service Details
+                        </a>
                       </li>
                     </ul>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <li class='nav-item dropdown'>
+                    <a
+                      class='nav-link dropdown-toggle'
+                      href='#'
+                      id='shopDropdown'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
                       Shop
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="shopDropdown">
-                      <li class="nav-item">
-                        <a href="product" class="nav-link">Shop</a>
+                    <ul class='dropdown-menu' aria-labelledby='shopDropdown'>
+                      <li class='nav-item'>
+                        <a href='product' class='nav-link'>
+                          Shop
+                        </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="product-detail" class="nav-link">Shop Details</a>
+                      <li class='nav-item'>
+                        <a href='product-detail' class='nav-link'>
+                          Shop Details
+                        </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="cart" class="nav-link">Cart</a>
+                      <li class='nav-item'>
+                        <a href='cart' class='nav-link'>
+                          Cart
+                        </a>
                       </li>
                     </ul>
                   </li>
-                  <li class="nav-item">
-                    <a href="pet-shop-list" class="nav-link">Pet Shop</a>
+                  <li class='nav-item'>
+                    <a href='pet-shop-list' class='nav-link'>
+                      Pet Shop
+                    </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="about-us" class="nav-link">About us</a>
+                  <li class='nav-item'>
+                    <a href='about-us' class='nav-link'>
+                      About us
+                    </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="contact-us" class="nav-link">Contact</a>
+                  <li class='nav-item'>
+                    <a href='contact-us' class='nav-link'>
+                      Contact
+                    </a>
                   </li>
                 </ul>
               </div>
-
 
               <div className='container'>
                 {/* <div className='option-inner'>
@@ -265,7 +326,6 @@ function Navbar() {
                     </div>
                   </div>
                 </div> */}
-
               </div>
             </div>
           </div>
@@ -306,7 +366,7 @@ function Navbar() {
         id='offcanvasRight'
       >
         <div className='offcanvas-header'>
-          <img src='assets/img/logo.png' alt='img' />
+          <img src={logo} alt='img' />
           <button
             type='button'
             className='btn-close text-reset'

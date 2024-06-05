@@ -1260,10 +1260,10 @@ textarea.form-control {
   border-bottom-left-radius: 12px;
 }
 .adoption_details_main_content {
-  padding: 20px 20px;
-  border: 1px solid #ddd;
-  background: #fbf8ff;
-  box-shadow: 2px 6px 14px 0px rgba(43, 33, 30, 0.12);
+  padding: 4px 39px;
+  /* border: 1px solid #ddd; */
+  /* background: #fbf8ff; */
+  /* box-shadow: 2px 6px 14px 0px rgba(43, 33, 30, 0.12); */
   border-bottom-right-radius: 12px;
   border-top-right-radius: 12px;
 }
@@ -1272,7 +1272,7 @@ textarea.form-control {
 }
 .adoption_pet_infos ul li {
   border-top: 1px solid #e0e0e0;
-  padding-top: 5px;
+  padding-top: 17px;
   padding-bottom: 5px;
 }
 .adoption_pet_infos ul li:last-child {
@@ -1364,6 +1364,7 @@ textarea.form-control {
   background: #fff;
   box-shadow: 2px 6px 12px 0px rgba(0, 0, 0, 0.08);
   margin-top: 30px;
+  cursor: pointer;
 }
 .shop_item_img {
   position: relative;
@@ -1407,12 +1408,17 @@ textarea.form-control {
   color: var(--main-color);
 }
 .shop_item_price {
-  display: flex;
   padding-top: 8px;
 }
 .shop_item_price p {
   font-size: 14px;
-  text-decoration: line-through;
+  line-height: 20px;
+  padding-right: 10px;
+}
+.shop_item_price span {
+  text-align: center;
+  color:#192f61;
+  font-size: 12px;
   line-height: 20px;
   padding-right: 10px;
 }
