@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
+import PetCard from "../common/card/PetCard";
 
 function AdoptionPetsArea() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   const handleClick = (props) => {
-    navigate(`/pet-details/adoption/${props}`)
+    navigate(`/pet-details/adoption/${props}`);
   };
 
   useEffect(() => {
@@ -300,49 +301,7 @@ function AdoptionPetsArea() {
                 <div className='shop_item_wrapper'>
                   <div className='row'>
                     {data?.map((item) => (
-                      <div
-                        className='col-lg-3 col-md-6 col-sm-12 col-12'
-                        key={item.id}
-                      >
-                        <div
-                          className='shop_main_item'
-                          onClick={()=>{handleClick(item.id)}}
-                        >
-                          <div className='shop_item_img'>
-                            <a href=''>
-                              <img src={item.petPhoto[0]} alt='img' />
-                            </a>
-                            {/* {item.badge && (
-                              <span
-                                className={`shop_badge ${
-                                  item.badge === "In stock"
-                                    ? "in_stock"
-                                    : "in_sold"
-                                }`}
-                              >
-                                {item.badge}
-                              </span>
-                            )} */}
-                          </div>
-                          <div className='shop_item_content'>
-                            <h3>
-                              <a href=''>{item.pets_name}</a>
-                            </h3>
-                            <div className='shop_item_price'>
-                              <h5>
-                                Adoption Fee:{" "}
-                                <span>{item.discountedPrice}</span>
-                              </h5>
-                              <h5>
-                                DOB : <span>{item.dob}</span>
-                              </h5>
-                              <h5>
-                                Gender : <span>{item.gender}</span>
-                              </h5>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <PetCard item={item} handleClick={handleClick} />
                     ))}
                   </div>
                 </div>
