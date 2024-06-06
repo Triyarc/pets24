@@ -11,9 +11,9 @@ function PetCard({item , handleClick}) {
       onClick={()=>{handleClick(item.id)}}
     >
       <div className='shop_item_img'>
-        <a href=''>
+        <div>
           <img src={item.petPhoto[0]} alt='img' />
-        </a>
+        </div>
         {/* {item.badge && (
           <span
             className={`shop_badge ${
@@ -28,7 +28,7 @@ function PetCard({item , handleClick}) {
       </div>
       <div className='shop_item_content'>
         <h3>
-          <a href=''>{item.pets_name}</a>
+          <a href='' alt="name">{item.pets_name}</a>
         </h3>
         <div className='shop_item_price'>
           <h5>

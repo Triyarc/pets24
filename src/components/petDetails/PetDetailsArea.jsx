@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import palm_icon from "../../assets/img/icon/sm-leg.png";
-import Loader from "../common/Loader";
 import { useNavigate } from "react-router-dom";
 
 function PetDetailsArea({
@@ -51,7 +50,7 @@ function PetDetailsArea({
                             {selectedImage && (
                               <img
                                 src={selectedImage}
-                                alt='Pet Image'
+                                alt='Pet'
                                 className='img-fluid '
                                 style={{
                                   height: "380px",
@@ -66,7 +65,7 @@ function PetDetailsArea({
                                 <img
                                   key={idx}
                                   src={image}
-                                  alt='image'
+                                  alt='pet'
                                   className='img-thumbnail mx-2 '
                                   style={{
                                     cursor: "pointer",
@@ -158,12 +157,13 @@ function PetDetailsArea({
 
                 <div className='adoption_details_item'>
                   <div className='adoption_submit_btn'>
-                    <a
+                    <div
                       onClick={handleInfoEvent}
-                      className='btn btn_theme btn_md'
+                      alt="handle info"
+                      className='btn btn_theme btn_md me-4'
                     >
                       Adopt me
-                    </a>
+                    </div>
                     <a href='/adoption' className='btn btn_theme_white btn_md'>
                       Go back to adopt gallery
                     </a>
@@ -182,13 +182,14 @@ function PetDetailsArea({
                           <i className='fas fa-map-marker-alt' /> Etiam rhoncus
                           leo a dolor plac
                         </p>{" "}
-                        <a
+                        <div
                           onClick={handleInfoEvent}
+                          alt="handle info"
                           className='btn btn_theme_white btn_sm'
                           style={{ height: "39px  " }}
                         >
                           Contact info
-                        </a>
+                        </div>
                       </div>
                     </div>
                   </div>
