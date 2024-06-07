@@ -10,6 +10,7 @@ function PetDetails() {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState();
   const [dataReturn, setDataReturn] = useState(false);
+  const [relatedData, setRelatedData] = useState([]);
 
   var pathname = window.location.pathname;
   var parts = pathname.split("/");
@@ -27,20 +28,33 @@ function PetDetails() {
           setSelectedImage(res.parameters.data.petPhoto[0]);
           setDataReturn(true);
         });
+        apiCall({
+          method: "POST",
+          apiUrl: `${local_host}/api/v1/related_adoption_list`,
+          payload: { adoption_id: id },
+        }).then((res) => {
+          setRelatedData(res.parameters.data);
+        });
       } else if (desiredPart === "mating") {
         apiCall({
           method: "POST",
           apiUrl: `${local_host}/api/v1/mating_detail`,
           payload: { mating_id: id },
-        })
-          .then((res) => {
-            setData(res.parameters.data);
-            setSelectedImage(res.parameters.data.petPhoto[0]);
-            setDataReturn(true);
-          })
+        }).then((res) => {
+          setData(res.parameters.data);
+          setSelectedImage(res.parameters.data.petPhoto[0]);
+          setDataReturn(true);
+        });
+        apiCall({
+          method: "POST",
+          apiUrl: `${local_host}/api/v1/related_mating_list`,
+          payload: { mating_id: id },
+        }).then((res) => {
+          setRelatedData(res.parameters.data);
+        });
       }
     };
-  }, [desiredPart,id]);
+  }, [desiredPart, id]);
 
   return (
     <div>
@@ -51,6 +65,7 @@ function PetDetails() {
           selectedImage={selectedImage}
           id={id}
           desiredPart={desiredPart}
+          relatedData={relatedData}
         />
       )}
 

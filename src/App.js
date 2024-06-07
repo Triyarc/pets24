@@ -26,6 +26,7 @@ import UserProfile from "./pages/UserProfile";
 import PetDetails from "./pages/PetDetails";
 import './App.css'
 import ProfileUpdate from "./pages/ProfileUpdate";
+import ServicePost from "./pages/formInfo/ServicePost";
 
 function App() {
   const [timmer, setTimmer] = useState(true);
@@ -63,6 +64,7 @@ function App() {
             <Route path='/mating-post' element={<MatingPost />} />
             {/* service */}
             <Route path='/service' element={<Service />} />
+            <Route path='/service-post' element={<ServicePost />} />
             {/* product */}
             <Route path='/product' element={<ProductShop />} />
             <Route path='/product-detail' element={<ProductDetails />} />

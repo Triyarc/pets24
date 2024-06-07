@@ -1,6 +1,7 @@
 import React from "react";
 import palm_icon from "../../assets/img/icon/sm-leg.png";
 import { useNavigate } from "react-router-dom";
+import PetCard from "../common/card/PetCard";
 
 function PetDetailsArea({
   data,
@@ -8,9 +9,15 @@ function PetDetailsArea({
   selectedImage,
   id,
   desiredPart,
+  relatedData,
 }) {
   const navigate = useNavigate();
   const isAuthenticated = document.cookie.includes("loggedIn=true");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // Smooth scrolling behavior
+  });
 
   const handleImageSelect = (image) => {
     setSelectedImage(image);
@@ -21,6 +28,11 @@ function PetDetailsArea({
       navigate("/login");
       document.cookie = `redirection_path=/pet-details/${desiredPart}/${id};path=/`;
     }
+  };
+
+  const handleClick = (props) => {
+    navigate(`/pet-details/${desiredPart}/${props}`);
+    window.location.reload();
   };
 
   return (
@@ -101,9 +113,11 @@ function PetDetailsArea({
                             <li>
                               Color: <span>{data.color}</span>
                             </li>
-                            {data?.heat_duration && <li>
-                              Heat Duration: <span>{data.heat_duration}</span>
-                            </li>}
+                            {data?.heat_duration && (
+                              <li>
+                                Heat Duration: <span>{data.heat_duration}</span>
+                              </li>
+                            )}
                             <li>
                               Height (Ft): <span>{data.height}</span>
                             </li>
@@ -159,7 +173,7 @@ function PetDetailsArea({
                   <div className='adoption_submit_btn'>
                     <div
                       onClick={handleInfoEvent}
-                      alt="handle info"
+                      alt='handle info'
                       className='btn btn_theme btn_md me-4'
                     >
                       Adopt me
@@ -184,7 +198,7 @@ function PetDetailsArea({
                         </p>{" "}
                         <div
                           onClick={handleInfoEvent}
-                          alt="handle info"
+                          alt='handle info'
                           className='btn btn_theme_white btn_sm'
                           style={{ height: "39px  " }}
                         >
@@ -264,6 +278,11 @@ function PetDetailsArea({
             <div className='adoption_details_item'>
               <div className='heading_border_bottom'>
                 <h2>Suggestion</h2>
+                <div className='row'>
+                  {relatedData?.map((item, idx) => (
+                    <PetCard item={item} handleClick={handleClick} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>

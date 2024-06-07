@@ -7,32 +7,9 @@ function ServicesAndPrice() {
   const [serviceHeadData, setServiceHeadData] = useState([]);
   const [serviceData, setServiceData] = useState([]);
   const [buttonClick, setButtonClick] = useState(true);
-
-  useEffect(() => {
-    return () => {
-      apiCall({
-        method: "POST",
-        apiUrl: `${local_host}/api/v1/service_list`,
-      }).then((res) => {
-        setServiceHeadData(res.parameters.data);
-      });
-    };
-  }, []);
-
-  const handleServiceId = (id) => {
-    apiCall({
-      method: "POST",
-      apiUrl: `${local_host}/api/v1/list_service`,
-      payload: {
-        service_id: id,
-        search_text: "",
-      },
-    }).then((res) => {
-      setServiceData(res.parameters.data.data);
-    });
-  };
-
-  console.log(serviceData, "serviceHeadData");
+  const [serviceCount, setserviceCount] = useState([]);
+  const [serviceCounSingle, setserviceCountSingle] = useState();
+  const [tabData, setTabData] = useState([]);
 
   var button = document.getElementsByClassName("button_click")[0];
 
@@ -42,6 +19,70 @@ function ServicesAndPrice() {
       setButtonClick(false);
     }
   }
+
+  const handleDataCount = (data) => {
+    console.log(data, "data");
+
+    var serviceDataCount = [];
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      let obj = {};
+      obj[data[i].name] = 6;
+      serviceDataCount.push(obj);
+    }
+    setserviceCount(serviceDataCount);
+  };
+
+  const handleLoadMore = (name) => {
+    console.log(name);
+    const match = name.match(/^([a-zA-Z\s]+)(\d+)$/);
+    let serviceName;
+    if (match) {
+      serviceName = match[1].trim();
+    }
+
+    for (let i = 0; i < serviceCount.length; i++) {
+      console.log(serviceCount[i]);
+      if (serviceName == Object.keys(serviceCount[i])[0]) {
+        setserviceCountSingle(serviceCount[i][serviceName]);
+        setTabData(serviceData.slice(0, serviceCount[i][name]));
+      }
+
+      if (name == Object.keys(serviceCount[i])[0]) {
+        serviceCount[i][Object.keys(serviceCount[i])[0]] += 6;
+        setserviceCountSingle(serviceCount[i][name]);
+        console.log(serviceData.slice(0, serviceCount[i][name]));
+      }
+    }
+  };
+
+
+  useEffect(() => {
+    return () => {
+      apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/service_list`,
+      }).then((res) => {
+        setServiceHeadData(res.parameters.data);
+        handleDataCount(res.parameters.data);
+      });
+    };
+  }, []);
+
+  const handleServiceId = (id, name) => {
+    apiCall({
+      method: "POST",
+      apiUrl: `${local_host}/api/v1/list_service`,
+      payload: {
+        service_id: id,
+        search_text: "",
+      },
+    }).then((res) => {
+      setServiceData(res.parameters.data.data);
+      handleLoadMore(name + 1);
+    });
+  };
+
   return (
     <div>
       <section id='pet_service_price'>
@@ -60,14 +101,14 @@ function ServicesAndPrice() {
                         {serviceHeadData?.map((el, idx) => (
                           <button
                             key={idx}
-                            onClick={()=>handleServiceId(el.id)}
+                            onClick={() => handleServiceId(el.id, el.name)}
                             className='nav-link  button_click'
-                            id={'nav-'+el.id + "-tab"}
+                            id={"nav-" + idx + "-tab"}
                             data-bs-toggle='tab'
-                            data-bs-target={'#nav-'+el.id}
+                            data-bs-target={"#nav-" + idx}
                             type='button'
                             role='tab'
-                            aria-controls={'nav-'+el.id}
+                            aria-controls={"nav-" + idx}
                             aria-selected='true'
                           >
                             {el.name}
@@ -78,621 +119,56 @@ function ServicesAndPrice() {
                   </div>
                 </div>
                 <div className='tab-content' id='nav-tabContent'>
-                  <div
-                    className='tab-pane fade show active'
-                    id='nav-1'
-                    role='tabpanel'
-                    aria-labelledby='nav-1-tab'
-                  >
-                    <div className='service_tab_item_wrapper'>
-                      <div className='row'>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-1.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
+                  {serviceHeadData?.map((el, idx) => (
+                    <div
+                      className='tab-pane fade show'
+                      id={"nav-" + idx}
+                      role='tabpanel'
+                      aria-labelledby={"nav-" + idx + "-tab"}
+                    >
+                      <div className='service_tab_item_wrapper'>
+                        <div className='row'>
+                          {serviceData.slice(0, serviceCounSingle).map((el) => (
+                            <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
+                              <div className='service_tabs_item'>
+                                <div className='service_tabs_img'>
                                   <a href='service-details.html'>
-                                    15 minutes walking training
+                                    <img
+                                      src={el.image_url}
+                                      alt='img'
+                                    />
                                   </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-2.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    15 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
+                                </div>
+                                <div className='service_tabs_text'>
+                                  <div className='service_tabs_left_text'>
+                                    <h3>
+                                      <a href='service-details.html'>
+                                        15 minutes walking training
+                                      </a>
+                                    </h3>
+                                    <p>{el.timings}</p>
+                                    <p>
+                                      {el.description}
+                                    </p>
+                                  </div>
+                                  <div className='service_tabs_right_text'>
+                                    <h3>{el.amount}</h3>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-3.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    30 minutes walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-4.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    30 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-5.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-6.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
+                      
+                      <button
+                        className='btn bg-primary text-white'
+                        onClick={() => handleLoadMore(el.name)}
+                      >
+                        Load More
+                      </button>
                     </div>
-                  </div>
-                  <div
-                    className='tab-pane fade'
-                    id='nav-2'
-                    role='tabpanel'
-                    aria-labelledby='nav-2-tab'
-                  >
-                    <div className='service_tab_item_wrapper'>
-                      <div className='row'>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-1.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    15 minutes walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-2.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    15 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-5.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-6.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className='tab-pane fade'
-                    id='nav-3'
-                    role='tabpanel'
-                    aria-labelledby='nav-3-tab'
-                  >
-                    <div className='service_tab_item_wrapper'>
-                      <div className='row'>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-1.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    15 minutes walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-2.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    15 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-3.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    30 minutes walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-4.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    30 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className='tab-pane fade'
-                    id='nav-4'
-                    role='tabpanel'
-                    aria-labelledby='nav-4-tab'
-                  >
-                    <div className='service_tab_item_wrapper'>
-                      <div className='row'>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-4.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    30 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-5.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-6.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>hi</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className='tab-pane fade'
-                    id='nav-5'
-                    role='tabpanel'
-                    aria-labelledby='nav-5-tab'
-                  >
-                    <div className='service_tab_item_wrapper'>
-                      <div className='row'>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-4.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    30 minutes sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>vel</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-5.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour walking training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>$20.00</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-lg-6 col-md-12 col-sm-12 col-12'>
-                          <div className='service_tabs_item'>
-                            <div className='service_tabs_img'>
-                              <a href='service-details.html'>
-                                <img
-                                  src='assets/img/service/service-6.png'
-                                  alt='img'
-                                />
-                              </a>
-                            </div>
-                            <div className='service_tabs_text'>
-                              <div className='service_tabs_left_text'>
-                                <h3>
-                                  <a href='service-details.html'>
-                                    1 hour sitting training
-                                  </a>
-                                </h3>
-                                <p>
-                                  Tempor aute culpa consectetur labore
-                                  voluptate. Esse adipisicing do.
-                                </p>
-                              </div>
-                              <div className='service_tabs_right_text'>
-                                <h3>hi</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
