@@ -1,4 +1,5 @@
 import React from "react";
+import PetCard from "../common/card/PetCard";
 
 function ShopUser() {
   return (
@@ -38,6 +39,7 @@ function ShopUser() {
       </div>
       <section className='container mt-4'>
         <div className='row'>
+        <PetCard/>
           <div className='col-lg-9 col-md-8 col-sm-12'>
             <div className='bestSeller mt-5'>
               <p className='SectionTitle'>Best Seller</p>
