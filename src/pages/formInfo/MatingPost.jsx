@@ -20,6 +20,7 @@ function MatingPost() {
       pets_id: null,
       breeds_id: null,
       name: "",
+      color:"",
       gender: "",
       dob: "",
       height: "",
@@ -27,14 +28,9 @@ function MatingPost() {
       heat_duration: "",
       certificate: "",
       certificateImage: null,
+      is_vaccinated:null,
       petPhoto: [],
-      zipCode: "",
-      apartment: "",
-      streetAddress: "",
-      city: "",
-      state: "",
       description: "",
-      country: "India",
     },
   });
 
@@ -51,8 +47,7 @@ function MatingPost() {
   const { errors } = formState;
 
   const watchPets = watch("pets_id");
-
-  console.log(petData);
+  const watchCertificate = watch("certificate");
 
   const petOptions = petData?.map((item) => ({
     value: item.id,
@@ -71,31 +66,6 @@ function MatingPost() {
     daysOptions.push({ value: `${i}  Day`, label: `${i}  Day` });
   }
 
-  const watchZipCode = watch("zipCode");
-  const watchCity = watch("city");
-  const watchState = watch("state");
-  const watchCertificate = watch("certificate");
-
-  const setCityValueFn = (filedValue) => {
-    let zipCode = {
-      pincode: filedValue,
-    };
-    if (cityValue === false) {
-      apiCall({
-        method: "POST",
-        apiUrl: `${local_host}/api/v1/get_city_state_from_pincode`,
-        payload: zipCode,
-      }).then((res) => {
-        if (res?.parameters == null) {
-          toast.error("Invalid Zip-Code");
-        } else {
-          setValue("city", res?.parameters?.city);
-          setValue("state", res?.parameters?.state);
-          setCityValue(true);
-        }
-      });
-    }
-  };
 
   const onSubmit = (data) => {
     console.log("form Submitted", data);
@@ -150,13 +120,7 @@ function MatingPost() {
     setValue("breeds_id", "");
   }, [watchPets]);
 
-  useEffect(() => {
-    if (watchZipCode?.length < 6) {
-      setCityValue(false);
-    } else if (watchZipCode?.length == 6) {
-      setCityValueFn(watchZipCode);
-    }
-  }, [watchZipCode]);
+
 
   useEffect(() => {
     apiCall({
@@ -247,13 +211,13 @@ function MatingPost() {
 
                 <div className='col-lg-6'>
                   <div className='form-group'>
-                    <label for='name' className='p-1'>
+                    <label for='color' className='p-1'>
                       name
                     </label>
 
                     <input
                       type='text'
-                      id='name'
+                      id='color'
                       className='form-control'
                       {...register("name", {
                         required: {
@@ -268,6 +232,31 @@ function MatingPost() {
                     />
 
                     <p className='text-danger'>{errors.name?.message}</p>
+                  </div>
+                </div>
+                <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='color' className='p-1'>
+                      Pet Color
+                    </label>
+
+                    <input
+                      type='text'
+                      id='color'
+                      className='form-control'
+                      {...register("color", {
+                        required: {
+                          value: true,
+                          message: "color required",
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z ]{3,}$/,
+                          message: "Only in Alphabetic of 3 letter ",
+                        },
+                      })}
+                    />
+
+                    <p className='text-danger'>{errors.color?.message}</p>
                   </div>
                 </div>
                 <div className='col-lg-6'>
@@ -297,7 +286,7 @@ function MatingPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='dob' className='p-1'>
-                      Date Of Yaer
+                      Date Of Birth
                     </label>
 
                     <Controller
@@ -317,13 +306,15 @@ function MatingPost() {
                       rules={{ required: true }}
                     />
 
-                    <p className='text-danger'>{errors.dob?.message}</p>
+{errors.dob && (
+                      <p className='text-danger'>Select Date Of Birth</p>
+                    )}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='height' className='p-1'>
-                      Height
+                      Height in cm
                     </label>
                     <input
                       type='number'
@@ -342,7 +333,7 @@ function MatingPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='weight' className='p-1'>
-                      Weight
+                      Weight in kg
                     </label>
                     <input
                       type='number'
@@ -378,9 +369,9 @@ function MatingPost() {
                       )}
                       rules={{ required: true }}
                     />
-                    <p className='text-danger'>
-                      {errors.heat_duration?.message}
-                    </p>
+                    {errors.heat_duration && (
+                      <p className='text-danger'>Select heat durationh</p>
+                    )}
                   </div>
                 </div>
                 <div className='col-lg-6'>
@@ -433,6 +424,31 @@ function MatingPost() {
                     </div>
                   </div>
                 )}
+                  <div className='col-lg-6'>
+                  <div className='form-group'>
+                    <label for='is_vaccinated' className='p-1'>
+                      Vaccinated
+                    </label>
+                    <select
+                      as='select' // Updated to use select for dropdown
+                      className='form-control'
+                      name='is_vaccinated'
+                      {...register("is_vaccinated", {
+                        required: {
+                          value: true,
+                          message: "Vaccinated required",
+                        },
+                      })}
+                    >
+                      <option value=''>Select Vaccinated</option>
+                      <option value='yes'>Yes</option>
+                      <option value='No'>No</option>
+                    </select>
+                    <p className='text-danger '>
+                      {errors.is_vaccinated?.message}
+                    </p>
+                  </div>
+                </div>
 
                 {/* <div className='col-lg-6'>
                   <div className='form-group'>
@@ -484,140 +500,7 @@ function MatingPost() {
                     </p>
                   </div>
                 </div> */}
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='zipCode' className='p-1'>
-                      Fill valid Zip Code
-                    </label>
-
-                    <input
-                      type='text'
-                      id='zipCode'
-                      className='form-control'
-                      {...register("zipCode", {
-                        pattern: {
-                          value: /^[1-9][0-9]{5}$/,
-                          message: "valid pincode",
-                        },
-                        required: {
-                          value: true,
-                          message: "Zip-Code required",
-                        },
-                        validate: (filedValue) => {
-                          setCityValueFn(filedValue);
-                        },
-                      })}
-                    />
-                    <p className='text-danger'>{errors.zipCode?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='apartment' className='p-1'>
-                      Appartment No*
-                    </label>
-
-                    <input
-                      type='text'
-                      id='apartment'
-                      className='form-control'
-                      {...register("apartment", {
-                        required: {
-                          value: true,
-                          message: "Appartment No required",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>{errors.apartment?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='streetAddress' className='p-1'>
-                      Street*
-                    </label>
-
-                    <input
-                      type='text'
-                      id='streetAddress'
-                      className='form-control'
-                      {...register("streetAddress", {
-                        required: {
-                          value: true,
-                          message: "Street required",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>
-                      {errors.streetAddress?.message}
-                    </p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='city' className='p-1'>
-                      city
-                    </label>
-
-                    <input
-                      type='text'
-                      id='city'
-                      className='form-control'
-                      {...register("city", {
-                        required: {
-                          value: true,
-                          message: "City required",
-                        },
-                      })}
-                    />
-                    {watchCity ? (
-                      ""
-                    ) : (
-                      <p className='text-danger'>{errors.city?.message}</p>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='state' className='p-1'>
-                      State
-                    </label>
-
-                    <input
-                      type='text'
-                      id='state'
-                      className='form-control'
-                      {...register("state", {
-                        required: {
-                          value: true,
-                          message: "State required",
-                        },
-                      })}
-                    />
-                    {watchState ? (
-                      ""
-                    ) : (
-                      <p className='text-danger'>{errors.state?.message}</p>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='country' className='p-1'>
-                      Country
-                    </label>
-
-                    <input
-                      type='text'
-                      id='country'
-                      className='form-control'
-                      value='India'
-                      disabled
-                    />
-                  </div>
-                </div>
+         
                 <div className='col-lg-12'>
                   <div className='form-group'>
                     <label for='state' className='p-1'>

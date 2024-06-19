@@ -16,7 +16,7 @@ export default function apiCall({ method, apiUrl, payload, id }) {
       let response;
       switch (method) {
         case "GET":
-          response = await axios.get(apiUrl);
+          response = await axios.get(apiUrl, header);
           break;
         case "POST":
           if (authToken) {
@@ -26,10 +26,10 @@ export default function apiCall({ method, apiUrl, payload, id }) {
           }
           break;
         case "PUT":
-          response = await axios.put(`${apiUrl}/${id}`, payload);
+          response = await axios.put(`${apiUrl}/${id}`, payload, header);
           break;
         case "DELETE":
-          response = await axios.delete(`${apiUrl}/${id}`);
+          response = await axios.delete(`${apiUrl}/${id}`, header);
           break;
         default:
           throw new Error("Invalid method");

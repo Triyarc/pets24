@@ -6,15 +6,15 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { toast } from "react-toastify";
 import PetGallery from "./PetGallery";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function AdoptionPost() {
   const [cityValue, setCityValue] = useState(false);
   const [images, setImages] = useState([]);
-  const [imagesErr, setImagesErr] = useState(false);
   const [petData, setPetData] = useState([]);
   const [imageItems, setImageItems] = useState([]); // State to manage selected images
+  const maxNumber = 4;
 
   const form = useForm({
     defaultValues: {
@@ -28,14 +28,8 @@ function AdoptionPost() {
       certificate: "",
       certificateImage: null,
       petPhoto: [],
-      zipCode: "",
-      apartment: "",
-      streetAddress: "",
-      city: "",
-      state: "",
+      amount: "",
       description: "",
-      district:"",
-      country: "India",
     },
   });
 
@@ -52,8 +46,7 @@ function AdoptionPost() {
   const { errors } = formState;
 
   const watchPets = watch("pets_id");
-
-  console.log(petData);
+  const watchCertificate = watch("certificate");
 
   const petOptions = petData?.map((item) => ({
     value: item.id,
@@ -66,33 +59,6 @@ function AdoptionPost() {
         .breeds?.map((breed) => ({ value: breed.id, label: breed.name }))
     : [];
 
-  const watchZipCode = watch("zipCode");
-  const watchCity = watch("city");
-  const watchDistrict = watch("district");
-  const watchState = watch("state");
-  const watchCertificate = watch("certificate");
-
-  const setCityValueFn = (filedValue) => {
-    let zipCode = {
-      pincode: filedValue,
-    };
-    if (cityValue === false) {
-      apiCall({
-        method: "POST",
-        apiUrl: `${local_host}/api/v1/get_city_state_from_pincode`,
-        payload: zipCode,
-      }).then((res) => {
-        if (res?.parameters == null) {
-          toast.error("Invalid Zip-Code");
-        } else {
-          setValue("city", res?.parameters?.city);
-          setValue("district", res?.parameters?.district);
-          setValue("state", res?.parameters?.state);
-          setCityValue(true);
-        }
-      });
-    }
-  };
 
   const onSubmit = (data) => {
     console.log("form Submitted", data);
@@ -147,13 +113,6 @@ function AdoptionPost() {
     setValue("breeds_id", "");
   }, [watchPets]);
 
-  useEffect(() => {
-    if (watchZipCode?.length < 6) {
-      setCityValue(false);
-    } else if (watchZipCode?.length == 6) {
-      setCityValueFn(watchZipCode);
-    }
-  }, [watchZipCode]);
 
   useEffect(() => {
     apiCall({
@@ -164,9 +123,6 @@ function AdoptionPost() {
       setPetData(res.parameters);
     });
   }, []);
-
-  // useEffect(() => {
-  // }, [imageItems]);
 
   return (
     <div className='container '>
@@ -184,6 +140,7 @@ function AdoptionPost() {
             images={images}
             imageItems={imageItems}
             setImageItems={setImageItems}
+            maxNumber={maxNumber}
           />
 
           <h2>Pet Details</h2>
@@ -296,19 +253,19 @@ function AdoptionPost() {
                       Birth in year
                     </label>
                     <Controller
-                    className="w-100"
+                      className='w-100'
                       name='dob'
                       control={control}
                       render={({ field }) => (
                         <DatePicker
-                            {...field}
-                            selected={field.value}
-                            onChange={(date) => setValue('dob', date)}
-                            dateFormat="MM/yyyy"
-                            className="form-control w-100"
-                            showMonthYearPicker
+                          {...field}
+                          selected={field.value}
+                          onChange={(date) => setValue("dob", date)}
+                          dateFormat='MM/yyyy'
+                          className='form-control w-100'
+                          showMonthYearPicker
                         />
-                    )}
+                      )}
                       rules={{ required: true }}
                     />
 
@@ -318,7 +275,7 @@ function AdoptionPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='height' className='p-1'>
-                      Height
+                      Height in cm
                     </label>
                     <input
                       type='number'
@@ -337,7 +294,7 @@ function AdoptionPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='weight' className='p-1'>
-                      Weight
+                      Weight in Kg
                     </label>
                     <input
                       type='number'
@@ -404,164 +361,27 @@ function AdoptionPost() {
                     </div>
                   </div>
                 )}
+
                 <div className='col-lg-6'>
                   <div className='form-group'>
-                    <label for='zipCode' className='p-1'>
-                      Fill valid Zip Code
+                    <label for='amount' className='p-1'>
+                      Adoption Charge 
                     </label>
-
                     <input
-                      type='text'
-                      id='zipCode'
+                      type='number'
+                      id='amount'
                       className='form-control'
-                      {...register("zipCode", {
-                        pattern: {
-                          value: /^[1-9][0-9]{5}$/,
-                          message: "valid pincode",
-                        },
+                      {...register("amount", {
                         required: {
                           value: true,
-                          message: "Zip-Code required",
-                        },
-                        validate: (filedValue) => {
-                          setCityValueFn(filedValue);
+                          message: "amount required",
                         },
                       })}
                     />
-                    <p className='text-danger'>{errors.zipCode?.message}</p>
+                    <p className='text-danger'>{errors.amount?.message}</p>
                   </div>
                 </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='apartment' className='p-1'>
-                      Appartment No*
-                    </label>
 
-                    <input
-                      type='text'
-                      id='apartment'
-                      className='form-control'
-                      {...register("apartment", {
-                        required: {
-                          value: true,
-                          message: "Appartment No required",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>{errors.apartment?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='streetAddress' className='p-1'>
-                      Street*
-                    </label>
-
-                    <input
-                      type='text'
-                      id='streetAddress'
-                      className='form-control'
-                      {...register("streetAddress", {
-                        required: {
-                          value: true,
-                          message: "Street required",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>
-                      {errors.streetAddress?.message}
-                    </p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='city' className='p-1'>
-                      city
-                    </label>
-
-                    <input
-                      type='text'
-                      id='city'
-                      className='form-control'
-                      {...register("city", {
-                        required: {
-                          value: true,
-                          message: "City required",
-                        },
-                      })}
-                    />
-                    {watchCity ? (
-                      ""
-                    ) : (
-                      <p className='text-danger'>{errors.city?.message}</p>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='district' className='p-1'>
-                      district
-                    </label>
-
-                    <input
-                      type='text'
-                      id='district'
-                      className='form-control'
-                      {...register("district", {
-                        required: {
-                          value: true,
-                          message: "district required",
-                        },
-                      })}
-                    />
-                    {watchDistrict ? (
-                      ""
-                    ) : (
-                      <p className='text-danger'>{errors.district?.message}</p>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='state' className='p-1'>
-                      State
-                    </label>
-
-                    <input
-                      type='text'
-                      id='state'
-                      className='form-control'
-                      {...register("state", {
-                        required: {
-                          value: true,
-                          message: "State required",
-                        },
-                      })}
-                    />
-                    {watchState ? (
-                      ""
-                    ) : (
-                      <p className='text-danger'>{errors.state?.message}</p>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='country' className='p-1'>
-                      Country
-                    </label>
-
-                    <input
-                      type='text'
-                      id='country'
-                      className='form-control'
-                      value='India'
-                      disabled
-                    />
-                  </div>
-                </div>
                 <div className='col-lg-12'>
                   <div className='form-group'>
                     <label for='state' className='p-1'>
