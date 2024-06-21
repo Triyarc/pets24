@@ -27,6 +27,8 @@ import PetDetails from "./pages/PetDetails";
 import './App.css'
 import ProfileUpdate from "./pages/ProfileUpdate";
 import ServicePost from "./pages/formInfo/ServicePost";
+import UpdateProfileDetails from "./pages/formInfo/UpdateProfileDetails";
+import ShopRegistration from "./pages/formInfo/ShopRegistration";
 
 function App() {
   const [timmer, setTimmer] = useState(true);
@@ -47,12 +49,15 @@ function App() {
             <Route path='/signup' element={<SignUp />} />
             <Route path='/' element={<Home />} />
             {/* profile */}
-            <Route path='/profile-details' element={<ProfileDetails />} />
+            <Route path='/profile-post' element={<ProfileDetails />} />
             <Route path='/profile' element={<UserProfile />} />
             <Route path='/profileTwo' element={<ProfileUpdate />} />
             {/* shop */}
             <Route path='/pet-shop-list' element={<ShopList />} />
-            <Route path='/shop-form-details' element={<ShopDetails />} />
+            <Route path='/shop-post' element={<ShopDetails />} />
+            <Route path='/shop-registration' element={<ShopRegistration />} />
+            <Route path='/edit-shop-info' element={<UpdateProfileDetails />} />
+
             {/* adoption */}
             <Route path='/adoption' element={<Adoption />} />
             <Route path='/adoption-post' element={<AdoptionPost />} />
