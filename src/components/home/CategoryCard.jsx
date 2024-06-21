@@ -1,4 +1,7 @@
 import React from "react";
+import img1 from "../../assets/img/common/offer-1.png"
+import img2 from "../../assets/img/common/offer-2.png"
+import img3 from "../../assets/img/common/offer-3.png"
 
 function CategoryCard() {
   return (
@@ -8,17 +11,17 @@ function CategoryCard() {
           <div className='row'>
             <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
               <div className='banner_bottom_item'>
-                <img src='assets/img/common/offer-1.png' alt='img' />
+                <img src={img1} alt='img' />
               </div>
             </div>
             <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
               <div className='banner_bottom_item'>
-                <img src='assets/img/common/offer-2.png' alt='img' />
+                <img src={img2} alt='img' />
               </div>
             </div>
             <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
               <div className='banner_bottom_item'>
-                <img src='assets/img/common/offer-3.png' alt='img' />
+                <img src={img3} alt='img' />
               </div>
             </div>
           </div>
