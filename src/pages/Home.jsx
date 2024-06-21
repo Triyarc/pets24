@@ -15,6 +15,23 @@ function Home() {
   
   }, [isAuthenticated]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Smooth scrolling behavior
+    });
+  };
+
+  window.addEventListener("scroll", function () {
+    var goTop = document.querySelector(".go-top");
+    if (window.scrollY > 600) {
+      goTop.classList.add("active");
+     
+    } else {
+      goTop.classList.remove("active");
+    }
+  });
+
   return (
     <div>
       <Banner />
@@ -25,6 +42,10 @@ function Home() {
       <MainGallery />
       {/* <ClientReview /> */}
       <SubscribeArea />
+      <div className='go-top' onClick={scrollToTop}>
+        <i className='fas fa-chevron-up'></i>
+        <i className='fas fa-chevron-up'></i>
+      </div>
     </div>
   );
 }

@@ -5,9 +5,15 @@ import axios from "axios";
 import { local_host } from "../env";
 import apiCall from "../apiCall";
 import { useNavigate } from "react-router-dom";
+import { getCookieValue } from "../cokkies";
+import { toast } from "react-toastify";
+import { loginConfrimation } from "../redux/loginAuthSlice";
+import { useDispatch } from "react-redux";
 
 function SignUp() {
-  // State and validation for registration section
+  const redirection_path = getCookieValue("redirection_path");
+  const dispatch = useDispatch();
+
   const [registrationData, setRegistrationData] = useState({
     first_name: "",
     last_name: "",
@@ -95,16 +101,16 @@ function SignUp() {
     e.preventDefault();
     if (validateRegistrationForm()) {
       console.log("Registering...", registrationData);
-      try {
-        const responseData = await apiCall({
-          method: "POST",
-          apiUrl: `${local_host}/api/v1/user_register`,
-          payload: registrationData,
-        });
-        console.log("Response Data:", responseData);
+
+      const responseData = await apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/user_register`,
+        payload: registrationData,
+      });
+      if (responseData.success == true) {
         navigate("/login");
-      } catch (error) {
-        console.error("Error occurred:", error);
+      } else if (responseData.success == false) {
+        toast.error(responseData.message);
       }
     } else {
       console.log("Registration form has errors. Please fix them.");
@@ -121,14 +127,39 @@ function SignUp() {
             headers: { Authorization: `Bearer ${response.access_token}` },
           }
         );
-        console.log(res);
-        document.cookie = "loggedIn=true;path=/";
+        if (res.status == 200) {
+          const googleData = {
+            name: res.data.given_name,
+            email: res.data.email,
+            social_id: res.data.sub,
+          };
+          const responseData = await apiCall({
+            method: "POST",
+            apiUrl: `${local_host}/api/v1/social_login`,
+            payload: googleData,
+          });
+
+          if (responseData.success == true) {
+            document.cookie = `auth_token=${responseData.parameters.token};path=/`;
+            document.cookie = "loggedIn=true;path=/";
+            dispatch(loginConfrimation(true));
+            if (redirection_path == "false" || redirection_path == "null") {
+              navigate("/");
+            } else {
+              navigate(redirection_path);
+            }
+          } else if (responseData.success == false) {
+            toast.error(responseData.message);
+          }
+        }
       } catch (err) {
         console.log(err);
       }
     },
   });
-
+  setTimeout(() => {
+    document.cookie = "redirection_path=null;path=/";
+  }, 300000);
   return (
     <div>
       <div>

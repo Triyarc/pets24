@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
-import logo from '../../assets/img/logo.png'
+import logo from "../../assets/img/logo.png";
+import { useSelector } from "react-redux";
 function Navbar() {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const isAuthenticated = document.cookie.includes("loggedIn=true");
 
-  
+  const loginAuth = useSelector((state) => state.login.login);
 
   window.addEventListener("scroll", function () {
     var navbarArea = document.querySelector(".navbar-area");
@@ -18,7 +19,6 @@ function Navbar() {
   });
 
   // Scroll to Top Button
-
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible);

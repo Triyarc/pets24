@@ -7,9 +7,12 @@ import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCookieValue } from "../../cokkies";
+import { useDispatch, useSelector } from "react-redux";
+import { loginConfrimation } from "../../redux/loginAuthSlice";
 
 function AccountArea() {
   const redirection_path = getCookieValue("redirection_path");
+  const dispatch = useDispatch();
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -77,12 +80,13 @@ function AccountArea() {
       if (responseData.success == true) {
         document.cookie = `auth_token=${responseData.parameters.token};path=/`;
         document.cookie = "loggedIn=true;path=/";
-        if(redirection_path == "false" || redirection_path == "null"){
+        dispatch(loginConfrimation(true));
+        if (redirection_path == "false" || redirection_path == "null") {
           navigate("/");
-        }else{
-          navigate(redirection_path)
+          dispatch(loginConfrimation(true));
+        } else {
+          navigate(redirection_path);
         }
-        
       } else if (responseData.success == false) {
         toast.error(responseData.message);
       }
@@ -117,7 +121,12 @@ function AccountArea() {
           if (responseData.success == true) {
             document.cookie = `auth_token=${responseData.parameters.token};path=/`;
             document.cookie = "loggedIn=true;path=/";
-            navigate("/");
+            dispatch(loginConfrimation(true));
+            if (redirection_path == "false" || redirection_path == "null") {
+              navigate("/");
+            } else {
+              navigate(redirection_path);
+            }
           } else if (responseData.success == false) {
             toast.error(responseData.message);
           }
