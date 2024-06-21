@@ -43,7 +43,7 @@ function ShopUser() {
           <div className='col-lg-9 col-md-8 col-sm-12'>
             <div className='bestSeller mt-5'>
               <p className='SectionTitle'>Best Seller</p>
-              <div className='row row-cols-1 row-cols-md-2 row-cols-lg-5 g-2'>
+              <div className='row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2'>
                 <div className='col '>
                   <div className='card h-100 borderRedius'>
                     <img
