@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import PetGallery from "./PetGallery";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 function AdoptionPost() {
   const [cityValue, setCityValue] = useState(false);
@@ -59,10 +60,24 @@ function AdoptionPost() {
         .breeds?.map((breed) => ({ value: breed.id, label: breed.name }))
     : [];
 
-
   const onSubmit = (data) => {
     console.log("form Submitted", data);
     console.log(images.length, "images");
+    if (data.certificateImage == null) {
+      delete data.certificateImage;
+    }
+    if (data.is_vaccinated) {
+      if (data.is_vaccinated == "1") {
+        data.is_vaccinated = 1;
+      } else if (data.is_vaccinated == "0") {
+        data.is_vaccinated = 0;
+      }
+    }
+    if (data.dob) {
+      let date = new Date(data.dob);
+      let formattedDate = moment(date).format("DD-MM-YYYY");
+      data.dob = formattedDate
+    }
     data.petPhoto = imageItems;
     console.log(data.petPhoto, " data.petPhoto");
     if (images.length == 0) {
@@ -112,7 +127,6 @@ function AdoptionPost() {
   useEffect(() => {
     setValue("breeds_id", "");
   }, [watchPets]);
-
 
   useEffect(() => {
     apiCall({
@@ -365,7 +379,7 @@ function AdoptionPost() {
                 <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='amount' className='p-1'>
-                      Adoption Charge 
+                      Adoption Charge
                     </label>
                     <input
                       type='number'

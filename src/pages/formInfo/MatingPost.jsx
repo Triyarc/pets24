@@ -6,21 +6,20 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { toast } from "react-toastify";
 import PetGallery from "./PetGallery";
-import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
+import moment from "moment/moment";
 
 function MatingPost() {
-  const [cityValue, setCityValue] = useState(false);
   const [images, setImages] = useState([]);
-  const [imagesErr, setImagesErr] = useState(false);
   const [petData, setPetData] = useState([]);
-  const [imageItems, setImageItems] = useState([]); // State to manage selected images
+  const [imageItems, setImageItems] = useState([]);
 
   const form = useForm({
     defaultValues: {
       pets_id: null,
       breeds_id: null,
       name: "",
-      color:"",
+      color: "",
       gender: "",
       dob: "",
       height: "",
@@ -28,7 +27,7 @@ function MatingPost() {
       heat_duration: "",
       certificate: "",
       certificateImage: null,
-      is_vaccinated:null,
+      is_vaccinated: null,
       petPhoto: [],
       description: "",
     },
@@ -48,6 +47,7 @@ function MatingPost() {
 
   const watchPets = watch("pets_id");
   const watchCertificate = watch("certificate");
+  const watchDob = watch("dob");
 
   const petOptions = petData?.map((item) => ({
     value: item.id,
@@ -66,12 +66,23 @@ function MatingPost() {
     daysOptions.push({ value: `${i}  Day`, label: `${i}  Day` });
   }
 
-
   const onSubmit = (data) => {
-    console.log("form Submitted", data);
-    console.log(images.length, "images");
+    if (data.certificateImage == null) {
+      delete data.certificateImage;
+    }
+    if (data.is_vaccinated) {
+      if (data.is_vaccinated == "1") {
+        data.is_vaccinated = 1;
+      } else if (data.is_vaccinated == "0") {
+        data.is_vaccinated = 0;
+      }
+    }
+    if (data.dob) {
+      let date = new Date(data.dob);
+      let formattedDate = moment(date).format("DD-MM-YYYY");
+      data.dob = formattedDate;
+    }
     data.petPhoto = imageItems;
-    console.log(data.petPhoto, " data.petPhoto");
     if (images.length == 0) {
       toast.error("Select Image");
       return;
@@ -119,8 +130,6 @@ function MatingPost() {
   useEffect(() => {
     setValue("breeds_id", "");
   }, [watchPets]);
-
-
 
   useEffect(() => {
     apiCall({
@@ -290,23 +299,24 @@ function MatingPost() {
                     </label>
 
                     <Controller
-                    className="w-100"
+                      className='w-100'
                       name='dob'
                       control={control}
                       render={({ field }) => (
                         <DatePicker
-                            {...field}
-                            selected={field.value}
-                            onChange={(date) => setValue('dob', date)}
-                            dateFormat="MM/yyyy"
-                            className="form-control w-100"
-                            showMonthYearPicker
+                          {...field}
+                          selected={field.value}
+                          onChange={(date) => {
+                            setValue("dob", date);
+                          }}
+                          dateFormat='MM/yyyy'
+                          className='form-control w-100'
+                          showMonthYearPicker
                         />
-                    )}
+                      )}
                       rules={{ required: true }}
                     />
-
-{errors.dob && (
+                    {errors.dob && (
                       <p className='text-danger'>Select Date Of Birth</p>
                     )}
                   </div>
@@ -360,9 +370,9 @@ function MatingPost() {
                       control={control}
                       render={({ field }) => (
                         <Select
-                        value={breedOptions.find(
-                          (c) => c.value === field.value
-                        )}
+                          value={breedOptions.find(
+                            (c) => c.value === field.value
+                          )}
                           options={daysOptions}
                           onChange={(val) => field.onChange(val.value)}
                         />
@@ -424,7 +434,7 @@ function MatingPost() {
                     </div>
                   </div>
                 )}
-                  <div className='col-lg-6'>
+                <div className='col-lg-6'>
                   <div className='form-group'>
                     <label for='is_vaccinated' className='p-1'>
                       Vaccinated
@@ -441,8 +451,8 @@ function MatingPost() {
                       })}
                     >
                       <option value=''>Select Vaccinated</option>
-                      <option value='yes'>Yes</option>
-                      <option value='No'>No</option>
+                      <option value='1'>Yes</option>
+                      <option value='0'>No</option>
                     </select>
                     <p className='text-danger '>
                       {errors.is_vaccinated?.message}
@@ -500,7 +510,7 @@ function MatingPost() {
                     </p>
                   </div>
                 </div> */}
-         
+
                 <div className='col-lg-12'>
                   <div className='form-group'>
                     <label for='state' className='p-1'>
