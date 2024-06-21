@@ -9,6 +9,7 @@ import PetGallery from "./PetGallery";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import "../../style/fabStyle.css"
 
 function AdoptionPost() {
   const [cityValue, setCityValue] = useState(false);
@@ -139,6 +140,7 @@ function AdoptionPost() {
   }, []);
 
   return (
+    <>
     <div className='container '>
       <div className='shipping_addres_area_main'>
         <div className='shipping_addres_main_form_area'>
@@ -270,20 +272,26 @@ function AdoptionPost() {
                       className='w-100'
                       name='dob'
                       control={control}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "Select Date Of Birth",
+                        },
+                      }}
                       render={({ field }) => (
                         <DatePicker
                           {...field}
                           selected={field.value}
-                          onChange={(date) => setValue("dob", date)}
+                          onChange={(date) => {
+                            setValue("dob", date, { shouldValidate: true }); // Update the value and trigger validation
+                          }}
                           dateFormat='MM/yyyy'
                           className='form-control w-100'
                           showMonthYearPicker
                         />
                       )}
-                      rules={{ required: true }}
                     />
-
-                    <p className='text-danger'>{errors.dob?.message}</p>
+                    <p className='text-danger '>{errors.dob?.message}</p>
                   </div>
                 </div>
                 <div className='col-lg-6'>
@@ -435,6 +443,7 @@ function AdoptionPost() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

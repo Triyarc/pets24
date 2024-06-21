@@ -56,8 +56,8 @@ function MatingPost() {
 
   const breedOptions = watchPets
     ? petData
-        .find((item) => item.id === watchPets)
-        .breeds?.map((breed) => ({ value: breed.id, label: breed.name }))
+      .find((item) => item.id === watchPets)
+      .breeds?.map((breed) => ({ value: breed.id, label: breed.name }))
     : [];
 
   var daysOptions = [];
@@ -141,6 +141,7 @@ function MatingPost() {
     });
   }, []);
 
+  console.log(errors, "errorserrors")
   // useEffect(() => {
   // }, [imageItems]);
 
@@ -297,28 +298,31 @@ function MatingPost() {
                     <label for='dob' className='p-1'>
                       Date Of Birth
                     </label>
-
                     <Controller
                       className='w-100'
                       name='dob'
                       control={control}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "Select Date Of Birth",
+                        },
+                      }}
                       render={({ field }) => (
                         <DatePicker
                           {...field}
                           selected={field.value}
                           onChange={(date) => {
-                            setValue("dob", date);
+                            setValue("dob", date, { shouldValidate: true }); // Update the value and trigger validation
                           }}
                           dateFormat='MM/yyyy'
                           className='form-control w-100'
                           showMonthYearPicker
                         />
                       )}
-                      rules={{ required: true }}
                     />
-                    {errors.dob && (
-                      <p className='text-danger'>Select Date Of Birth</p>
-                    )}
+                    <p className='text-danger '>{errors.dob?.message}</p>
+
                   </div>
                 </div>
                 <div className='col-lg-6'>
