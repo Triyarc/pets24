@@ -1,5 +1,7 @@
 import React from 'react'
-
+import img1 from '../../assets/img/icon/sq-dot.png'
+import img2 from '../../assets/img/icon/round-check.png'
+import img3 from '../../assets/img/common/about.png'
 function AboutArea() {
   return (
     <div> <section id='about_area' className='section_padding'>
@@ -9,7 +11,7 @@ function AboutArea() {
           <div className='about_area_left_wrapper'>
             <div className='about_left_content_top'>
               <h3>
-                <img src='assets/img/icon/sq-dot.png' alt='img' /> About us
+                <img src={img1} alt='img' /> About us
               </h3>
               <h2>Your pet deserve the best services</h2>
               <p>
@@ -21,21 +23,21 @@ function AboutArea() {
               <div className='about_round_check_wrapper'>
                 <div className='about_round_check_item'>
                   <div className='about_round_check_inner'>
-                    <img src='assets/img/icon/round-check.png' alt='icon' />
+                    <img src={img2} alt='icon' />
                     <p>Certified goomer</p>
                   </div>
                   <div className='about_round_check_inner'>
-                    <img src='assets/img/icon/round-check.png' alt='icon' />
+                    <img src={img2} alt='icon' />
                     <p>Pet care service</p>
                   </div>
                 </div>
                 <div className='about_round_check_item'>
                   <div className='about_round_check_inner'>
-                    <img src='assets/img/icon/round-check.png' alt='icon' />
+                    <img src={img2} alt='icon' />
                     <p>Animal lover</p>
                   </div>
                   <div className='about_round_check_inner'>
-                    <img src='assets/img/icon/round-check.png' alt='icon' />
+                    <img src={img2} alt='icon' />
                     <p>Adoption pets</p>
                   </div>
                 </div>
@@ -133,7 +135,7 @@ function AboutArea() {
         </div>
         <div class='col-lg-6'>
           <div class='about_area_right_img'>
-            <img src='assets/img/common/about.png' alt='img' />
+            <img src={img3} alt='img' />
           </div>
         </div>
       </div>

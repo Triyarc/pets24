@@ -2,6 +2,8 @@ import React from "react";
 import img1 from "../../assets/img/common/offer-1.png"
 import img2 from "../../assets/img/common/offer-2.png"
 import img3 from "../../assets/img/common/offer-3.png"
+import img4 from '../../assets/img/common/about.png'
+import img5 from '../../assets/img/icon/round-check.png'
 
 function CategoryCard() {
   return (
@@ -9,17 +11,17 @@ function CategoryCard() {
       <section id='banner_bottom_area' className='section_padding'>
         <div className='container'>
           <div className='row'>
-            <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
+            <div className='col-lg-4 col-4'>
               <div className='banner_bottom_item'>
                 <img src={img1} alt='img' />
               </div>
             </div>
-            <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
+            <div className='col-lg-4 col-4'>
               <div className='banner_bottom_item'>
                 <img src={img2} alt='img' />
               </div>
             </div>
-            <div className='col-lg-4 col-md-6 col-sm-12 col-12'>
+            <div className='col-lg-4 col-4'>
               <div className='banner_bottom_item'>
                 <img src={img3} alt='img' />
               </div>
@@ -32,7 +34,7 @@ function CategoryCard() {
           <div className='row'>
             <div className='col-lg-6'>
               <div className='about_area_right_img'>
-                <img src='assets/img/common/about.png' alt='img' />
+                <img src={img4} alt='img' />
               </div>
             </div>
             <div className='col-lg-6'>
@@ -48,21 +50,21 @@ function CategoryCard() {
                   <div className='about_round_check_wrapper'>
                     <div className='about_round_check_item'>
                       <div className='about_round_check_inner'>
-                        <img src='assets/img/icon/round-check.png' alt='icon' />
+                        <img src={img5} alt='icon' />
                         <p>Certified goomer</p>
                       </div>
                       <div className='about_round_check_inner'>
-                        <img src='assets/img/icon/round-check.png' alt='icon' />
+                        <img src={img5} alt='icon' />
                         <p>Pet care service</p>
                       </div>
                     </div>
                     <div className='about_round_check_item'>
                       <div className='about_round_check_inner'>
-                        <img src='assets/img/icon/round-check.png' alt='icon' />
+                        <img src={img5} alt='icon' />
                         <p>Animal lover</p>
                       </div>
                       <div className='about_round_check_inner'>
-                        <img src='assets/img/icon/round-check.png' alt='icon' />
+                        <img src={img5} alt='icon' />
                         <p>Adoption pets</p>
                       </div>
                     </div>

@@ -1,4 +1,10 @@
 import React from 'react'
+import consultantImg1 from '../../assets/img/icon/consultation-1.png'
+import consultantImg2 from '../../assets/img/icon/consultation-2.png'
+import consultantImg3 from '../../assets/img/icon/consultation-3.png'
+import consultantImg4 from '../../assets/img/icon/consultation-4.png'
+import arrowUpImg from '../../assets/img/element/arrow-up.png'
+import arrowDownImg from '../../assets/img/element/arrow-down.png'
 
 function ConsultantArea() {
   return (
@@ -18,14 +24,14 @@ function ConsultantArea() {
       <div className='row'>
         <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
           <div className='our_consultation_item'>
-            <img src='assets/img/icon/consultation-1.png' alt='img' />
+            <img src={consultantImg1} alt='img' />
             <h3>Get in touch</h3>
             <p>
               Tempor aute culpa consectetur labore deserunt cupidatat
               voluptate. Esse adipisicing in deserunt.
             </p>
             <img
-              src='assets/img/element/arrow-down.png'
+              src={arrowDownImg}
               alt='img'
               className='arrow_down_consult'
             />
@@ -33,14 +39,14 @@ function ConsultantArea() {
         </div>
         <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
           <div className='our_consultation_item'>
-            <img src='assets/img/icon/consultation-2.png' alt='img' />
+            <img src={consultantImg2} alt='img' />
             <h3>Make a schedule</h3>
             <p>
               Tempor aute culpa consectetur labore deserunt cupidatat
               voluptate. Esse adipisicing in deserunt.
             </p>
             <img
-              src='assets/img/element/arrow-up.png'
+              src={arrowUpImg}
               alt='img'
               className='arrow_up_consult'
             />
@@ -48,14 +54,14 @@ function ConsultantArea() {
         </div>
         <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
           <div className='our_consultation_item'>
-            <img src='assets/img/icon/consultation-3.png' alt='img' />
+            <img src={consultantImg3} alt='img' />
             <h3>Pet admission</h3>
             <p>
               Tempor aute culpa consectetur labore deserunt cupidatat
               voluptate. Esse adipisicing in deserunt.
             </p>
             <img
-              src='assets/img/element/arrow-down.png'
+              src={arrowDownImg}
               alt='img'
               className='arrow_down_consult'
             />
@@ -63,7 +69,7 @@ function ConsultantArea() {
         </div>
         <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
           <div className='our_consultation_item'>
-            <img src='assets/img/icon/consultation-4.png' alt='img' />
+            <img src={consultantImg4} alt='img' />
             <h3>Cure your pet</h3>
             <p>
               Tempor aute culpa consectetur labore deserunt cupidatat

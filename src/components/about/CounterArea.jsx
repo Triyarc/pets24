@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
+import countImg1 from '../../assets/img/icon/counter-1.png'
+import countImg2 from '../../assets/img/icon/counter-2.png'
+import countImg3 from '../../assets/img/icon/counter-3.png'
+import countImg4 from '../../assets/img/icon/counter-4.png'
 
 function CounterArea() {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,14 +32,14 @@ function CounterArea() {
   }, []);
 
   return (
-    <div>
+    <div className="mt-lg-5">
       <section id='our_counter_area' className='section_padding_bottom'>
         <div className='container'>
           <div className='counter_area_wrapper'>
             <div className='row'>
               <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
                 <div className='our_counter_item'>
-                  <img src='assets/img/icon/counter-1.png' alt='img' />
+                  <img src={countImg1} alt='img' />
                   <h2 className='counter' ref={countRef}>
                     {isVisible && (
                       <CountUp start={300} end={348} duration={2} />
@@ -46,7 +50,7 @@ function CounterArea() {
               </div>
               <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
                 <div className='our_counter_item'>
-                  <img src='assets/img/icon/counter-2.png' alt='img' />
+                  <img src={countImg2} alt='img' />
                   <h2 className='counter' ref={countRef}>
                     {isVisible && (
                       <CountUp start={300} end={348} duration={2} />
@@ -57,7 +61,7 @@ function CounterArea() {
               </div>
               <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
                 <div className='our_counter_item'>
-                  <img src='assets/img/icon/counter-3.png' alt='img' />
+                  <img src={countImg3} alt='img' />
                   <h2 className='counter' ref={countRef}>
                     {isVisible && (
                       <CountUp start={300} end={348} duration={2} />
@@ -68,7 +72,7 @@ function CounterArea() {
               </div>
               <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
                 <div className='our_counter_item'>
-                  <img src='assets/img/icon/counter-4.png' alt='img' />
+                  <img src={countImg4} alt='img' />
                   <h2 className='counter' ref={countRef}>
                     {isVisible && (
                       <CountUp start={300} end={348} duration={2} />

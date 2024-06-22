@@ -7,6 +7,7 @@ import PricingCard from "../components/home/PricingCard";
 import ServiceCard from "../components/common/ServiceCard";
 import SubscribeArea from "../components/common/SubscribeArea";
 import MainGallery from "../components/home/MainGallery";
+import '../style/home.css'
 
 function Home() {
   const isAuthenticated = document.cookie.includes("loggedIn=true");

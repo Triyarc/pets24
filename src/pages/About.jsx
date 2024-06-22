@@ -1,11 +1,11 @@
 import React from "react";
 import AboutArea from "../components/about/AboutArea";
 import ConsultantArea from "../components/about/ConsultantArea";
-import GroomersArea from "../components/common/GroomersArea";
 import CounterArea from "../components/about/CounterArea";
 import VideoArea from "../components/about/VideoArea";
 import SubscribeArea from "../components/common/SubscribeArea";
 import Banner from "../components/common/Banner";
+import GroomersCard from "../components/common/GroomersCard";
 function About() {
   var pageName= "About"
   return (
@@ -13,7 +13,7 @@ function About() {
       <Banner pageName={pageName}/>
       <AboutArea />
       <ConsultantArea />
-      <GroomersArea />
+      <GroomersCard />
       <CounterArea />
       <VideoArea />
       <SubscribeArea />

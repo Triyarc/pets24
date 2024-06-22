@@ -1,4 +1,8 @@
 import React from 'react'
+import contactImg1 from '../../assets/img/icon/contact-1.png'
+import contactImg2 from '../../assets/img/icon/contact-2.png'
+import contactImg3 from '../../assets/img/icon/contact-3.png'
+import contactImg4 from '../../assets/img/icon/contact-4.png'
 
 function ContactBy() {
   return (
@@ -7,14 +11,14 @@ function ContactBy() {
         <div className="row">
             <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                 <div className="contact_card_item">
-                    <img src="assets/img/icon/contact-1.png" alt="icon" />
+                    <img src={contactImg1} alt="icon" />
                     <h3>Address</h3>
                     <p>107, Broklyn Golden Road Street. New York, USA.</p>
                 </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                 <div className="contact_card_item">
-                    <img src="assets/img/icon/contact-2.png" alt="icon" />
+                    <img src={contactImg2} alt="icon" />
                     <h3>Email</h3>
                     <ul>
                         <li><a href="#!">support@domain.com</a></li>
@@ -24,7 +28,7 @@ function ContactBy() {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                 <div className="contact_card_item">
-                    <img src="assets/img/icon/contact-3.png" alt="icon" />
+                    <img src={contactImg3} alt="icon" />
                     <h3>Phone number</h3>
                     <ul>
                         <li><a href="#!">+01 123 456 789</a></li>
@@ -34,7 +38,7 @@ function ContactBy() {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                 <div className="contact_card_item">
-                    <img src="assets/img/icon/contact-4.png" alt="icon" />
+                    <img src={contactImg4} alt="icon" />
                     <h3>Open hours</h3>
                     <ul>
                         <li>Mon-Fri: 8am-10pm</li>

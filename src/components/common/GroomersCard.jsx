@@ -1,4 +1,8 @@
 import React from "react";
+import groomersImg1 from '../../assets/img/groomers/groomers-1.png'
+import groomersImg2 from '../../assets/img/groomers/groomers-2.png'
+import groomersImg3 from '../../assets/img/groomers/groomers-3.png'
+import groomersImg4 from '../../assets/img/groomers/groomers-4.png'
 
 function GroomersCard() {
   return (
@@ -20,7 +24,7 @@ function GroomersCard() {
             <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
               <div className='groomers_area_wrapper'>
                 <div className='groomers_area_img img_animation_one'>
-                  <img src='assets/img/groomers/groomers-1.png' alt='img' />
+                  <img src={groomersImg1} alt='img' />
                 </div>
                 <div className='groomers_area_decantation'>
                   <div className='groomers_social_icon'>
@@ -55,7 +59,7 @@ function GroomersCard() {
             <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
               <div className='groomers_area_wrapper'>
                 <div className='groomers_area_img img_animation_one'>
-                  <img src='assets/img/groomers/groomers-2.png' alt='img' />
+                  <img src={groomersImg2} alt='img' />
                 </div>
                 <div className='groomers_area_decantation'>
                   <div className='groomers_social_icon'>
@@ -90,7 +94,7 @@ function GroomersCard() {
             <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
               <div className='groomers_area_wrapper'>
                 <div className='groomers_area_img img_animation_one'>
-                  <img src='assets/img/groomers/groomers-3.png' alt='img' />
+                  <img src={groomersImg3} alt='img' />
                 </div>
                 <div className='groomers_area_decantation'>
                   <div className='groomers_social_icon'>
@@ -125,7 +129,7 @@ function GroomersCard() {
             <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
               <div className='groomers_area_wrapper'>
                 <div className='groomers_area_img img_animation_one'>
-                  <img src='assets/img/groomers/groomers-4.png' alt='img' />
+                  <img src={groomersImg4} alt='img' />
                 </div>
                 <div className='groomers_area_decantation'>
                   <div className='groomers_social_icon'>
