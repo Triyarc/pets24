@@ -3,7 +3,7 @@ import "../../../style/product.css";
 
 function PetCard({ item, handleClick }) {
   return (
-    <div className='col-lg-3 col-md-6 col-sm-6 col-6' key={item?.id}>
+    <div className='col-lg-3 col-md-6 col-sm-12 col-12' key={item?.id}>
       <div
         className='shop_main_item'
         onClick={() => {

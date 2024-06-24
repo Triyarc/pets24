@@ -65,14 +65,14 @@ function PetDetailsArea({
                                 alt='Pet'
                                 className='img-fluid '
                                 style={{
-                                  height: "380px",
+                                  height: "300px",
                                   borderRadius: "5px",
                                 }}
                               />
                             )}
                           </div>
-                          <div className='slider slider-nav'>
-                            <div style={{ width: "70px", display: "flex" }}>
+                          <div className='slider slider-nav' style={{overflow:"auto"}}>
+                            <div style={{ width: "70px", display: "flex",  }}>
                               {data?.petPhoto?.map((image, idx) => (
                                 <img
                                   key={idx}
@@ -174,7 +174,7 @@ function PetDetailsArea({
                     <div
                       onClick={handleInfoEvent}
                       alt='handle info'
-                      className='btn btn_theme btn_md me-4'
+                      className='btn btn_theme btn_md me-lg-4 me-sm-1'
                     >
                       Adopt me
                     </div>

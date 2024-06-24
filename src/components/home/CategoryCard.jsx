@@ -11,17 +11,17 @@ function CategoryCard() {
       <section id='banner_bottom_area' className='section_padding'>
         <div className='container'>
           <div className='row'>
-            <div className='col-lg-4 col-4'>
+            <div className='col-lg-4 col-sm-12'>
               <div className='banner_bottom_item'>
                 <img src={img1} alt='img' />
               </div>
             </div>
-            <div className='col-lg-4 col-4'>
+            <div className='col-lg-4 col-sm-12'>
               <div className='banner_bottom_item'>
                 <img src={img2} alt='img' />
               </div>
             </div>
-            <div className='col-lg-4 col-4'>
+            <div className='col-lg-4 col-sm-12'>
               <div className='banner_bottom_item'>
                 <img src={img3} alt='img' />
               </div>
