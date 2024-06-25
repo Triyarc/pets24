@@ -9,6 +9,7 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     loginConfrimation: (state, action) => {
+      console.log(action.payload , "action.payload")
       if (action.payload == true) {
         state.login = action.payload;
       }
