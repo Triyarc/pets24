@@ -65,7 +65,8 @@ function PetDetailsArea({
                                 alt='Pet'
                                 className='img-fluid '
                                 style={{
-                                  height: "300px",
+                                  height: "250px",
+                                  width: "100%",
                                   borderRadius: "5px",
                                 }}
                               />

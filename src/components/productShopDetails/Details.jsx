@@ -43,7 +43,8 @@ function ProductDetails() {
                       alt={selectedImage.description}
                       className='img-fluid '
                       style={{
-                        height: "380px",
+                        height: "250px",
+                        width: "100%",
                         borderRadius: "5px",
                       }}
                     />
