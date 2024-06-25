@@ -2458,7 +2458,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 @media only screen and (max-width: 600px) {
   #home_banner {
     background-color: #f8f8ff;
-    padding: 30px 0 100px 0;
+    padding: 30px 0 47px 0;
     letter-spacing: 2px;
 }
 .main_banner_text_wrapper h1 {
@@ -2468,7 +2468,59 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .main_banner_text_wrapper p {
   padding-top: 15px;
   font-size: 14px;
-  line-height: 22px;
+  line-height: 21px;
+  letter-spacing: 0px;
+}
+.banner_main_service_item {
+  background: #fff;
+  box-shadow: 4px 6px 14px 0px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  padding: 13px;
+  margin-right: 0px;
+}
+.section_padding {
+  padding: 22px 0;
+}
+.section_padding_bottom {
+  padding: 0 0 32px 0;
+}
+.main_service_item_icon {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.main_service_inner_content {
+  padding-left: 0px;
+}
+.subscribe_wrapper {
+  background-color: #ffffff;
+  box-shadow: -4px -6px 24px rgba(0, 0, 0, 0.08), 8px 12px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 27px 11px 40px 20px;
+}
+#subscribe_form .btn_md {
+  padding: 16px 9px;
+  font-size: 18px;
+}
+#subscribe_form .form-control {
+  height: 60px;
+  background: var(--white-color);
+  box-shadow: none;
+  padding: 8px;
+}
+.adoption_details_main_content {
+  padding: 13px 0px;
+}
+.adoption_details_item {
+  margin-bottom: 14px;
+}
+.btn_md {
+  padding: 10px 6px;
+  font-size: 14px;
+}
+.adoption_submit_btn a {
+  margin-right: 2px;
+  margin-left: 14px;
 }
 }
 
