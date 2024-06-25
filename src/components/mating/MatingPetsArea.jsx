@@ -3,6 +3,7 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
+import Autocomplete from 'react-autocomplete';
 
 function MatingPetsArea() {
   const [data, setData] = useState([]);
@@ -23,6 +24,15 @@ function MatingPetsArea() {
     };
   }, []);
 
+  const [value, setValue] = useState('');
+  const [items] = useState([
+    { id: 1, title: 'The Shawshank Redemption' },
+    { id: 2, title: 'The Godfather' },
+    { id: 3, title: 'The Dark Knight' },
+    { id: 4, title: 'Pulp Fiction' },
+    { id: 5, title: 'Fight Club' },
+    // Add more movie objects as needed
+  ]);
   return (
     <div>
       {" "}
@@ -292,6 +302,26 @@ function MatingPetsArea() {
               </div>
             </div> */}
             {/* product */}
+            <div className="autocomplete-wrapper">
+      <Autocomplete
+        value={value}
+        items={items}
+        getItemValue={item => item.title}
+        shouldItemRender={(item, value) =>
+          item.title.toLowerCase().indexOf(value.toLowerCase()) > -1
+        }
+        renderItem={(item, isHighlighted) => (
+          <div
+            className={`item ${isHighlighted ? 'selected-item' : ''}`}
+            key={item.id}
+          >
+            {item.title}
+          </div>
+        )}
+        onChange={e => setValue(e.target.value)}
+        onSelect={value => setValue(value)}
+      />
+    </div>
             <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>
                 <div className='shop_heading_sort_area'>
