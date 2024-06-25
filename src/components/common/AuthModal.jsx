@@ -2,12 +2,13 @@ import React from "react";
 import img from "../../assets/img/common/about.png";
 import { useNavigate } from "react-router-dom";
 
-function AuthModal() {
+function AuthModal({redirectionPath}) {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
     let buttonClose = document.getElementById("btn_close");
     buttonClose.click();
+    document.cookie = `redirection_path=/${redirectionPath};path=/`;
     navigate("/login");
   };
   return (

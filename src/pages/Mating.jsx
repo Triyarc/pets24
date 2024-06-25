@@ -39,7 +39,7 @@ function Mating() {
   };
   return (
     <div>
-      <AuthModal />
+      <AuthModal redirectionPath={"mating-post"}/>
       <a id='add_btn' onClick={handleModal} className='fabButton'>
         <Tooltip content='Mating Post'>
           <FaPlus />

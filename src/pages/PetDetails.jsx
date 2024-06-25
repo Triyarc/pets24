@@ -58,7 +58,7 @@ function PetDetails() {
 
   return (
     <div>
-      {dataReturn && (
+      {dataReturn ? (
         <PetDetailsArea
           data={data}
           setSelectedImage={setSelectedImage}
@@ -67,6 +67,13 @@ function PetDetails() {
           desiredPart={desiredPart}
           relatedData={relatedData}
         />
+      ) : (
+        <h2
+          style={{ height: "100vh" }}
+          className=' d-flex text-center align-items-center justify-content-center'
+        >
+          Loading...
+        </h2>
       )}
 
       <SubscribeArea />

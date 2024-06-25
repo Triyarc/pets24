@@ -9,7 +9,7 @@ function MatingPetsArea() {
   const navigate = useNavigate();
 
   const handleClick = (props) => {
-    navigate(`/pet-details/mating/${props}`)
+    navigate(`/pet-details/mating/${props}`);
   };
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function MatingPetsArea() {
   }, []);
 
   return (
-     <div>
+    <div>
       {" "}
       <section id='our_shop_main' className='section_padding pt-5 '>
         <div className='container'>
@@ -302,7 +302,7 @@ function MatingPetsArea() {
                 <div className='shop_item_wrapper'>
                   <div className='row'>
                     {data?.map((item) => (
-                       <PetCard item={item} handleClick={handleClick}/>
+                      <PetCard item={item} handleClick={handleClick} />
                     ))}
                   </div>
                 </div>

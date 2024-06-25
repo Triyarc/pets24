@@ -36,7 +36,7 @@ function Adoption() {
   };
   return (
     <div>
-      <AuthModal />
+      <AuthModal redirectionPath={"adoption-post"} />
       <a id='add_btn' onClick={handleModal} className='fabButton'>
         <Tooltip content='Adoption Post'>
           <FaPlus />

@@ -7,14 +7,13 @@ import PricingCard from "../components/home/PricingCard";
 import ServiceCard from "../components/common/ServiceCard";
 import SubscribeArea from "../components/common/SubscribeArea";
 import MainGallery from "../components/home/MainGallery";
-import '../style/home.css'
+import "../style/home.css";
+import WhatWeDo from "../components/home/WhatWeDo";
 
 function Home() {
   const isAuthenticated = document.cookie.includes("loggedIn=true");
 
-  useEffect(() => {
-  
-  }, [isAuthenticated]);
+  useEffect(() => {}, [isAuthenticated]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -27,7 +26,6 @@ function Home() {
     var goTop = document.querySelector(".go-top");
     if (window.scrollY > 600) {
       goTop.classList.add("active");
-     
     } else {
       goTop.classList.remove("active");
     }
@@ -38,6 +36,7 @@ function Home() {
       <Banner />
       <CategoryCard />
       <ServiceCard />
+      <WhatWeDo />
       <GroomerCard />
       <PricingCard />
       <MainGallery />
