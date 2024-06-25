@@ -56,8 +56,8 @@ function MatingPost() {
 
   const breedOptions = watchPets
     ? petData
-      .find((item) => item.id === watchPets)
-      .breeds?.map((breed) => ({ value: breed.id, label: breed.name }))
+        .find((item) => item.id === watchPets)
+        .breeds?.map((breed) => ({ value: breed.id, label: breed.name }))
     : [];
 
   var daysOptions = [];
@@ -132,16 +132,18 @@ function MatingPost() {
   }, [watchPets]);
 
   useEffect(() => {
-    apiCall({
-      method: "POST",
-      apiUrl: `${local_host}/api/v1/pets_breeds_list`,
-    }).then((res) => {
-      console.log(res);
-      setPetData(res.parameters);
-    });
+    return () => {
+      apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/pets_breeds_list`,
+      }).then((res) => {
+        console.log(res);
+        setPetData(res.parameters);
+      });
+    };
   }, []);
 
-  console.log(errors, "errorserrors")
+  console.log(errors, "errorserrors");
   // useEffect(() => {
   // }, [imageItems]);
 
@@ -322,7 +324,6 @@ function MatingPost() {
                       )}
                     />
                     <p className='text-danger '>{errors.dob?.message}</p>
-
                   </div>
                 </div>
                 <div className='col-lg-6'>
@@ -553,6 +554,7 @@ function MatingPost() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

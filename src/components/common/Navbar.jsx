@@ -153,7 +153,7 @@ function Navbar() {
                           <ul className='dropdown-menu'>
                             <li className='nav-item'>
                               <a
-                                href='adoption.html'
+                                href='/login'
                                 className='nav-link'
                                 onClick={() => logout()}
                               >

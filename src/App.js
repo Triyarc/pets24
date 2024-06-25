@@ -24,14 +24,25 @@ import PetGallery from "./pages/formInfo/PetGallery";
 import Loader from "./components/common/Loader";
 import UserProfile from "./pages/UserProfile";
 import PetDetails from "./pages/PetDetails";
-import './App.css'
+import "./App.css";
 import ProfileUpdate from "./pages/ProfileUpdate";
 import ServicePost from "./pages/formInfo/ServicePost";
 import UpdateProfileDetails from "./pages/formInfo/UpdateProfileDetails";
 import ShopRegistration from "./pages/formInfo/ShopRegistration";
+import { loginConfrimation } from "./redux/loginAuthSlice";
+import { getCookieValue } from "./cokkies";
+import { useDispatch } from "react-redux";
 
 function App() {
   const [timmer, setTimmer] = useState(true);
+  const dispatch = useDispatch();
+  const loginAuth = getCookieValue("loggedIn");
+
+  if (loginAuth == "true") {
+    dispatch(loginConfrimation(true));
+  } else if (loginAuth == "false") {
+    dispatch(loginConfrimation(false));
+  }
 
   useEffect(() => {
     setTimeout(function () {

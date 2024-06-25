@@ -7,10 +7,9 @@ import { toast } from "react-toastify";
 
 function UpdateProfileDetails() {
   const [cityValue, setCityValue] = useState(false);
-  const [images, setImages] = useState([]);
+  const [previosData, setPreviosData] = useState([]);
   const [imgFile, setImgFile] = useState(false);
   const imgRef = useRef(null);
-
 
   const form = useForm({
     defaultValues: {
@@ -38,7 +37,6 @@ function UpdateProfileDetails() {
   const watchState = watch("state");
   const watchDistrict = watch("district");
   const watchLogo = watch("logo");
-  const [imageName, setImageName] = useState('');
 
   useEffect(() => {
     return () => {
@@ -46,19 +44,19 @@ function UpdateProfileDetails() {
         method: "GET",
         apiUrl: `${local_host}/api/v1/get_shop_profile`,
       }).then((data) => {
+        setPreviosData(data?.parameters);
         reset(data?.parameters);
-        setValue('logo', data?.parameters?.logo, { shouldValidate: true });
-      })
+      });
     };
   }, []);
 
   const Uploadlogo = () => {
-    if (imgRef.current) {
-      imgRef.current.click();
-    }
-    setImgFile(true)
-  }
-
+    setImgFile(true);
+    setTimeout(() => {
+      let divElement = document.getElementById("logo");
+      divElement.click();
+    }, 50);
+  };
 
   const setCityValueFn = (filedValue) => {
     let pincode = {
@@ -83,8 +81,9 @@ function UpdateProfileDetails() {
   };
 
   const onSubmit = (data) => {
-    console.log(data, "data")
-    console.log("form Submitted", data);
+    if (data.logo.includes("http") == true) {
+      delete data.logo;
+    }
     const formData = new FormData();
 
     Object.keys(data).forEach((key) => {
@@ -119,14 +118,13 @@ function UpdateProfileDetails() {
     }
   }, [watchPincode]);
 
-  console.log(errors, "errorserrors")
-
+  console.log(errors, "errorserrors");
 
   return (
     <div className='container pt-md-5'>
       <div className='shipping_addres_area_main'>
         <div className='shipping_addres_main_form_area'>
-          <h2>Shop Registration</h2>
+          <h2>Edit Shop Details</h2>
           <div className='shipping_address_form'>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className='row'>
@@ -180,43 +178,52 @@ function UpdateProfileDetails() {
                   </div>
                 </div>
                 <div className='col-lg-6'>
-                  {watchLogo && (
-                    <div className="flex">
-                      <img src={watchLogo} alt="Watch Logo" />
-                      <button onClick={Uploadlogo}>Update Image</button>
-                    </div>
-                  )}
+                  {" "}
                   <div className='form-group'>
                     <label htmlFor='logo' className='p-1'>
-                      Profile Image (optional)
+                      Profile Image
                     </label>
+                    {!imgFile && (
+                      <div className='flex'>
+                        <img
+                          src={watchLogo}
+                          className='shop-Logo-Image'
+                          alt='Watch Logo'
+                        />
+                        <button
+                          className='btn btn_theme btn_md me-4 ms-5'
+                          onClick={Uploadlogo}
+                        >
+                          Edit Image
+                        </button>
+                      </div>
+                    )}
 
                     {imgFile && (
-  <>
-    <div ref={imgRef}>
-      <input
-        type='file'
-        id='logo'
-        className='form-control'
-        accept='.jpg, .jpeg, .png'
-        {...register("logo", {
-          required: {
-            value: true,
-            message: "Profile Image required",
-          },
-        })}
-        onChange={(e) => {
-          // Handle file selection and update imgFile state here
-          // Example:
-          const file = e.target.files[0];
-          // Update state accordingly
-        }}
-      />
-    </div>
-    <p className='text-danger'>{errors.logo?.message}</p>
-  </>
-)}
-
+                      <>
+                        <div ref={imgRef}>
+                          <input
+                            type='file'
+                            id='logo'
+                            className='form-control'
+                            accept='.jpg, .jpeg, .png'
+                            {...register("logo", {
+                              required: {
+                                value: true,
+                                message: "Profile Image required",
+                              },
+                            })}
+                            onChange={(e) => {
+                              // Handle file selection and update imgFile state here
+                              // Example:
+                              const file = e.target.files[0];
+                              // Update state accordingly
+                            }}
+                          />
+                        </div>
+                        <p className='text-danger'>{errors.logo?.message}</p>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className='col-lg-6'>
@@ -455,9 +462,18 @@ function UpdateProfileDetails() {
 
               <div className='modal-footer'>
                 <div className='my_acount_submit'>
-                  <button type='submit' className='btn btn_theme btn_md w-100'>
-                    Submit
-                  </button>
+                  <div className='d-flex'>
+                    {" "}
+                    <button className='btn btn_theme_white btn_md me-4 w-100'>
+                      Cancel
+                    </button>
+                    <button
+                      type='submit'
+                      className='btn btn_theme btn_md w-100'
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>

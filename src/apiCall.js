@@ -2,6 +2,12 @@ import axios from "axios";
 import { getCookieValue } from "./cokkies";
 import { local_host } from "./env";
 
+// Function to handle 401 errors (e.g., redirect to login page)
+function handle401Error() {
+  // Implement your logic here, such as redirecting to a login page
+  window.location.href = "/";
+}
+
 const authToken = getCookieValue("auth_token");
 
 const header = {
@@ -19,11 +25,7 @@ export default function apiCall({ method, apiUrl, payload, id }) {
           response = await axios.get(apiUrl, header);
           break;
         case "POST":
-          if (authToken) {
-            response = await axios.post(apiUrl, payload, header);
-          } else {
-            response = await axios.post(apiUrl, payload);
-          }
+          response = await axios.post(apiUrl, payload, authToken ? header : {});
           break;
         case "PUT":
           response = await axios.put(`${apiUrl}/${id}`, payload, header);
@@ -36,7 +38,17 @@ export default function apiCall({ method, apiUrl, payload, id }) {
       }
       resolve(response.data);
     } catch (error) {
-      reject(error);
+      // Extract status code and error message
+      const status = error.response ? error.response.status : null;
+      const message = error.response ? error.response.data : error.message;
+
+      // Handle 401 Unauthorized error specifically
+      if (status === 401) {
+        handle401Error();
+      }
+
+      // Reject with an object containing status and message
+      reject({ status, message });
     }
   });
 }
