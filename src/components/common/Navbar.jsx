@@ -35,6 +35,7 @@ function Navbar() {
   // logout
   function clearAuthenticationCookie() {
     document.cookie = "loggedIn=false;path=/;";
+    document.cookie = "auth_token=;path=/;";
   }
 
 
@@ -43,6 +44,7 @@ function Navbar() {
   function logout() {
     // Clear the authentication cookie
     clearAuthenticationCookie();
+    window.location.reload();
   }
 
   // useEffect(() => {
@@ -187,10 +189,7 @@ function Navbar() {
                           </a>
                           <ul className='dropdown-menu'>
                             <li className='nav-item'>
-                              <a
-                                className='nav-link'
-                                onClick={() => logout()}
-                              >
+                              <a className='nav-link' onClick={() => logout()}>
                                 Logout
                               </a>
                             </li>
