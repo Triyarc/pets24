@@ -32,6 +32,8 @@ import ShopRegistration from "./pages/formInfo/ShopRegistration";
 import { loginConfrimation } from "./redux/loginAuthSlice";
 import { getCookieValue } from "./cokkies";
 import { useDispatch } from "react-redux";
+import EditPorfileDetails from "./pages/formInfo/EditPorfileDetails";
+import EditShopDetails from "./pages/formInfo/EditShopDetails";
 
 function App() {
   const [timmer, setTimmer] = useState(true);
@@ -59,15 +61,18 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/' element={<Home />} />
+            
             {/* profile */}
             <Route path='/profile-post' element={<ProfileDetails />} />
             <Route path='/profile' element={<UserProfile />} />
             <Route path='/profileTwo' element={<ProfileUpdate />} />
+            <Route path='/edit-profile-info' element={<EditPorfileDetails />} />
+
             {/* shop */}
             <Route path='/pet-shop-list' element={<ShopList />} />
             <Route path='/shop-post' element={<ShopDetails />} />
             <Route path='/shop-registration' element={<ShopRegistration />} />
-            <Route path='/edit-shop-info' element={<UpdateProfileDetails />} />
+            <Route path='/edit-shop-info' element={<EditShopDetails />} />
 
             {/* adoption */}
             <Route path='/adoption' element={<Adoption />} />

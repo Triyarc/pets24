@@ -151,7 +151,7 @@ function ShopRegistration() {
               <div className='col-lg-6'>
                 <div className='form-group'>
                   <label for='logo' className='p-1'>
-                    Profile Image (optional)
+                    Logo Image 
                   </label>
 
                   <input

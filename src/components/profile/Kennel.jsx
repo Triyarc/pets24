@@ -1,44 +1,24 @@
 import React, { useState } from "react";
+import img from '../../assets/img/adoption/adoption-1.png'
+import img2 from '../../assets/img/service/service-1.png'
 
 function Kennel() {
   return (
     <div>
-      <section id='shop_details_area' className='section_padding'>
+      <section id='shop_details_area' className=''>
         <div className='container'>
           <div className='row'>
-            <div className=' col-md-4'>
-              <img
-                src='assets/img/pet.jpg'
-                alt='img'
-                className='profile-logo-img'
-              />
+            <div className=' col-lg-3'>
             </div>
-            <div className='col-secong col-md-8'>
+            <div className='col-secong col-md-7'>
               <div className='shop_details_wrapper'>
                 <div className='shop_details_top_content'>
-                  <h2>Automatic dog blue leash</h2>
-                  <span className='nearBy'>Near by Shop</span>
-                  <div className='reviews_rating'>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <span>729</span>
-                  </div>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Aliquam asperiores beatae fuga harum gui laboriosam maiores
                     quasi quidem quo repudiandae voluptate. Lorem ipsum dolor
-                    sit amet, denos consectetur adipisicing elit. Aliquam
-                    asperiores beatae fuga harum laboriosam maio.
+                    sit amet, denos consectetur adipisicing elit. 
                   </p>
-                  <li className='d-flex justify-content-start align-items-center mb-4'>
-                    <span className='d-flex align-items-center me-3 fs-2'>
-                      <i className='fas fa-address-card profile-partcard'></i>
-                    </span>
-                    <span>52 Buddy Ln Conway, Arkansas(AR), 72032</span>
-                  </li>
                 </div>
               </div>
             </div>
@@ -89,7 +69,7 @@ function Kennel() {
                           <div className='adoption_item_img img_hover'>
                             <a href='adoption-details.html'>
                               <img
-                                src='assets/img/adoption/adoption-1.png'
+                                src={img}
                                 alt='img'
                               />
                             </a>
@@ -118,7 +98,7 @@ function Kennel() {
                           <div className='adoption_item_img img_hover'>
                             <a href='adoption-details.html'>
                               <img
-                                src='assets/img/adoption/adoption-1.png'
+                                src={img}
                                 alt='img'
                               />
                             </a>
@@ -147,7 +127,7 @@ function Kennel() {
                           <div className='adoption_item_img img_hover'>
                             <a href='adoption-details.html'>
                               <img
-                                src='assets/img/adoption/adoption-1.png'
+                                src={img}
                                 alt='img'
                               />
                             </a>
@@ -176,7 +156,7 @@ function Kennel() {
                           <div className='adoption_item_img img_hover'>
                             <a href='adoption-details.html'>
                               <img
-                                src='assets/img/adoption/adoption-1.png'
+                                src={img}
                                 alt='img'
                               />
                             </a>
@@ -205,7 +185,7 @@ function Kennel() {
                           <div className='adoption_item_img img_hover'>
                             <a href='adoption-details.html'>
                               <img
-                                src='assets/img/adoption/adoption-1.png'
+                                src={img}
                                 alt='img'
                               />
                             </a>
@@ -244,7 +224,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -273,7 +253,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -302,7 +282,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -331,7 +311,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -360,7 +340,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -389,7 +369,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -418,7 +398,7 @@ function Kennel() {
                             <div className='adoption_item_img img_hover'>
                               <a href='adoption-details.html'>
                                 <img
-                                  src='assets/img/adoption/adoption-1.png'
+                                  src={img}
                                   alt='img'
                                 />
                               </a>
@@ -478,7 +458,7 @@ function Kennel() {
                 <div className='service_tabs_item'>
                   <div className='service_tabs_img'>
                     <a href='service-details.html'>
-                      <img src='assets/img/service/service-1.png' alt='Image' />
+                      <img src={img2} alt='Image' />
                     </a>
                   </div>
                   <div className='service_tabs_text'>
@@ -504,7 +484,7 @@ function Kennel() {
                 <div className='service_tabs_item'>
                   <div className='service_tabs_img'>
                     <a href='service-details.html'>
-                      <img src='assets/img/service/service-1.png' alt='Image' />
+                      <img src={img2} alt='Image' />
                     </a>
                   </div>
                   <div className='service_tabs_text'>
@@ -530,7 +510,7 @@ function Kennel() {
                 <div className='service_tabs_item'>
                   <div className='service_tabs_img'>
                     <a href='service-details.html'>
-                      <img src='assets/img/service/service-1.png' alt='Image' />
+                      <img src={img2} alt='Image' />
                     </a>
                   </div>
                   <div className='service_tabs_text'>
@@ -556,7 +536,7 @@ function Kennel() {
                 <div className='service_tabs_item'>
                   <div className='service_tabs_img'>
                     <a href='service-details.html'>
-                      <img src='assets/img/service/service-1.png' alt='Image' />
+                      <img src={img2} alt='Image' />
                     </a>
                   </div>
                   <div className='service_tabs_text'>
@@ -582,7 +562,7 @@ function Kennel() {
                 <div className='service_tabs_item'>
                   <div className='service_tabs_img'>
                     <a href='service-details.html'>
-                      <img src='assets/img/service/service-1.png' alt='Image' />
+                      <img src={img2} alt='Image' />
                     </a>
                   </div>
                   <div className='service_tabs_text'>
@@ -606,16 +586,16 @@ function Kennel() {
             </div>
           </div>
 
-          <div className='row mt-3'>
+          <div className='row mt-5'>
             <div className='text-center'>
-              <h2>Shop</h2>
+              <h2>Pet Food (&) Accessories</h2>
             </div>
             <div className='row'>
               <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
                 <div className='adoption_card_wrapper'>
                   <div className='adoption_item_img img_hover'>
                     <a href='adoption-details.html'>
-                      <img src='assets/img/adoption/adoption-1.png' alt='img' />
+                      <img src={img} alt='img' />
                     </a>
                   </div>
                   <div className='adoption_item_content'>
@@ -646,7 +626,7 @@ function Kennel() {
                 <div className='adoption_card_wrapper'>
                   <div className='adoption_item_img img_hover'>
                     <a href='adoption-details.html'>
-                      <img src='assets/img/adoption/adoption-1.png' alt='img' />
+                      <img src={img} alt='img' />
                     </a>
                   </div>
                   <div className='adoption_item_content'>
@@ -677,7 +657,7 @@ function Kennel() {
                 <div className='adoption_card_wrapper'>
                   <div className='adoption_item_img img_hover'>
                     <a href='adoption-details.html'>
-                      <img src='assets/img/adoption/adoption-1.png' alt='img' />
+                      <img src={img} alt='img' />
                     </a>
                   </div>
                   <div className='adoption_item_content'>
@@ -708,7 +688,7 @@ function Kennel() {
                 <div className='adoption_card_wrapper'>
                   <div className='adoption_item_img img_hover'>
                     <a href='adoption-details.html'>
-                      <img src='assets/img/adoption/adoption-1.png' alt='img' />
+                      <img src={img} alt='img' />
                     </a>
                   </div>
                   <div className='adoption_item_content'>
@@ -739,7 +719,7 @@ function Kennel() {
                 <div className='adoption_card_wrapper'>
                   <div className='adoption_item_img img_hover'>
                     <a href='adoption-details.html'>
-                      <img src='assets/img/adoption/adoption-1.png' alt='img' />
+                      <img src={img} alt='img' />
                     </a>
                   </div>
                   <div className='adoption_item_content'>
@@ -949,7 +929,7 @@ function Kennel() {
                       <span>
                         <img
                           className='review-image'
-                          src='assets/img/adoption/adoption-1.png'
+                          src={img}
                           alt=''
                         />
                       </span>
