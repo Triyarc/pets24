@@ -4,6 +4,15 @@ import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
 import Autocomplete from 'react-autocomplete';
+import Downshift from 'downshift';
+
+const items = [
+  { value: 'Apple' },
+  { value: 'Orange' },
+  { value: 'Grapes' },
+  { value: 'Banana' },
+  { value: 'Mango' },
+];
 
 function MatingPetsArea() {
   const [data, setData] = useState([]);
@@ -303,24 +312,48 @@ function MatingPetsArea() {
             </div> */}
             {/* product */}
             <div className="autocomplete-wrapper">
-      <Autocomplete
-        value={value}
-        items={items}
-        getItemValue={item => item.title}
-        shouldItemRender={(item, value) =>
-          item.title.toLowerCase().indexOf(value.toLowerCase()) > -1
-        }
-        renderItem={(item, isHighlighted) => (
-          <div
-            className={`item ${isHighlighted ? 'selected-item' : ''}`}
-            key={item.id}
-          >
-            {item.title}
-          </div>
-        )}
-        onChange={e => setValue(e.target.value)}
-        onSelect={value => setValue(value)}
-      />
+            <Downshift
+    onChange={selection => alert(`You selected ${selection.value}`)}
+    itemToString={item => (item ? item.value : '')}
+  >
+    {({
+      getInputProps,
+      getItemProps,
+      getMenuProps,
+      isOpen,
+      inputValue,
+      highlightedIndex,
+      selectedItem,
+    }) => (
+      <div>
+        <input {...getInputProps({ placeholder: 'Type a fruit' })} />
+        <ul {...getMenuProps()}>
+          {isOpen
+            ? items
+                .filter(item =>
+                  !inputValue || item.value.toLowerCase().includes(inputValue.toLowerCase())
+                )
+                .map((item, index) => (
+                  <li
+                    {...getItemProps({
+                      key: item.value,
+                      index,
+                      item,
+                      style: {
+                        backgroundColor:
+                          highlightedIndex === index ? 'lightgray' : 'white',
+                        fontWeight: selectedItem === item ? 'bold' : 'normal',
+                      },
+                    })}
+                  >
+                    {item.value}
+                  </li>
+                ))
+            : null}
+        </ul>
+      </div>
+    )}
+  </Downshift>
     </div>
             <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>
