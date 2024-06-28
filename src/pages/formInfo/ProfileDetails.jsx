@@ -70,10 +70,10 @@ function ProfileDetails() {
       payload: formData,
     })
       .then((res) => {
-        if (res?.success == true) {
+        if (res?.success === true) {
           toast.success("submitted Successfully");
           reset();
-        } else if (res?.success == false) {
+        } else if (res?.success === false) {
           toast.error("Something went wrong");
         }
       })

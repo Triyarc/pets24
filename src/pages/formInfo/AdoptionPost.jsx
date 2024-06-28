@@ -127,7 +127,7 @@ function AdoptionPost() {
 
   useEffect(() => {
     setValue("breeds_id", "");
-  }, [watchPets]);
+  }, [watchPets , setValue]);
 
   useEffect(() => {
     apiCall({
@@ -358,7 +358,7 @@ function AdoptionPost() {
                     </p>
                   </div>
                 </div>
-                {watchCertificate == "yes" && (
+                {watchCertificate === "yes" && (
                   <div className='col-lg-6'>
                     <div className='form-group'>
                       <label for='certificateImage' className='p-1'>

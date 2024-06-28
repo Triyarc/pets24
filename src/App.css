@@ -1,3 +1,11 @@
 .react-datepicker-wrapper {
   width: 100%;
 }
+.card {
+  transition: all 0.3s ease;
+}
+
+.card.checked {
+  border: 2px solid green; /* Example border change */
+  background-color: #e9ecef; /* Example background color change */
+}

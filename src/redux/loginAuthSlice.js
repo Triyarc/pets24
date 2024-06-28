@@ -10,7 +10,7 @@ export const loginSlice = createSlice({
   reducers: {
     loginConfrimation: (state, action) => {
       console.log(action.payload , "action.payload")
-      if (action.payload == true) {
+      if (action.payload === true) {
         state.login = action.payload;
       }
     },

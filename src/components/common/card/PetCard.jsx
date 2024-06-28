@@ -2,7 +2,6 @@ import React from "react";
 import "../../../style/product.css";
 
 function PetCard({ item, handleClick }) {
-
   return (
     <div className='col-lg-3 col-md-6 col-sm-12 col-12' key={item?.id}>
       <div
@@ -13,7 +12,7 @@ function PetCard({ item, handleClick }) {
       >
         <div className='shop_item_img'>
           <span className='PetVerify'>Trusted</span>
-          <div class='_3UrC5'>
+          <div className='_3UrC5'>
             {/* <img src={item.petPhoto[0]} alt='img' /> */}
             <img
               src={`${

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import apiCall from "../../apiCall";
@@ -7,9 +7,7 @@ import { toast } from "react-toastify";
 
 function EditShopDetails() {
   const [cityValue, setCityValue] = useState(false);
-  const [previosData, setPreviosData] = useState([]);
   const [imgFile, setImgFile] = useState(false);
-  const imgRef = useRef(null);
 
   const form = useForm({
     defaultValues: {
@@ -44,11 +42,10 @@ function EditShopDetails() {
         method: "GET",
         apiUrl: `${local_host}/api/v1/get_shop_profile`,
       }).then((data) => {
-        setPreviosData(data?.parameters);
         reset(data?.parameters);
       });
     };
-  }, []);
+  }, [reset]);
 
   const Uploadlogo = () => {
     setImgFile(true);
@@ -82,8 +79,8 @@ function EditShopDetails() {
 
   const onSubmit = (data) => {
     setValue("country", "India");
-    if (typeof data.logo == "string") {
-      if (data.logo.includes("http") == true) {
+    if (typeof data.logo === "string") {
+      if (data.logo.includes("http") === true) {
         delete data.logo;
       }
     }
@@ -103,10 +100,10 @@ function EditShopDetails() {
       payload: formData,
     })
       .then((res) => {
-        if (res?.success == true) {
+        if (res?.success === true) {
           toast.success("submitted Successfully");
           reset();
-        } else if (res?.success == false) {
+        } else if (res?.success === false) {
           toast.error("Something went wrong");
         }
       })
@@ -119,7 +116,14 @@ function EditShopDetails() {
     if (watchPincode?.length < 6) {
       setCityValue(false);
     }
-  }, [watchPincode]);
+    if (typeof watchLogo == "string") {
+      if (watchLogo.includes("http")) {
+        setImgFile(false);
+      }
+    } else {
+      setImgFile(true);
+    }
+  }, [watchPincode, watchLogo]);
 
   return (
     <div className='container pt-md-5'>

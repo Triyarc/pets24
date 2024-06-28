@@ -229,7 +229,7 @@ function Navbar() {
               </div>
               <div className='dot-menu toggle_bar'>
                 <button
-                  class='navbar-toggler'
+                  className='navbar-toggler'
                   type='button'
                   data-bs-toggle='collapse'
                   data-bs-target='#navbarNav'
@@ -237,33 +237,33 @@ function Navbar() {
                   aria-expanded='false'
                   aria-label='Toggle navigation'
                 >
-                  <i class='fas fa-bars bg-color'></i>
+                  <i className='fas fa-bars bg-color'></i>
                 </button>
               </div>
 
               <div
-                class='collapse navbar-collapse mobile_toggleResposive'
+                className='collapse navbar-collapse mobile_toggleResposive'
                 id='navbarNav'
               >
-                <ul class='navbar-nav'>
-                  <li class='nav-item'>
-                    <a href='/' class='nav-link active'>
+                <ul className='navbar-nav'>
+                  <li className='nav-item'>
+                    <a href='/' className='nav-link active'>
                       Home
                     </a>
                   </li>
-                  <li class='nav-item'>
-                    <a href='mating' class='nav-link'>
+                  <li className='nav-item'>
+                    <a href='mating' className='nav-link'>
                       Mating
                     </a>
                   </li>
-                  <li class='nav-item'>
-                    <a href='adoption' class='nav-link'>
+                  <li className='nav-item'>
+                    <a href='adoption' className='nav-link'>
                       Adoption
                     </a>
                   </li>
-                  <li class='nav-item dropdown'>
+                  <li className='nav-item dropdown'>
                     <a
-                      class='nav-link dropdown-toggle'
+                      className='nav-link dropdown-toggle'
                       href='#'
                       id='servicesDropdown'
                       role='button'
@@ -273,24 +273,24 @@ function Navbar() {
                       Services
                     </a>
                     <ul
-                      class='dropdown-menu'
+                      className='dropdown-menu'
                       aria-labelledby='servicesDropdown'
                     >
-                      <li class='nav-item'>
-                        <a href='service' class='nav-link'>
+                      <li className='nav-item'>
+                        <a href='service' className='nav-link'>
                           Service
                         </a>
                       </li>
-                      <li class='nav-item'>
-                        <a href='service-details.html' class='nav-link'>
+                      <li className='nav-item'>
+                        <a href='service-details.html' className='nav-link'>
                           Service Details
                         </a>
                       </li>
                     </ul>
                   </li>
-                  <li class='nav-item dropdown'>
+                  <li className='nav-item dropdown'>
                     <a
-                      class='nav-link dropdown-toggle'
+                      className='nav-link dropdown-toggle'
                       href='#'
                       id='shopDropdown'
                       role='button'
@@ -299,36 +299,36 @@ function Navbar() {
                     >
                       Shop
                     </a>
-                    <ul class='dropdown-menu' aria-labelledby='shopDropdown'>
-                      <li class='nav-item'>
-                        <a href='product' class='nav-link'>
+                    <ul className='dropdown-menu' aria-labelledby='shopDropdown'>
+                      <li className='nav-item'>
+                        <a href='product' className='nav-link'>
                           Shop
                         </a>
                       </li>
-                      <li class='nav-item'>
-                        <a href='product-detail' class='nav-link'>
+                      <li className='nav-item'>
+                        <a href='product-detail' className='nav-link'>
                           Shop Details
                         </a>
                       </li>
-                      <li class='nav-item'>
-                        <a href='cart' class='nav-link'>
+                      <li className='nav-item'>
+                        <a href='cart' className='nav-link'>
                           Cart
                         </a>
                       </li>
                     </ul>
                   </li>
-                  <li class='nav-item'>
-                    <a href='pet-shop-list' class='nav-link'>
+                  <li className='nav-item'>
+                    <a href='pet-shop-list' className='nav-link'>
                       Pet Shop
                     </a>
                   </li>
-                  <li class='nav-item'>
-                    <a href='about-us' class='nav-link'>
+                  <li className='nav-item'>
+                    <a href='about-us' className='nav-link'>
                       About us
                     </a>
                   </li>
-                  <li class='nav-item'>
-                    <a href='contact-us' class='nav-link'>
+                  <li className='nav-item'>
+                    <a href='contact-us' className='nav-link'>
                       Contact
                     </a>
                   </li>
@@ -395,7 +395,7 @@ function Navbar() {
       {/* offcanvas */}
       <div
         className='offcanvas offcanvas-end offcanvas_custom'
-        tabindex='-1'
+        tabIndex='-1'
         id='offcanvasRight'
       >
         <div className='offcanvas-header'>
