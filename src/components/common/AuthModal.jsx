@@ -41,7 +41,7 @@ function AuthModal({redirectionPath}) {
               <img src={img} style={{ height: "250px", width: "auto" }}></img>
             </div>
             <div className='text-center justify-content-center pt-5 pb-3    '>
-              <p className='w-75 mb-3 '>
+              <p className='mb-3 m-auto w-75 '>
                 User must login to post your pet, becasue only you know the
                 action of post
               </p>

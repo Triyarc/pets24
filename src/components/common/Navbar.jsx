@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import logo from "../../assets/img/logo.png";
 import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
 function Navbar() {
+  let { id } = useParams();
+
+  var pathname = window.location.pathname;
+  var parts = pathname.split("/");
+  var desiredPart = parts[1];
+
+  console.log(id, "idididid")
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const isAuthenticated = document.cookie.includes("loggedIn=true");
@@ -30,12 +38,40 @@ function Navbar() {
     document.cookie = "auth_token=;path=/;";
   }
 
+
+
   // Function to handle logout
   function logout() {
     // Clear the authentication cookie
     clearAuthenticationCookie();
     window.location.reload();
   }
+
+  // useEffect(() => {
+  //   let getClassname = document.getElementsByClassName('nav-link');
+  //   let getData = []
+  //   for (let i = 0; i < getClassname.length; i++) {
+  //     let getAttr = getClassname[i].getAttribute('href');
+  //     console.log(getAttr, "getAttr");
+  //     getData.push(getAttr)
+  //   }
+  //   console.log(getData)
+  //   console.log(desiredPart)
+
+  //   getData.filter((el, i) => {
+  //     if (typeof el == 'string') {
+  //       if (el.includes(desiredPart)) {
+  //         console.log(el);
+  //         getClassname[i].setAttribute('class', 'active');
+  //         return true;  // Keep this element in the filtered array
+  //       }
+  //     }
+
+  //     return false;   // Exclude this element from the filtered array
+  //   });
+
+  // }, [])
+
   return (
     <div>
       <header className='main_header_arae'>
@@ -63,7 +99,7 @@ function Navbar() {
                 >
                   <ul className='navbar-nav'>
                     <li className='nav-item'>
-                      <a href='/' className='nav-link active'>
+                      <a href='/' className='nav-link'>
                         Home
                       </a>
                     </li>
