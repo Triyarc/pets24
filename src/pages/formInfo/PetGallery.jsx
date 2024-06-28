@@ -75,7 +75,7 @@ function PetGallery({ images, setImages,setImageItems }) {
                 ))}{" "}
               </div>
               <div className='justify-content-center d-flex mt-5'>
-                {imageIdx == 4 ? (
+                {imageIdx === 4 ? (
                   ""
                 ) : (
                   <button

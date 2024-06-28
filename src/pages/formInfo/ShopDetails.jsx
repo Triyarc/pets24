@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 function ShopDetails() {
@@ -122,7 +122,7 @@ function ShopDetails() {
         isValid = false;
       }
 
-      if (key === "shopDescription" && value.trim().length == 0) {
+      if (key === "shopDescription" && value.trim().length === 0) {
         newErrors.shopDescription = "Provid Valid shopDescription";
         isValid = false;
       }

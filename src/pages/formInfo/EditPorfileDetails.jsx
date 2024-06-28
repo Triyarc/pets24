@@ -42,7 +42,7 @@ function EditPorfileDetails() {
         reset(data?.parameters);
       });
     };
-  }, []);
+  }, [reset]);
 
   const setCityValueFn = (filedValue) => {
     let pincode = {
@@ -76,7 +76,7 @@ function EditPorfileDetails() {
   const onSubmit = (data) => {
     setValue("country", "India");
     if (typeof data.profile_image == "string") {
-      if (data.profile_image.includes("http") == true) {
+      if (data.profile_image.includes("http") === true) {
         delete data.profile_image;
       }
     }
@@ -97,10 +97,10 @@ function EditPorfileDetails() {
       payload: formData,
     })
       .then((res) => {
-        if (res?.success == true) {
+        if (res?.success === true) {
           toast.success("submitted Successfully");
           reset();
-        } else if (res?.success == false) {
+        } else if (res?.success === false) {
           toast.error("Something went wrong");
         }
       })
@@ -163,7 +163,7 @@ function EditPorfileDetails() {
                         <img
                           src={watchProfileImage}
                           className='shop-Logo-Image'
-                          alt='Profile Image'
+                          alt='Profile'
                         />
                         <button
                           className='btn btn_theme btn_md me-4 ms-5'

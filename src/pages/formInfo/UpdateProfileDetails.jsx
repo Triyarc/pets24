@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 function UpdateProfileDetails() {
   const [cityValue, setCityValue] = useState(false);
-  const [previosData, setPreviosData] = useState([]);
   const [imgFile, setImgFile] = useState(false);
   const imgRef = useRef(null);
 
@@ -44,11 +43,10 @@ function UpdateProfileDetails() {
         method: "GET",
         apiUrl: `${local_host}/api/v1/get_shop_profile`,
       }).then((data) => {
-        setPreviosData(data?.parameters);
         reset(data?.parameters);
       });
     };
-  }, []);
+  }, [reset]);
 
   const Uploadlogo = () => {
     setImgFile(true);
@@ -81,7 +79,7 @@ function UpdateProfileDetails() {
   };
 
   const onSubmit = (data) => {
-    if (data.logo.includes("http") == true) {
+    if (data.logo.includes("http") === true) {
       delete data.logo;
     }
     const formData = new FormData();
@@ -100,10 +98,10 @@ function UpdateProfileDetails() {
       payload: formData,
     })
       .then((res) => {
-        if (res?.success == true) {
+        if (res?.success === true) {
           toast.success("submitted Successfully");
           reset();
-        } else if (res?.success == false) {
+        } else if (res?.success === false) {
           toast.error("Something went wrong");
         }
       })
@@ -214,10 +212,7 @@ function UpdateProfileDetails() {
                               },
                             })}
                             onChange={(e) => {
-                              // Handle file selection and update imgFile state here
-                              // Example:
-                              const file = e.target.files[0];
-                              // Update state accordingly
+                              
                             }}
                           />
                         </div>

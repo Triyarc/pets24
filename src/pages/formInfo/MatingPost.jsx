@@ -41,13 +41,11 @@ function MatingPost() {
     watch,
     setValue,
     reset,
-    getValues,
   } = form;
   const { errors } = formState;
 
   const watchPets = watch("pets_id");
   const watchCertificate = watch("certificate");
-  const watchDob = watch("dob");
 
   const petOptions = petData?.map((item) => ({
     value: item.id,
@@ -71,9 +69,9 @@ function MatingPost() {
       delete data.certificateImage;
     }
     if (data.is_vaccinated) {
-      if (data.is_vaccinated == "1") {
+      if (data.is_vaccinated === "1") {
         data.is_vaccinated = 1;
-      } else if (data.is_vaccinated == "0") {
+      } else if (data.is_vaccinated === "0") {
         data.is_vaccinated = 0;
       }
     }
@@ -83,7 +81,7 @@ function MatingPost() {
       data.dob = formattedDate;
     }
     data.petPhoto = imageItems;
-    if (images.length == 0) {
+    if (images.length === 0) {
       toast.error("Select Image");
       return;
     }
@@ -115,10 +113,10 @@ function MatingPost() {
       payload: formData,
     })
       .then((res) => {
-        if (res?.success == true) {
+        if (res?.success === true) {
           toast.success("submitted Successfully");
           reset();
-        } else if (res?.success == false) {
+        } else if (res?.success === false) {
           toast.error("Something went wrong");
         }
       })
@@ -129,7 +127,7 @@ function MatingPost() {
 
   useEffect(() => {
     setValue("breeds_id", "");
-  }, [watchPets]);
+  }, [watchPets ,setValue]);
 
   useEffect(() => {
     return () => {
@@ -414,7 +412,7 @@ function MatingPost() {
                     </p>
                   </div>
                 </div>
-                {watchCertificate == "yes" && (
+                {watchCertificate === "yes" && (
                   <div className='col-lg-6'>
                     <div className='form-group'>
                       <label for='certificateImage' className='p-1'>
