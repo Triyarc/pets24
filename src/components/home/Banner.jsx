@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import main_Banner from '../../assets/img/common/banner_left.png'
-import sub_Banner_one from '../../assets/img/icon/banner-1.png'
-import sub_Banner_two from '../../assets/img/icon/banner-2.png'
-import sub_Banner_three from '../../assets/img/icon/banner-3.png'
+import main_Banner from "../../assets/img/common/banner_left.png";
+import sub_Banner_one from "../../assets/img/icon/banner-1.png";
+import sub_Banner_two from "../../assets/img/icon/banner-2.png";
+import sub_Banner_three from "../../assets/img/icon/banner-3.png";
+import useAos from "../../useAos";
 
 function Banner() {
+  useAos();
 
   return (
     <div>
@@ -42,7 +44,7 @@ function Banner() {
               </div>
             </div>
             <div className='col-lg-6 d-lg-block d-none'>
-              <div className='main_banner_img_left'>
+              <div className='main_banner_img_left' data-aos='fade-right'>
                 <img
                   src={main_Banner}
                   alt='img'

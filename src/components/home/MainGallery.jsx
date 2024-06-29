@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { Gallery } from "react-grid-gallery";
@@ -114,9 +114,7 @@ const CardWithCheckbox = () => {
                       />
                       <div className='card-body'>
                         <h5>3 X </h5>
-                        <p
-                          style={{ color: "#485b48", fontSize: "15px" }}
-                        >
+                        <p style={{ color: "#485b48", fontSize: "15px" }}>
                           Post reachable 3times comparing to normal post
                         </p>
                       </div>
@@ -142,8 +140,10 @@ const CardWithCheckbox = () => {
                         onChange={handleRadioChange}
                       />
                       <div className='card-body'>
-                        <h5 >5 X</h5>
-                        <p  style={{ color: "#485b48", fontSize: "15px" }}>Post reachable 5times comparing to normal pos</p>
+                        <h5>5 X</h5>
+                        <p style={{ color: "#485b48", fontSize: "15px" }}>
+                          Post reachable 5times comparing to normal pos
+                        </p>
                       </div>
                     </label>
                     <label
@@ -163,8 +163,10 @@ const CardWithCheckbox = () => {
                         onChange={handleRadioChange}
                       />
                       <div className='card-body'>
-                        <h5 >7 X</h5>
-                        <p  style={{ color: "#485b48", fontSize: "15px" }}>Post reachable 7times comparing to normal pos</p>
+                        <h5>7 X</h5>
+                        <p style={{ color: "#485b48", fontSize: "15px" }}>
+                          Post reachable 7times comparing to normal pos
+                        </p>
                       </div>
                     </label>
                   </div>
@@ -207,7 +209,19 @@ function MainGallery() {
   const handleMoveNext = () => setIndex(nextIndex);
 
   return (
-    <div className='container'>
+    <div
+      className='container'
+    >
+      <div className='col-lg-6 offset-lg-3 pb-4 pb-lg-5'>
+        <div className='section_heading'>
+          <h2>Gallery</h2>
+          <p>
+            Tempor aute culpa consectetur labore deserunt cupidatat voluptate.
+            Esse adipisicing in deserunt adipisicing duis.
+          </p>
+        </div>
+      </div>
+
       <Gallery
         images={images}
         onClick={handleClick}

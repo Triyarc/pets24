@@ -1,47 +1,49 @@
-import React from "react";
-import OwlCarousel from "react-owl-carousel";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import img1 from "../../assets/img/testimonial/test-2.png";
+import img2 from "../../assets/img/testimonial/test-3.png";
+import quotes from "../../assets/img/testimonial/quote.png";
+import icon from "../../assets/img/logo/logp-1.png";
+import useAos from "../../useAos";
 
 function ClientReview() {
-  const options = {
-    items: 3,
-    loop: true,
-    margin: 10,
-    autoplay: true,
-    autoplayTimeout: 2000,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      600: {
-        items: 2,
-      },
-      1000: {
-        items: 3,
-      },
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 3, // optional, default to 1.
     },
-    dots: false,
-    nav: true,
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
   };
 
-  const iconOptions = {
-    items: 3,
-    loop: true,
-    margin: 10,
-    autoplay: true,
-    autoplayTimeout: 2000,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      600: {
-        items: 3,
-      },
-      1000: {
-        items: 5,
-      },
+  const responsiveLogo = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 3, // optional, default to 1.
     },
-    dots: false,
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
   };
+  
+  useAos();
 
   return (
     <div>
@@ -49,6 +51,10 @@ function ClientReview() {
       <section
         id='testimonial_area'
         className='section_padding_bottom slider_side_btn'
+        data-aos='fade-zoom-out'
+        data-aos-offset='200'
+        data-aos-easing='ease-in-sine'
+        data-aos-duration='600'
       >
         <div className='container'>
           <div className='row'>
@@ -62,161 +68,168 @@ function ClientReview() {
               </div>
             </div>
           </div>
-          <div className='row'>
+          <div className='row mt-lg-5 mt-4'>
             <div className='col-lg-12'>
-              <OwlCarousel
-                className='testmoinal_main_slider owl-theme'
-                {...options}
+              <Carousel
+                swipeable={true}
+                draggable={true}
+                showDots={false}
+                arrows={false}
+                responsive={responsive}
+                ssr={true} // means to render carousel on server-side.
+                infinite={true}
+                autoPlay={true}
+                autoPlaySpeed={5000}
+                keyBoardControl={true}
+                customTransition='transform 300ms ease-in-out'
+                transitionDuration={1000}
+                containerClass='carousel-container'
+                sliderClass='react-multi-carousel-track'
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                // deviceType={this.props.deviceType}
+                dotListClass='custom-dot-list-style'
+                itemClass='carousel-item-padding-40-px'
+                rewind={true}
+                rewindWithAnimation={true}
+                renderDotsOutside={true}
+                minimumTouchDrag={50}
               >
-                <div className='testimonial_area_item'>
-                  <img
-                    src='assets/img/testimonial/test-2.png'
-                    className='test_main_img'
-                    alt='img'
-                  />
+                <div className='testimonial_area_item m-2'>
+                  <img src={img1} className='test_main_img' alt='img' />
                   <p className='test_main_para'>
                     Lorem ipsum dolor sit amet, consectetur notted adipisicing
                     elit sed do eiusm menos tdolore magna aliqua andhn.
                   </p>
-                  <img
-                    src='assets/img/testimonial/quote.png'
-                    className='test_quote_img'
-                    alt='icon'
-                  />
+                  <img src={quotes} className='test_quote_img' alt='icon' />
                   <div className='test_destination'>
                     <h3>Adam brown</h3>
                     <p>Businessman</p>
                   </div>
                 </div>
-                <div className='testimonial_area_item'>
-                  <img
-                    src='assets/img/testimonial/test-3.png'
-                    className='test_main_img'
-                    alt='img'
-                  />
+                <div className='testimonial_area_item m-2'>
+                  <img src={img2} className='test_main_img' alt='img' />
                   <p className='test_main_para'>
                     Lorem ipsum dolor sit amet, consectetur notted adipisicing
                     elit sed do eiusm menos tdolore magna aliqua andhn.
                   </p>
-                  <img
-                    src='assets/img/testimonial/quote.png'
-                    className='test_quote_img'
-                    alt='icon'
-                  />
+                  <img src={quotes} className='test_quote_img' alt='icon' />
                   <div className='test_destination'>
                     <h3>Adam brown</h3>
                     <p>Businessman</p>
                   </div>
                 </div>
-                <div className='testimonial_area_item'>
-                  <img
-                    src='assets/img/testimonial/test-2.png'
-                    className='test_main_img'
-                    alt='img'
-                  />
+                <div className='testimonial_area_item m-2'>
+                  <img src={img1} className='test_main_img' alt='img' />
                   <p className='test_main_para'>
                     Lorem ipsum dolor sit amet, consectetur notted adipisicing
                     elit sed do eiusm menos tdolore magna aliqua andhn.
                   </p>
-                  <img
-                    src='assets/img/testimonial/quote.png'
-                    className='test_quote_img'
-                    alt='icon'
-                  />
+                  <img src={quotes} className='test_quote_img' alt='icon' />
                   <div className='test_destination'>
                     <h3>Adam brown</h3>
                     <p>Businessman</p>
                   </div>
                 </div>
-                <div className='testimonial_area_item'>
-                  <img
-                    src='assets/img/testimonial/test-3.png'
-                    className='test_main_img'
-                    alt='img'
-                  />
+                <div className='testimonial_area_item m-2'>
+                  <img src={img2} className='test_main_img' alt='img' />
                   <p className='test_main_para'>
                     Lorem ipsum dolor sit amet, consectetur notted adipisicing
                     elit sed do eiusm menos tdolore magna aliqua andhn.
                   </p>
-                  <img
-                    src='assets/img/testimonial/quote.png'
-                    className='test_quote_img'
-                    alt='icon'
-                  />
+                  <img src={quotes} className='test_quote_img' alt='icon' />
                   <div className='test_destination'>
                     <h3>Adam brown</h3>
                     <p>Businessman</p>
                   </div>
                 </div>
-                <div className='testimonial_area_item'>
-                  <img
-                    src='assets/img/testimonial/test-2.png'
-                    className='test_main_img'
-                    alt='img'
-                  />
+                <div className='testimonial_area_item m-2'>
+                  <img src={img1} className='test_main_img' alt='img' />
                   <p className='test_main_para'>
                     Lorem ipsum dolor sit amet, consectetur notted adipisicing
                     elit sed do eiusm menos tdolore magna aliqua andhn.
                   </p>
-                  <img
-                    src='assets/img/testimonial/quote.png'
-                    className='test_quote_img'
-                    alt='icon'
-                  />
+                  <img src={quotes} className='test_quote_img' alt='icon' />
                   <div className='test_destination'>
                     <h3>Adam brown</h3>
                     <p>Businessman</p>
                   </div>
                 </div>
-              </OwlCarousel>
+              </Carousel>
             </div>
           </div>
         </div>
       </section>
-      <section id='client_logo_area' className='section_padding_bottom'>
+      <section
+        id='client_logo_area'
+        className=''
+        data-aos='flip-left'
+        data-aos-offset='200'
+        data-aos-easing='ease-in-sine'
+        data-aos-duration='600'
+      >
         <div className='container'>
           <div className='row'>
             <div className='col-lg-12 '>
-              <OwlCarousel
-                className='client_logo_slider_wrapper  owl-theme '
-                {...iconOptions}
+              <Carousel
+                swipeable={true}
+                draggable={true}
+                showDots={false}
+                arrows={false}
+                responsive={responsiveLogo}
+                ssr={true} // means to render carousel on server-side.
+                infinite={true}
+                autoPlay={true}
+                autoPlaySpeed={5000}
+                keyBoardControl={true}
+                customTransition='transform 300ms ease-in-out'
+                transitionDuration={1000}
+                containerClass='carousel-container'
+                sliderClass='react-multi-carousel-track'
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                // deviceType={this.props.deviceType}
+                dotListClass='custom-dot-list-style'
+                itemClass='carousel-item-padding-40-px'
+                rewind={true}
+                rewindWithAnimation={true}
+                renderDotsOutside={false}
+                minimumTouchDrag={50}
               >
-                <div className='client_logo_item '>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-1.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-                <div className='client_logo_item'>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-2.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-                <div className='client_logo_item'>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-3.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-                <div className='client_logo_item'>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-4.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-                <div className='client_logo_item'>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-5.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-                <div className='client_logo_item'>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-6.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-                <div className='client_logo_item'>
+                <div className='client_logo_item text-center'>
                   <a href='#!'>
-                    <img src='assets/img/logo/logp-7.png' alt='img' />
+                    <img src={icon} alt='img' />
                   </a>
                 </div>
-              </OwlCarousel>
+              </Carousel>
             </div>
           </div>
         </div>

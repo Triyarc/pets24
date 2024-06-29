@@ -1,16 +1,20 @@
 import React from "react";
-import serviceImg from '../../assets/img/element/service.png'
-import serviceImg1 from '../../assets/img/icon/service-1.png'
-import serviceImg2 from '../../assets/img/icon/service-2.png'
-import serviceImg3 from '../../assets/img/icon/service-3.png'
-import serviceImg4 from '../../assets/img/icon/service-4.png'
-import serviceImg5 from '../../assets/img/icon/service-5.png'
-import serviceImg6 from '../../assets/img/icon/service-6.png'
+import serviceImg from "../../assets/img/element/service.png";
+import serviceImg1 from "../../assets/img/icon/service-1.png";
+import serviceImg2 from "../../assets/img/icon/service-2.png";
+import serviceImg3 from "../../assets/img/icon/service-3.png";
+import serviceImg4 from "../../assets/img/icon/service-4.png";
+import serviceImg5 from "../../assets/img/icon/service-5.png";
+import serviceImg6 from "../../assets/img/icon/service-6.png";
 
 function ServiceCard() {
+
   return (
     <div>
-      <section id='main_service' className='section_padding_bottom'>
+      <section
+        id='main_service'
+        className='section_padding_bottom'
+      >
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6 offset-lg-3'>

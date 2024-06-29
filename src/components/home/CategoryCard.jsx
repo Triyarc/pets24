@@ -1,14 +1,20 @@
 import React from "react";
-import img1 from "../../assets/img/common/offer-1.png"
-import img2 from "../../assets/img/common/offer-2.png"
-import img3 from "../../assets/img/common/offer-3.png"
-import img4 from '../../assets/img/common/about.png'
-import img5 from '../../assets/img/icon/round-check.png'
+import img1 from "../../assets/img/common/offer-1.png";
+import img2 from "../../assets/img/common/offer-2.png";
+import img3 from "../../assets/img/common/offer-3.png";
+import img4 from "../../assets/img/common/about.png";
+import img5 from "../../assets/img/icon/round-check.png";
+import useAos from "../../useAos";
 
 function CategoryCard() {
+  useAos();
+
   return (
     <div>
-      <section id='banner_bottom_area' className='section_padding'>
+      <section
+        id='banner_bottom_area'
+        className='section_padding'
+      >
         <div className='container'>
           <div className='row'>
             <div className='col-lg-4 col-sm-12'>
@@ -29,7 +35,14 @@ function CategoryCard() {
           </div>
         </div>
       </section>
-      <section id='about_area' className='section_padding_bottom'>
+      <section
+        id='about_area'
+        className='section_padding_bottom'
+        data-aos='zoom-in-left'
+        data-aos-offset='200'
+        data-aos-easing='ease-in-sine'
+        data-aos-duration='600'
+      >
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6'>
