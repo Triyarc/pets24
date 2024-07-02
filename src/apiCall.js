@@ -1,22 +1,25 @@
 import axios from "axios";
 import { getCookieValue } from "./cokkies";
 import { local_host } from "./env";
+import { toast } from "react-toastify";
 
 // Function to handle 401 errors (e.g., redirect to login page)
 function handle401Error() {
   // Implement your logic here, such as redirecting to a login page
-  window.location.href = "/";
+  toast.error("Login Error")
+  window.location.href = "/login";
 }
 
-const authToken = getCookieValue("auth_token");
-
-const header = {
-  headers: {
-    Authorization: "Bearer " + authToken,
-  },
-};
-
 export default function apiCall({ method, apiUrl, payload, id }) {
+  const authToken = getCookieValue("auth_token");
+
+  const header = {
+    headers: {
+      Authorization: "Bearer " + authToken,
+    },
+  };
+  console.log(header, "header");
+
   return new Promise(async (resolve, reject) => {
     try {
       let response;

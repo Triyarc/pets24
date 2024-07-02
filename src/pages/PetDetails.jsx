@@ -11,6 +11,7 @@ function PetDetails() {
   const [selectedImage, setSelectedImage] = useState();
   const [dataReturn, setDataReturn] = useState(false);
   const [relatedData, setRelatedData] = useState([]);
+  const [otherPetsData, setOtherPetsData] = useState([]);
 
   var pathname = window.location.pathname;
   var parts = pathname.split("/");
@@ -35,6 +36,12 @@ function PetDetails() {
         }).then((res) => {
           setRelatedData(res.parameters.data);
         });
+        apiCall({
+          method: "GET",
+          apiUrl: `${local_host}/api/v1/recent_adoption_list`,
+        }).then((res) => {
+          setOtherPetsData(res.parameters.data);
+        });
       } else if (desiredPart === "mating") {
         apiCall({
           method: "POST",
@@ -52,6 +59,12 @@ function PetDetails() {
         }).then((res) => {
           setRelatedData(res.parameters.data);
         });
+        apiCall({
+          method: "GET",
+          apiUrl: `${local_host}/api/v1/recent_mating_list`,
+        }).then((res) => {
+          setOtherPetsData(res.parameters.data);
+        });
       }
     };
   }, [desiredPart, id]);
@@ -66,6 +79,7 @@ function PetDetails() {
           id={id}
           desiredPart={desiredPart}
           relatedData={relatedData}
+          otherPetsData={otherPetsData}
         />
       ) : (
         <h2

@@ -1,5 +1,4 @@
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import img1 from "../../assets/img/testimonial/test-2.png";
 import img2 from "../../assets/img/testimonial/test-3.png";
 import quotes from "../../assets/img/testimonial/quote.png";
