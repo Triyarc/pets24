@@ -1,10 +1,13 @@
 import React from "react";
 
 function PricingCard() {
+
   return (
     <div id='our_pricing_area'>
       {" "}
-      <section className='section_padding'>
+      <section
+        className='section_padding'
+      >
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6 offset-lg-3'>
@@ -25,8 +28,9 @@ function PricingCard() {
                   {/* <h2>
                     ₹ 399.00<sub>/ 6 month</sub>
                   </h2> */}
-                   <h2>
-                   Free Registration <br></br><sub> Till May-2024</sub>
+                  <h2>
+                    Free Registration <br></br>
+                    <sub> Till May-2024</sub>
                   </h2>
                   <p>
                     Occaecat ex consectetur eu irure non dolore in anim nostrud
@@ -86,8 +90,9 @@ function PricingCard() {
                   {/* <h2>
                     ₹ 599.00<sub>/ 6 month</sub>
                   </h2> */}
-                     <h2>
-                   Free Registration <br></br><sub> Till May-2024</sub>
+                  <h2>
+                    Free Registration <br></br>
+                    <sub> Till May-2024</sub>
                   </h2>
                   <p>
                     Occaecat ex consectetur eu irure non dolore in anim nostrud

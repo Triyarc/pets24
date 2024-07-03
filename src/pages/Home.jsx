@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Banner from "../components/home/Banner";
 import CategoryCard from "../components/home/CategoryCard";
-// import ClientReview from "../components/home/ClientReview";
+import ClientReview from "../components/home/ClientReview";
 import GroomerCard from "../components/common/GroomersCard";
 import PricingCard from "../components/home/PricingCard";
 import ServiceCard from "../components/common/ServiceCard";
@@ -36,11 +36,10 @@ function Home() {
       <Banner />
       <CategoryCard />
       <ServiceCard />
-      <WhatWeDo />
-      <GroomerCard />
+      {/* <GroomerCard /> */} <WhatWeDo />
       <PricingCard />
       <MainGallery />
-      {/* <ClientReview /> */}
+      <ClientReview />
       <SubscribeArea />
       <div className='go-top' onClick={scrollToTop}>
         <i className='fas fa-chevron-up'></i>

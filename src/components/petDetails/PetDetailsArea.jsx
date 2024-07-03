@@ -2,6 +2,7 @@ import React from "react";
 import palm_icon from "../../assets/img/icon/sm-leg.png";
 import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
+import Carousel from "react-multi-carousel";
 
 function PetDetailsArea({
   data,
@@ -10,6 +11,7 @@ function PetDetailsArea({
   id,
   desiredPart,
   relatedData,
+  otherPetsData,
 }) {
   const navigate = useNavigate();
   const isAuthenticated = document.cookie.includes("loggedIn=true");
@@ -35,11 +37,29 @@ function PetDetailsArea({
     window.location.reload();
   };
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 3, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
   return (
     <>
       <section
         id='adoption_details_wrapper'
-        className='section_padding slider_side_btn pt-md-5 pt-4'
+        className=' slider_side_btn pt-md-5 pt-4'
       >
         <div className='container'>
           <div className='row'>
@@ -72,8 +92,11 @@ function PetDetailsArea({
                               />
                             )}
                           </div>
-                          <div className='slider slider-nav' style={{overflow:"auto"}}>
-                            <div style={{ width: "70px", display: "flex",  }}>
+                          <div
+                            className='slider slider-nav'
+                            style={{ overflow: "auto" }}
+                          >
+                            <div style={{ width: "70px", display: "flex" }}>
                               {data?.petPhoto?.map((image, idx) => (
                                 <img
                                   key={idx}
@@ -212,77 +235,72 @@ function PetDetailsArea({
               </div>
             </div>
             <div className='col-lg-3'>
-              <div className='sidebar_boxed_wrapper'>
-                <div className='sidebar_common_heading'>
-                  <h3>Adopt others</h3>
-                </div>
-                <div className='adopt_other_wrapper'>
-                  <div className='adopt_other_item'>
-                    <div className='adopt_other_img'>
-                      <img
-                        src='assets/img/adoption/adoption-sm-1.png'
-                        alt='img'
-                      />
-                    </div>
-                    <div className='adopt_other_content'>
-                      <h3>Olivia</h3>
-                      <p>
-                        Gender: <span>Male</span>
-                      </p>
-                    </div>
+              {console.log(otherPetsData, "otherPetsData")}
+              {otherPetsData && (
+                <div className='sidebar_boxed_wrapper'>
+                  <div className='sidebar_common_heading'>
+                    <h3>Adopt others</h3>
                   </div>
-                  <div className='adopt_other_item'>
-                    <div className='adopt_other_img'>
-                      <img
-                        src='assets/img/adoption/adoption-sm-2.png'
-                        alt='img'
-                      />
-                    </div>
-                    <div className='adopt_other_content'>
-                      <h3>Donik</h3>
-                      <p>
-                        Gender: <span>Female</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className='adopt_other_item'>
-                    <div className='adopt_other_img'>
-                      <img
-                        src='assets/img/adoption/adoption-sm-3.png'
-                        alt='img'
-                      />
-                    </div>
-                    <div className='adopt_other_content'>
-                      <h3>Parsia</h3>
-                      <p>
-                        Gender: <span>Male</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className='adopt_other_item'>
-                    <div className='adopt_other_img'>
-                      <img
-                        src='assets/img/adoption/adoption-sm-4.png'
-                        alt='img'
-                      />
-                    </div>
-                    <div className='adopt_other_content'>
-                      <h3>Diki</h3>
-                      <p>
-                        Gender: <span>Male</span>
-                      </p>
-                    </div>
+                  <div className='adopt_other_wrapper'>
+                    {otherPetsData?.map((el, idx) => (
+                      <div className='adopt_other_item' key={idx}>
+                        <div className='adopt_other_img'>
+                          <img
+                            src={el.petPhoto[0]}
+                            alt='img'
+                            className='otherPet_image'
+                          />
+                        </div>
+                        <div className='adopt_other_content'>
+                          <h3>{el.breeds_name}</h3>
+                          <p>
+                            Gender: <span>{el.gender}</span>
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className='adoption_details_item'>
               <div className='heading_border_bottom'>
                 <h2>Suggestion</h2>
                 <div className='row'>
-                  {relatedData?.map((item, idx) => (
-                    <PetCard item={item} handleClick={handleClick} />
-                  ))}
+                  <Carousel
+                    swipeable={true}
+                    draggable={true}
+                    showDots={false}
+                    arrows={true}
+                    responsive={responsive}
+                    ssr={true} // means to render carousel on server-side.
+                    infinite={false}
+                    autoPlay={true}
+                    autoPlaySpeed={5000}
+                    keyBoardControl={true}
+                    customTransition='transform 300ms ease-in-out'
+                    transitionDuration={1000}
+                    containerClass='carousel-container'
+                    sliderClass='react-multi-carousel-track'
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    // deviceType={this.props.deviceType}
+                    dotListClass='custom-dot-list-style'
+                    itemClass='carousel-item-padding-40-px'
+                    rewind={true}
+                    rewindWithAnimation={true}
+                    renderDotsOutside={true}
+                    minimumTouchDrag={50}
+                  >
+                    {relatedData?.map((item, idx) => (
+                      <div className='col-11'>
+                        <PetCard
+                          item={item}
+                          handleClick={handleClick}
+                          cancelCol={true}
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
                 </div>
               </div>
             </div>

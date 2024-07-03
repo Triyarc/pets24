@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import img1 from "../../assets/img/icon/sm-leg.png";
 import img2 from "../../assets/img/common/do-icon.png";
 import img3 from "../../assets/img/common/do-middle-img.jpg";
+import useAos from "../../useAos";
 
 function WhatWeDo() {
+  useAos();
+
   return (
-    <section id='what_we_do_area' className='section_padding_bottom'>
+    <section
+      id='what_we_do_area'
+      className=''
+      data-aos='zoom-out'
+      data-aos-offset='200'
+      data-aos-easing='ease-in-sine'
+      data-aos-duration='600'
+    >
       <div className='container'>
         <div className='row'>
           <div className='col-lg-12'>

@@ -3,9 +3,9 @@ import "../../../style/product.css";
 
 function PetCard({ item, handleClick }) {
   return (
-    <div className='col-lg-3 col-md-6 col-sm-12 col-12' key={item?.id}>
       <div
         className='shop_main_item'
+        key={item?.id}
         onClick={() => {
           handleClick(item.id);
         }}
@@ -26,33 +26,6 @@ function PetCard({ item, handleClick }) {
          (min-width: 540px) 25vw, 
          (min-width: 320px) 30vw, 
          35vw'
-              srcSet={`
-    ${
-      item?.petPhoto[0]
-        ? item.petPhoto[0]
-        : "https://apollo.olx.in/v1/files/nli9qgmpfm75-IN/image;s=300x600;q=60"
-    }?s=100x200&q=60 100w,
-    ${
-      item?.petPhoto[0]
-        ? item.petPhoto[0]
-        : "https://apollo.olx.in/v1/files/nli9qgmpfm75-IN/image;s=300x600;q=60"
-    }?s=200x400&q=60 200w,
-    ${
-      item?.petPhoto[0]
-        ? item.petPhoto[0]
-        : "https://apollo.olx.in/v1/files/nli9qgmpfm75-IN/image;s=300x600;q=60"
-    }?s=300x600&q=60 300w,
-    ${
-      item?.petPhoto[0]
-        ? item.petPhoto[0]
-        : "https://apollo.olx.in/v1/files/nli9qgmpfm75-IN/image;s=300x600;q=60"
-    }?s=400x800&q=60 400w,
-    ${
-      item?.petPhoto[0]
-        ? item.petPhoto[0]
-        : "https://apollo.olx.in/v1/files/nli9qgmpfm75-IN/image;s=300x600;q=60"
-    }?s=600x1200&q=60 600w
-  `}
               className='_3vnjf'
             />
           </div>
@@ -98,7 +71,6 @@ function PetCard({ item, handleClick }) {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

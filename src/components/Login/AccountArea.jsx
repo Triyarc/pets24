@@ -81,7 +81,7 @@ function AccountArea() {
         document.cookie = `auth_token=${responseData.parameters.token};path=/`;
         document.cookie = "loggedIn=true;path=/";
         dispatch(loginConfrimation(true));
-        if (redirection_path == "false" || redirection_path == null) {
+        if (redirection_path == "false" || redirection_path == "null") {
           navigate("/");
           dispatch(loginConfrimation(true));
         } else {
@@ -122,7 +122,7 @@ function AccountArea() {
             document.cookie = `auth_token=${responseData.parameters.token};path=/`;
             document.cookie = "loggedIn=true;path=/";
             dispatch(loginConfrimation(true));
-            if (redirection_path == "false" || redirection_path == null) {
+            if (redirection_path == "false" || redirection_path == "null") {
               navigate("/");
             } else {
               navigate(redirection_path);

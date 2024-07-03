@@ -50,9 +50,24 @@ function MatingPetsArea() {
                 </div>
                 <div className='shop_item_wrapper'>
                   <div className='row'>
-                    {data?.map((item , idx) => (
-                      <PetCard key={idx} item={item} handleClick={handleClick} />
-                    ))}
+                    {data ? (
+                      data?.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className='col-lg-3 col-md-6 col-sm-12 col-12'
+                        >
+                          <PetCard item={item} handleClick={handleClick} />
+                        </div>
+                      ))
+                    ) : (
+                      <h2
+                        style={{ height: "100vh" }}
+                        className=' d-flex text-center align-items-center justify-content-center'
+                      >
+                        Loading...
+                      </h2>
+                    )}
+                    
                   </div>
                 </div>
               </div>

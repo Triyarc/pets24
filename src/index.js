@@ -15,7 +15,8 @@ import './assets/css/navber copy.css'
 import './assets/css/navber.css'
 import './assets/css/responsive.css'
 import './assets/css/style.css'
-
+import "aos/dist/aos.css";
+import "react-multi-carousel/lib/styles.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
