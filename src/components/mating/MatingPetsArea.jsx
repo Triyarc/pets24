@@ -28,7 +28,7 @@ function MatingPetsArea() {
       {" "}
       <section id='our_shop_main' className='section_padding pt-5 '>
         <div className='container'>
-          <button
+          {/* <button
             className='btn btn-primary filter-btn d-lg-none pa_filter_btn'
             type='button'
             data-bs-toggle='offcanvas'
@@ -36,10 +36,13 @@ function MatingPetsArea() {
             aria-controls='filterOffcanvas'
           >
             Filter
-          </button>
+          </button> */}
           <div className='row'>
-            <div className='autocomplete-wrapper' style={{zIndex:"9999"}}>
-              <SearchBar/>
+            <div className='autocomplete-wrapper' style={{ zIndex: "9999" }}>
+              <div className='col-12 col-lg-12'>
+                <SearchBar />
+                
+              </div>
             </div>
             <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>
@@ -67,7 +70,7 @@ function MatingPetsArea() {
                         Loading...
                       </h2>
                     )}
-                    
+
                   </div>
                 </div>
               </div>
