@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../components/home/Banner";
 import CategoryCard from "../components/home/CategoryCard";
 import ClientReview from "../components/home/ClientReview";
@@ -11,6 +11,7 @@ import "../style/home.css";
 import WhatWeDo from "../components/home/WhatWeDo";
 
 function Home() {
+  const [reload, setReload] = useState(false);
   const isAuthenticated = document.cookie.includes("loggedIn=true");
 
   useEffect(() => {}, [isAuthenticated]);
@@ -22,14 +23,7 @@ function Home() {
     });
   };
 
-  window.addEventListener("scroll", function () {
-    var goTop = document.querySelector(".go-top");
-    if (window.scrollY > 600) {
-      goTop.classList.add("active");
-    } else {
-      goTop.classList.remove("active");
-    }
-  });
+ 
 
   return (
     <div>

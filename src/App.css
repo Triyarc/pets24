@@ -9,3 +9,8 @@
   border: 2px solid green; /* Example border change */
   background-color: #e9ecef; /* Example background color change */
 }
+
+.main-navbar .navbar .navbar-nav .active a:nth-child(1)  {
+  color: var(--main-color) !important;
+}
+

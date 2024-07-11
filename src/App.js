@@ -56,7 +56,6 @@ function App() {
       {timmer && <Loader />}
       <>
         <Navbar />
-        <BrowserRouter>
           <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
@@ -103,7 +102,6 @@ function App() {
             <Route path='/404' element={<ErrorBoundry />} />
             <Route path='*' element={<ErrorBoundry />} />
           </Routes>
-        </BrowserRouter>
         <Footer />
       </>
     </div>

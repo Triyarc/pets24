@@ -1,76 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
+import { Link, useLocation, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import { useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
+
 function Navbar() {
   let { id } = useParams();
 
-  var pathname = window.location.pathname;
-  var parts = pathname.split("/");
-  var desiredPart = parts[1];
+  const location = useLocation();
+  const currentPath = location.pathname;
 
-  console.log(id, "idididid")
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const isAuthenticated = document.cookie.includes("loggedIn=true");
 
   const loginAuth = useSelector((state) => state.login.login);
 
-  window.addEventListener("scroll", function () {
-    var navbarArea = document.querySelector(".navbar-area");
-    if (window.scrollY > 10) {
-      navbarArea.classList.add("is-sticky");
-    } else {
-      navbarArea.classList.remove("is-sticky");
-    }
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbarArea = document.querySelector(".navbar-area");
+      if (window.scrollY > 10) {
+        navbarArea.classList.add("is-sticky");
+      } else {
+        navbarArea.classList.remove("is-sticky");
+      }
+    };
 
-  // Scroll to Top Button
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };
 
-  // logout
-  function clearAuthenticationCookie() {
+  const clearAuthenticationCookie = () => {
     document.cookie = "loggedIn=false;path=/;";
     document.cookie = "auth_token=;path=/;";
-  }
+  };
 
-
-
-  // Function to handle logout
-  function logout() {
-    // Clear the authentication cookie
+  const logout = () => {
     clearAuthenticationCookie();
     window.location.reload();
-  }
+  };
 
-  // useEffect(() => {
-  //   let getClassname = document.getElementsByClassName('nav-link');
-  //   let getData = []
-  //   for (let i = 0; i < getClassname.length; i++) {
-  //     let getAttr = getClassname[i].getAttribute('href');
-  //     console.log(getAttr, "getAttr");
-  //     getData.push(getAttr)
-  //   }
-  //   console.log(getData)
-  //   console.log(desiredPart)
+  const isActive = (path) => {
+    return currentPath === path ? "active" : "";
+  };
 
-  //   getData.filter((el, i) => {
-  //     if (typeof el == 'string') {
-  //       if (el.includes(desiredPart)) {
-  //         console.log(el);
-  //         getClassname[i].setAttribute('class', 'active');
-  //         return true;  // Keep this element in the filtered array
-  //       }
-  //     }
-
-  //     return false;   // Exclude this element from the filtered array
-  //   });
-
-  // }, [])
+  const isDropdownActive = (paths) => {
+    return paths.includes(currentPath) ? "active" : "";
+  };
 
   return (
     <div>
@@ -80,9 +62,9 @@ function Navbar() {
             <div className='container'>
               <div className='main-responsive-menu'>
                 <div className='logo'>
-                  <a href='/'>
+                  <Link to='/'>
                     <img src={logo} alt='logo' />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -90,114 +72,103 @@ function Navbar() {
           <div className='main-navbar'>
             <div className='container'>
               <nav className='navbar navbar-expand-md navbar-light'>
-                <a className='navbar-brand' href='/'>
+                <Link className='navbar-brand' to='/'>
                   <img src={logo} alt='logo' />
-                </a>
+                </Link>
                 <div
                   className='collapse navbar-collapse mean-menu'
                   id='navbarSupportedContent'
                 >
                   <ul className='navbar-nav'>
-                    <li className='nav-item'>
-                      <a href='/' className='nav-link'>
+                    <li className={`nav-item ${isActive("/")}`}>
+                      <Link to='/' className='nav-link'>
                         Home
-                      </a>
+                      </Link>
                     </li>
-                    <li className='nav-item'>
-                      <a href='/mating' className='nav-link'>
+                    <li className={`nav-item ${isActive("/mating")}`}>
+                      <Link to='/mating' className='nav-link'>
                         Mating
-                      </a>
+                      </Link>
                     </li>
-                    <li className='nav-item'>
-                      <a href='/adoption' className='nav-link'>
+                    <li className={`nav-item ${isActive("/adoption")}`}>
+                      <Link to='/adoption' className='nav-link'>
                         Adoption
-                      </a>
+                      </Link>
                     </li>
-                    <li className='nav-item'>
+                    <li className={`nav-item dropdown ${isDropdownActive(["/service", "/service-details.html"])}`}>
                       <a className='nav-link'>
                         Services
                         <i className='fas fa-angle-down'></i>
                       </a>
                       <ul className='dropdown-menu'>
-                        <li className='nav-item'>
-                          <a href='/service' className='nav-link'>
+                        <li className={`nav-item ${isActive("/service")}`}>
+                          <Link to='/service' className='nav-link'>
                             Service
-                          </a>
+                          </Link>
                         </li>
-                        <li className='nav-item'>
-                          <a href='/service-details.html' className='nav-link'>
+                        <li className={`nav-item ${isActive("/service-details.html")}`}>
+                          <Link to='/service-details.html' className='nav-link'>
                             Service Details
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </li>
-                    <li className='nav-item'>
-                      <a href='#' className='nav-link'>
+                    <li className={`nav-item dropdown ${isDropdownActive(["/product", "/product-detail", "/cart"])}`}>
+                      <a className='nav-link'>
                         Shop
                         <i className='fas fa-angle-down'></i>
                       </a>
                       <ul className='dropdown-menu'>
-                        <li className='nav-item'>
-                          <a href='/product' className='nav-link'>
+                        <li className={`nav-item ${isActive("/product")}`}>
+                          <Link to='/product' className='nav-link'>
                             Shop
-                          </a>
+                          </Link>
                         </li>
-                        <li className='nav-item'>
-                          <a href='/product-detail' className='nav-link'>
+                        <li className={`nav-item ${isActive("/product-detail")}`}>
+                          <Link to='/product-detail' className='nav-link'>
                             Shop Details
-                          </a>
+                          </Link>
                         </li>
-                        <li className='nav-item'>
-                          <a href='/cart' className='nav-link'>
+                        <li className={`nav-item ${isActive("/cart")}`}>
+                          <Link to='/cart' className='nav-link'>
                             Cart
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </li>
-                    <li className='nav-item'>
-                      <a href='/pet-shop-list' className='nav-link'>
+                    <li className={`nav-item ${isActive("/pet-shop-list")}`}>
+                      <Link to='/pet-shop-list' className='nav-link'>
                         Pet Shop
-                      </a>
-                    </li>{" "}
-                    <li className='nav-item'>
-                      <a href='/about-us' className='nav-link'>
-                        About us{" "}
-                      </a>
+                      </Link>
                     </li>
-                    <li className='nav-item'>
-                      <a href='/contact-us' className='nav-link'>
+                    <li className={`nav-item ${isActive("/about-us")}`}>
+                      <Link to='/about-us' className='nav-link'>
+                        About us
+                      </Link>
+                    </li>
+                    <li className={`nav-item ${isActive("/contact-us")}`}>
+                      <Link to='/contact-us' className='nav-link'>
                         Contact
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   <div className='others-options d-flex align-items-center'>
-                    {/* <div className='option-item'>
-                      <a
-                        href='#'
-                        className='search-box'
-                        onClick={toggleOverlay}
-                      >
-                        {" "}
-                        <img src='assets/img/icon/search.png' alt='icon' />
-                      </a>
-                    </div> */}
                     <ul className='navbar-nav'>
                       {isAuthenticated ? (
                         <li className='nav-item'>
-                          <a href='profile' className='nav-link'>
+                          <Link to='/profile' className='nav-link'>
                             <FaRegUserCircle style={{ fontSize: "35px" }} />
-                          </a>
+                          </Link>
                           <ul className='dropdown-menu'>
                             <li className='nav-item'>
-                              <a className='nav-link' onClick={() => logout()}>
+                              <span className='nav-link' onClick={logout}>
                                 Logout
-                              </a>
+                              </span>
                             </li>
                           </ul>
                         </li>
                       ) : (
                         <>
-                          {" "}
                           <button
                             className='btn btn-outline-dark me-2'
                             onClick={() => (window.location.href = "/login")}
@@ -246,125 +217,100 @@ function Navbar() {
                 id='navbarNav'
               >
                 <ul className='navbar-nav'>
-                  <li className='nav-item'>
-                    <a href='/' className='nav-link active'>
+                  <li className={`nav-item ${isActive("/")}`}>
+                    <Link to='/' className='nav-link active'>
                       Home
-                    </a>
+                    </Link>
                   </li>
-                  <li className='nav-item'>
-                    <a href='mating' className='nav-link'>
+                  <li className={`nav-item ${isActive("/mating")}`}>
+                    <Link to='/mating' className='nav-link'>
                       Mating
-                    </a>
+                    </Link>
                   </li>
-                  <li className='nav-item'>
-                    <a href='adoption' className='nav-link'>
+                  <li className={`nav-item ${isActive("/adoption")}`}>
+                    <Link to='/adoption' className='nav-link'>
                       Adoption
-                    </a>
+                    </Link>
                   </li>
-                  <li className='nav-item dropdown'>
-                    <a
+                  <li className={`nav-item dropdown ${isDropdownActive(["/service", "/service-details.html"])}`}>
+                    <span
                       className='nav-link dropdown-toggle'
-                      href='#'
                       id='servicesDropdown'
                       role='button'
                       data-bs-toggle='dropdown'
                       aria-expanded='false'
                     >
                       Services
-                    </a>
+                    </span>
                     <ul
                       className='dropdown-menu'
                       aria-labelledby='servicesDropdown'
                     >
-                      <li className='nav-item'>
-                        <a href='service' className='nav-link'>
+                      <li className={`nav-item ${isActive("/service")}`}>
+                        <Link to='/service' className='nav-link'>
                           Service
-                        </a>
+                        </Link>
                       </li>
-                      <li className='nav-item'>
-                        <a href='service-details.html' className='nav-link'>
+                      <li className={`nav-item ${isActive("/service-details.html")}`}>
+                        <Link to='/service-details.html' className='nav-link'>
                           Service Details
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>
-                  <li className='nav-item dropdown'>
-                    <a
+                  <li className={`nav-item dropdown ${isDropdownActive(["/product", "/product-detail", "/cart"])}`}>
+                    <span
                       className='nav-link dropdown-toggle'
-                      href='#'
                       id='shopDropdown'
                       role='button'
                       data-bs-toggle='dropdown'
                       aria-expanded='false'
                     >
                       Shop
-                    </a>
-                    <ul className='dropdown-menu' aria-labelledby='shopDropdown'>
-                      <li className='nav-item'>
-                        <a href='product' className='nav-link'>
+                    </span>
+                    <ul
+                      className='dropdown-menu'
+                      aria-labelledby='shopDropdown'
+                    >
+                      <li className={`nav-item ${isActive("/product")}`}>
+                        <Link to='/product' className='nav-link'>
                           Shop
-                        </a>
+                        </Link>
                       </li>
-                      <li className='nav-item'>
-                        <a href='product-detail' className='nav-link'>
+                      <li className={`nav-item ${isActive("/product-detail")}`}>
+                        <Link to='/product-detail' className='nav-link'>
                           Shop Details
-                        </a>
+                        </Link>
                       </li>
-                      <li className='nav-item'>
-                        <a href='cart' className='nav-link'>
+                      <li className={`nav-item ${isActive("/cart")}`}>
+                        <Link to='/cart' className='nav-link'>
                           Cart
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </li>
-                  <li className='nav-item'>
-                    <a href='pet-shop-list' className='nav-link'>
+                  <li className={`nav-item ${isActive("/pet-shop-list")}`}>
+                    <Link to='/pet-shop-list' className='nav-link'>
                       Pet Shop
-                    </a>
+                    </Link>
                   </li>
-                  <li className='nav-item'>
-                    <a href='about-us' className='nav-link'>
+                  <li className={`nav-item ${isActive("/about-us")}`}>
+                    <Link to='/about-us' className='nav-link'>
                       About us
-                    </a>
+                    </Link>
                   </li>
-                  <li className='nav-item'>
-                    <a href='contact-us' className='nav-link'>
+                  <li className={`nav-item ${isActive("/contact-us")}`}>
+                    <Link to='/contact-us' className='nav-link'>
                       Contact
-                    </a>
+                    </Link>
                   </li>
                 </ul>
-              </div>
-
-              <div className='container'>
-                {/* <div className='option-inner'>
-                  <div className='others-options'>
-                    <div className='responsive_icon_dot_flex'>
-                      <div className='option-item'>
-                        <a href='#' className='search-box'>
-                          {" "}
-                          <img src='assets/img/icon/search.png' alt='icon' />
-                        </a>
-                      </div>
-                      <div className='option-item'>
-                        <a
-                          href='#'
-                          data-bs-toggle='offcanvas'
-                          data-bs-target='#offcanvasRight'
-                          aria-controls='offcanvasRight'
-                        >
-                          {" "}
-                          <img src='assets/img/icon/menu.png' alt='icon' />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
         </div>
       </header>
-      {/* search overley */}
+      {/* search overlay */}
       {isOverlayVisible && (
         <div className='search-overlay'>
           <div className='d-table'>
@@ -449,24 +395,24 @@ function Navbar() {
               <h5>Follow Us</h5>
               <ul>
                 <li>
-                  <a href='#!'>
+                  <Link to='#!'>
                     <img src='assets/img/icon/facebook.png' alt='icon' />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href='#!'>
+                  <Link to='#!'>
                     <img src='assets/img/icon/twitter.png' alt='icon' />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href='#!'>
+                  <Link to='#!'>
                     <img src='assets/img/icon/instagram.png' alt='icon' />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href='#!'>
+                  <Link to='#!'>
                     <img src='assets/img/icon/linkedin.png' alt='icon' />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
