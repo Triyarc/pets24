@@ -14,6 +14,40 @@ const Cart = () => {
     0
   );
 
+  const imageStyle = {
+    width: '100px',
+    height: '100px',
+    objectFit: 'cover',
+    borderRadius: '50%',
+  };
+
+  const cardStyle = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: '10px',
+    maxWidth: '400px',
+  };
+
+  const cardBodyStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  };
+
+  const priceStyle = {
+    marginBottom: '8px',
+  };
+
+  const buttonStyle = {
+    width: '32px',
+    height: '32px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+
   // GST percentage
   const gstPercentage = 1.8; // Change this to your actual GST percentage
 
@@ -115,6 +149,37 @@ const Cart = () => {
                       </tbody>
                     </table>
                   </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div className="card" style={cardStyle}>
+            <img
+              src="https://via.placeholder.com/100"
+              alt="Product"
+              style={imageStyle}
+            />
+            <div className="card-body" style={cardBodyStyle}>
+              <h5 className="card-title">Brown Jacket</h5>
+              <p className="card-text">
+                <small className="text-muted">Size: XL</small>
+              </p>
+              <p className="card-text" style={priceStyle}>$83.97</p>
+              <div className="d-flex gap-2">
+                <div className="d-flex align-items-center align-items-center align-items-center">
+                  <button className="btn btn-outline-secondary me-2" style={buttonStyle}>-</button>
+                  <span>1</span>
+                  <button className="btn btn-outline-secondary ms-2" style={buttonStyle}>+</button>
+                </div>
+                <div>
+                  <i
+                    className='fas fa-trash'
+                    onClick={() =>
+                      dispatch(removeFromCart())
+                    }
+                  ></i>
                 </div>
               </div>
             </div>

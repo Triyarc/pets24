@@ -51,7 +51,7 @@ const CardWithCheckbox = () => {
             </div>
             <div className='modal-body'>
               <div className='row'>
-                <div className='col-6 justify-content-center d-flex'>
+                <div className='col-12 col-md-6 justify-content-center d-flex'>
                   <div>
                     <h2 className='card-title' style={{ fontSize: "20px" }}>
                       Verfication
@@ -87,7 +87,7 @@ const CardWithCheckbox = () => {
                     </label>
                   </div>
                 </div>
-                <div className='col-6 justify-content-center d-flex'>
+                <div className='col-12 col-md-6 justify-content-center d-flex'>
                   <div>
                     <h2 className='card-title' style={{ fontSize: "20px" }}>
                       Post Reachable
@@ -222,11 +222,13 @@ function MainGallery() {
         </div>
       </div>
 
-      <Gallery
+<div style={{ width: '100%' }}>
+      {/* <Gallery
         images={images}
         onClick={handleClick}
         enableImageSelection={false}
-      />
+        style={{ width: '100%' }}
+      /> */}
       {console.log(currentImage?.src)}
       {!!currentImage?.src && (
         <Lightbox
@@ -242,6 +244,7 @@ function MainGallery() {
           onMoveNextRequest={handleMoveNext}
         />
       )}
+      </div>
       <CardWithCheckbox />
     </div>
   );

@@ -3,8 +3,7 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
-import Autocomplete from "react-autocomplete";
-
+import SearchBar from "../common/SearchBar";
 function MatingPetsArea() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -24,21 +23,12 @@ function MatingPetsArea() {
     };
   }, []);
 
-  const [value, setValue] = useState("");
-  const [items] = useState([
-    { id: 1, title: "The Shawshank Redemption" },
-    { id: 2, title: "The Godfather" },
-    { id: 3, title: "The Dark Knight" },
-    { id: 4, title: "Pulp Fiction" },
-    { id: 5, title: "Fight Club" },
-    // Add more movie objects as needed
-  ]);
   return (
     <div>
       {" "}
       <section id='our_shop_main' className='section_padding pt-5 '>
         <div className='container'>
-          <button
+          {/* <button
             className='btn btn-primary filter-btn d-lg-none pa_filter_btn'
             type='button'
             data-bs-toggle='offcanvas'
@@ -46,27 +36,13 @@ function MatingPetsArea() {
             aria-controls='filterOffcanvas'
           >
             Filter
-          </button>
+          </button> */}
           <div className='row'>
-            <div className='autocomplete-wrapper'>
-              <Autocomplete
-                value={value}
-                items={items}
-                getItemValue={(item) => item.title}
-                shouldItemRender={(item, value) =>
-                  item.title.toLowerCase().indexOf(value.toLowerCase()) > -1
-                }
-                renderItem={(item, isHighlighted) => (
-                  <div
-                    className={`item ${isHighlighted ? "selected-item" : ""}`}
-                    key={item.id}
-                  >
-                    {item.title}
-                  </div>
-                )}
-                onChange={(e) => setValue(e.target.value)}
-                onSelect={(value) => setValue(value)}
-              />
+            <div className='autocomplete-wrapper' style={{ zIndex: "9999" }}>
+              <div className='col-12 col-lg-12'>
+                <SearchBar />
+                
+              </div>
             </div>
             <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>
@@ -94,7 +70,7 @@ function MatingPetsArea() {
                         Loading...
                       </h2>
                     )}
-                    
+
                   </div>
                 </div>
               </div>

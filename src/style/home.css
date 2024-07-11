@@ -53,3 +53,16 @@ p {
   font-family: "Poppins", sans-serif;
   margin-bottom: 0;
 }
+
+
+/* searchbox style  */
+
+.placeholder {
+  font-size: 12px; /* Adjust the size as needed */
+  color: #6c757d; /* Optional: Change color to differentiate the placeholder */
+}
+
+.form-select:not(:placeholder-shown) .placeholder {
+  font-size: initial;
+  color: initial;
+}
