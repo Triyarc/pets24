@@ -161,10 +161,6 @@ function ClientReview() {
       <section
         id='client_logo_area'
         className=''
-        data-aos='flip-left'
-        data-aos-offset='200'
-        data-aos-easing='ease-in-sine'
-        data-aos-duration='600'
       >
         <div className='container'>
           <div className='row'>

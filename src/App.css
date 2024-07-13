@@ -10,7 +10,7 @@
   background-color: #e9ecef; /* Example background color change */
 }
 
-.main-navbar .navbar .navbar-nav .active a:nth-child(1)  {
+.main-navbar .navbar .navbar-nav .active a  {
   color: var(--main-color) !important;
 }
 

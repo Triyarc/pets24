@@ -4,6 +4,7 @@ import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
 import SearchBar from "../common/SearchBar";
+import Skeleton from "react-loading-skeleton";
 function MatingPetsArea() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -41,7 +42,6 @@ function MatingPetsArea() {
             <div className='autocomplete-wrapper' style={{ zIndex: "9999" }}>
               <div className='col-12 col-lg-12'>
                 <SearchBar />
-                
               </div>
             </div>
             <div className='col-lg-12'>
@@ -53,24 +53,27 @@ function MatingPetsArea() {
                 </div>
                 <div className='shop_item_wrapper'>
                   <div className='row'>
-                    {data ? (
-                      data?.map((item, idx) => (
-                        <div
-                          key={idx}
-                          className='col-lg-3 col-md-6 col-sm-12 col-12'
-                        >
-                          <PetCard item={item} handleClick={handleClick} />
-                        </div>
-                      ))
-                    ) : (
-                      <h2
-                        style={{ height: "100vh" }}
-                        className=' d-flex text-center align-items-center justify-content-center'
-                      >
-                        Loading...
-                      </h2>
-                    )}
-
+                    {data.length !== 0
+                      ? data?.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className='col-lg-3 col-md-6 col-sm-12 col-12'
+                          >
+                            <PetCard item={item} handleClick={handleClick} />
+                          </div>
+                        ))
+                      : Array(16)
+                          .fill()
+                          .map((item, idx) => (
+                            <div
+                              key={idx}
+                              className='col-lg-3 col-md-6 col-sm-12 col-12'
+                            >
+                              <li className='card mt-lg-5'>
+                                <Skeleton height={180} />
+                              </li>
+                            </div>
+                          ))}
                   </div>
                 </div>
               </div>

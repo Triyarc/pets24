@@ -17,6 +17,7 @@ import "./assets/css/responsive.css";
 import "./assets/css/style.css";
 import "aos/dist/aos.css";
 import "react-multi-carousel/lib/styles.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

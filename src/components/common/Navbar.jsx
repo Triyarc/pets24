@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { Link, useLocation, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
@@ -15,6 +15,9 @@ function Navbar() {
   const isAuthenticated = document.cookie.includes("loggedIn=true");
 
   const loginAuth = useSelector((state) => state.login.login);
+
+  const navbarCollapseRef = useRef(null);
+  const navbarTogglerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +57,12 @@ function Navbar() {
     return paths.includes(currentPath) ? "active" : "";
   };
 
+  const handleNavLinkClick = () => {
+    if (navbarCollapseRef.current.classList.contains("show")) {
+      navbarTogglerRef.current.click();
+    }
+  };
+
   return (
     <div>
       <header className='main_header_arae'>
@@ -75,23 +84,36 @@ function Navbar() {
                 <Link className='navbar-brand' to='/'>
                   <img src={logo} alt='logo' />
                 </Link>
+                <button
+                  className='navbar-toggler'
+                  type='button'
+                  data-bs-toggle='collapse'
+                  data-bs-target='#navbarSupportedContent'
+                  aria-controls='navbarSupportedContent'
+                  aria-expanded='false'
+                  aria-label='Toggle navigation'
+                  ref={navbarTogglerRef}
+                >
+                  <span className='navbar-toggler-icon'></span>
+                </button>
                 <div
                   className='collapse navbar-collapse mean-menu'
                   id='navbarSupportedContent'
+                  ref={navbarCollapseRef}
                 >
                   <ul className='navbar-nav'>
                     <li className={`nav-item ${isActive("/")}`}>
-                      <Link to='/' className='nav-link'>
+                      <Link to='/' className='nav-link' onClick={handleNavLinkClick}>
                         Home
                       </Link>
                     </li>
                     <li className={`nav-item ${isActive("/mating")}`}>
-                      <Link to='/mating' className='nav-link'>
+                      <Link to='/mating' className='nav-link' onClick={handleNavLinkClick}>
                         Mating
                       </Link>
                     </li>
                     <li className={`nav-item ${isActive("/adoption")}`}>
-                      <Link to='/adoption' className='nav-link'>
+                      <Link to='/adoption' className='nav-link' onClick={handleNavLinkClick}>
                         Adoption
                       </Link>
                     </li>
@@ -102,12 +124,12 @@ function Navbar() {
                       </a>
                       <ul className='dropdown-menu'>
                         <li className={`nav-item ${isActive("/service")}`}>
-                          <Link to='/service' className='nav-link'>
+                          <Link to='/service' className='nav-link' onClick={handleNavLinkClick}>
                             Service
                           </Link>
                         </li>
                         <li className={`nav-item ${isActive("/service-details.html")}`}>
-                          <Link to='/service-details.html' className='nav-link'>
+                          <Link to='/service-details.html' className='nav-link' onClick={handleNavLinkClick}>
                             Service Details
                           </Link>
                         </li>
@@ -120,34 +142,34 @@ function Navbar() {
                       </a>
                       <ul className='dropdown-menu'>
                         <li className={`nav-item ${isActive("/product")}`}>
-                          <Link to='/product' className='nav-link'>
+                          <Link to='/product' className='nav-link' onClick={handleNavLinkClick}>
                             Shop
                           </Link>
                         </li>
                         <li className={`nav-item ${isActive("/product-detail")}`}>
-                          <Link to='/product-detail' className='nav-link'>
+                          <Link to='/product-detail' className='nav-link' onClick={handleNavLinkClick}>
                             Shop Details
                           </Link>
                         </li>
                         <li className={`nav-item ${isActive("/cart")}`}>
-                          <Link to='/cart' className='nav-link'>
+                          <Link to='/cart' className='nav-link' onClick={handleNavLinkClick}>
                             Cart
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className={`nav-item ${isActive("/pet-shop-list")}`}>
-                      <Link to='/pet-shop-list' className='nav-link'>
+                      <Link to='/pet-shop-list' className='nav-link' onClick={handleNavLinkClick}>
                         Pet Shop
                       </Link>
                     </li>
                     <li className={`nav-item ${isActive("/about-us")}`}>
-                      <Link to='/about-us' className='nav-link'>
+                      <Link to='/about-us' className='nav-link' onClick={handleNavLinkClick}>
                         About us
                       </Link>
                     </li>
                     <li className={`nav-item ${isActive("/contact-us")}`}>
-                      <Link to='/contact-us' className='nav-link'>
+                      <Link to='/contact-us' className='nav-link' onClick={handleNavLinkClick}>
                         Contact
                       </Link>
                     </li>
@@ -156,7 +178,7 @@ function Navbar() {
                     <ul className='navbar-nav'>
                       {isAuthenticated ? (
                         <li className='nav-item'>
-                          <Link to='/profile' className='nav-link'>
+                          <Link to='/profile' className='nav-link' onClick={handleNavLinkClick}>
                             <FaRegUserCircle style={{ fontSize: "35px" }} />
                           </Link>
                           <ul className='dropdown-menu'>
@@ -207,6 +229,7 @@ function Navbar() {
                   aria-controls='navbarNav'
                   aria-expanded='false'
                   aria-label='Toggle navigation'
+                  ref={navbarTogglerRef}
                 >
                   <i className='fas fa-bars bg-color'></i>
                 </button>
@@ -215,20 +238,21 @@ function Navbar() {
               <div
                 className='collapse navbar-collapse mobile_toggleResposive'
                 id='navbarNav'
+                ref={navbarCollapseRef}
               >
                 <ul className='navbar-nav'>
                   <li className={`nav-item ${isActive("/")}`}>
-                    <Link to='/' className='nav-link active'>
+                    <Link to='/' className='nav-link active' onClick={handleNavLinkClick}>
                       Home
                     </Link>
                   </li>
                   <li className={`nav-item ${isActive("/mating")}`}>
-                    <Link to='/mating' className='nav-link'>
+                    <Link to='/mating' className='nav-link' onClick={handleNavLinkClick}>
                       Mating
                     </Link>
                   </li>
                   <li className={`nav-item ${isActive("/adoption")}`}>
-                    <Link to='/adoption' className='nav-link'>
+                    <Link to='/adoption' className='nav-link' onClick={handleNavLinkClick}>
                       Adoption
                     </Link>
                   </li>
@@ -247,12 +271,12 @@ function Navbar() {
                       aria-labelledby='servicesDropdown'
                     >
                       <li className={`nav-item ${isActive("/service")}`}>
-                        <Link to='/service' className='nav-link'>
+                        <Link to='/service' className='nav-link' onClick={handleNavLinkClick}>
                           Service
                         </Link>
                       </li>
                       <li className={`nav-item ${isActive("/service-details.html")}`}>
-                        <Link to='/service-details.html' className='nav-link'>
+                        <Link to='/service-details.html' className='nav-link' onClick={handleNavLinkClick}>
                           Service Details
                         </Link>
                       </li>
@@ -273,34 +297,34 @@ function Navbar() {
                       aria-labelledby='shopDropdown'
                     >
                       <li className={`nav-item ${isActive("/product")}`}>
-                        <Link to='/product' className='nav-link'>
+                        <Link to='/product' className='nav-link' onClick={handleNavLinkClick}>
                           Shop
                         </Link>
                       </li>
                       <li className={`nav-item ${isActive("/product-detail")}`}>
-                        <Link to='/product-detail' className='nav-link'>
+                        <Link to='/product-detail' className='nav-link' onClick={handleNavLinkClick}>
                           Shop Details
                         </Link>
                       </li>
                       <li className={`nav-item ${isActive("/cart")}`}>
-                        <Link to='/cart' className='nav-link'>
+                        <Link to='/cart' className='nav-link' onClick={handleNavLinkClick}>
                           Cart
                         </Link>
                       </li>
                     </ul>
                   </li>
                   <li className={`nav-item ${isActive("/pet-shop-list")}`}>
-                    <Link to='/pet-shop-list' className='nav-link'>
+                    <Link to='/pet-shop-list' className='nav-link' onClick={handleNavLinkClick}>
                       Pet Shop
                     </Link>
                   </li>
                   <li className={`nav-item ${isActive("/about-us")}`}>
-                    <Link to='/about-us' className='nav-link'>
+                    <Link to='/about-us' className='nav-link' onClick={handleNavLinkClick}>
                       About us
                     </Link>
                   </li>
                   <li className={`nav-item ${isActive("/contact-us")}`}>
-                    <Link to='/contact-us' className='nav-link'>
+                    <Link to='/contact-us' className='nav-link' onClick={handleNavLinkClick}>
                       Contact
                     </Link>
                   </li>
