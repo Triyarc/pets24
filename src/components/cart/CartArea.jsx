@@ -167,8 +167,8 @@ const Cart = () => {
                 <small className="text-muted">Size: XL</small>
               </p>
               <p className="card-text" style={priceStyle}>$83.97</p>
-              <div className="d-flex gap-2">
-                <div className="d-flex align-items-center align-items-center align-items-center">
+              <div className="d-flex gap-2 align-items-center ">
+                <div className="d-flex align-items-center">
                   <button className="btn btn-outline-secondary me-2" style={buttonStyle}>-</button>
                   <span>1</span>
                   <button className="btn btn-outline-secondary ms-2" style={buttonStyle}>+</button>

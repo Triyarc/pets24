@@ -27,7 +27,8 @@ p.CartCerti {
   font-weight: 500;
 }
 .card-pet-name {
-  font-size: 18px;
+  font-size: 22px;
+  color:#f34100;
 }
 .card-pet-gender {
   font-size: 14px;
@@ -92,4 +93,8 @@ p.CartCerti {
 
 .adopt_other_img{
   width: 90px;
+}
+.petDOB{
+  color: #444444;
+  font-size: 12px;
 }

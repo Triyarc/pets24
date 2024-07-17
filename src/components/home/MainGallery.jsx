@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { Gallery } from "react-grid-gallery";
@@ -36,7 +36,7 @@ const CardWithCheckbox = () => {
         aria-labelledby='exampleModalLabel'
         aria-hidden='true'
       >
-        <div className='modal-dialog modal-dialog-centered modal-lg'>
+        <div className='modal-dialog modal-dialog-centered modal-fullscreen'>
           <div className='modal-content'>
             <div className='modal-header border-0'>
               <h1 className='modal-title fs-5' id='exampleModalLabel'>
@@ -93,9 +93,8 @@ const CardWithCheckbox = () => {
                       Post Reachable
                     </h2>
                     <label
-                      className={`card ${
-                        selectedRadio === "option1" ? "checked" : ""
-                      }`}
+                      className={`card ${selectedRadio === "option1" ? "checked" : ""
+                        }`}
                       style={{
                         width: "18rem",
                         cursor: "pointer",
@@ -120,9 +119,8 @@ const CardWithCheckbox = () => {
                       </div>
                     </label>
                     <label
-                      className={`card ${
-                        selectedRadio === "option2" ? "checked" : ""
-                      }`}
+                      className={`card ${selectedRadio === "option2" ? "checked" : ""
+                        }`}
                       style={{
                         width: "18rem",
                         cursor: "pointer",
@@ -147,9 +145,8 @@ const CardWithCheckbox = () => {
                       </div>
                     </label>
                     <label
-                      className={`card ${
-                        selectedRadio === "option3" ? "checked" : ""
-                      }`}
+                      className={`card ${selectedRadio === "option3" ? "checked" : ""
+                        }`}
                       style={{ width: "18rem", cursor: "pointer" }}
                     >
                       <input
@@ -222,28 +219,28 @@ function MainGallery() {
         </div>
       </div>
 
-<div style={{ width: '100%' }}>
-      {/* <Gallery
+      <div style={{ width: '100%' }}>
+        {/* <Gallery
         images={images}
         onClick={handleClick}
         enableImageSelection={false}
         style={{ width: '100%' }}
       /> */}
-      {console.log(currentImage?.src)}
-      {!!currentImage?.src && (
-        <Lightbox
-          mainSrc={currentImage.src}
-          imageTitle={currentImage.caption}
-          mainSrcThumbnail={currentImage.src}
-          nextSrc={nextImage.original}
-          nextSrcThumbnail={nextImage.src}
-          prevSrc={prevImage.original}
-          prevSrcThumbnail={prevImage.src}
-          onCloseRequest={handleClose}
-          onMovePrevRequest={handleMovePrev}
-          onMoveNextRequest={handleMoveNext}
-        />
-      )}
+        {console.log(currentImage?.src)}
+        {!!currentImage?.src && (
+          <Lightbox
+            mainSrc={currentImage.src}
+            imageTitle={currentImage.caption}
+            mainSrcThumbnail={currentImage.src}
+            nextSrc={nextImage.original}
+            nextSrcThumbnail={nextImage.src}
+            prevSrc={prevImage.original}
+            prevSrcThumbnail={prevImage.src}
+            onCloseRequest={handleClose}
+            onMovePrevRequest={handleMovePrev}
+            onMoveNextRequest={handleMoveNext}
+          />
+        )}
       </div>
       <CardWithCheckbox />
     </div>

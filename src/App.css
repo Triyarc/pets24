@@ -4,13 +4,23 @@
 .card {
   transition: all 0.3s ease;
 }
+body{
+  padding: 0%;
+  margin: 0%;
+  overflow-x: hidden;
+}
 
 .card.checked {
   border: 2px solid green; /* Example border change */
   background-color: #e9ecef; /* Example background color change */
 }
-
-.main-navbar .navbar .navbar-nav .active a  {
+.activeClass {
   color: var(--main-color) !important;
 }
+span.mobile-toggle {
+  color: #677294;
+}
 
+.App-header div div div.wrapper{
+  border-radius: 5px;
+}
