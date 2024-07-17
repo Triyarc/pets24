@@ -56,7 +56,6 @@ function ServicesAndPrice() {
     }
   };
 
-
   useEffect(() => {
     return () => {
       apiCall({
@@ -133,10 +132,7 @@ function ServicesAndPrice() {
                               <div className='service_tabs_item'>
                                 <div className='service_tabs_img'>
                                   <a href='service-details.html'>
-                                    <img
-                                      src={el.image_url}
-                                      alt='img'
-                                    />
+                                    <img src={el.image_url} alt='img' />
                                   </a>
                                 </div>
                                 <div className='service_tabs_text'>
@@ -147,9 +143,7 @@ function ServicesAndPrice() {
                                       </a>
                                     </h3>
                                     <p>{el.timings}</p>
-                                    <p>
-                                      {el.description}
-                                    </p>
+                                    <p>{el.description}</p>
                                   </div>
                                   <div className='service_tabs_right_text'>
                                     <h3>{el.amount}</h3>
@@ -160,13 +154,14 @@ function ServicesAndPrice() {
                           ))}
                         </div>
                       </div>
-                      
-                      <button
-                        className='btn bg-primary text-white'
-                        onClick={() => handleLoadMore(el.name)}
-                      >
-                        Load More
-                      </button>
+                      {serviceData.length > 6 && (
+                        <button
+                          className='btn bg-primary text-white'
+                          onClick={() => handleLoadMore(el.name)}
+                        >
+                          Load More
+                        </button>
+                      )}
                     </div>
                   ))}
                 </div>

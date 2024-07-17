@@ -50,10 +50,10 @@ function ClientReview() {
       <section
         id='testimonial_area'
         className='section_padding_bottom slider_side_btn'
-        data-aos='fade-zoom-out'
-        data-aos-offset='200'
-        data-aos-easing='ease-in-sine'
-        data-aos-duration='600'
+        // data-aos='fade-zoom-out'
+        // data-aos-offset='200'
+        // data-aos-easing='ease-in-sine'
+        // data-aos-duration='600'
       >
         <div className='container'>
           <div className='row'>
