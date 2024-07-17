@@ -38,10 +38,10 @@ function CategoryCard() {
       <section
         id='about_area'
         className='section_padding_bottom'
-        data-aos='zoom-in-left'
-        data-aos-offset='200'
-        data-aos-easing='ease-in-sine'
-        data-aos-duration='600'
+        // data-aos='zoom-in-left'
+        // data-aos-offset='200'
+        // data-aos-easing='ease-in-sine'
+        // data-aos-duration='600'
       >
         <div className='container'>
           <div className='row'>

@@ -11,10 +11,10 @@ function WhatWeDo() {
     <section
       id='what_we_do_area'
       className=''
-      data-aos='zoom-out'
-      data-aos-offset='200'
-      data-aos-easing='ease-in-sine'
-      data-aos-duration='600'
+      // data-aos='zoom-out'
+      // data-aos-offset='200'
+      // data-aos-easing='ease-in-sine'
+      // data-aos-duration='600'
     >
       <div className='container'>
         <div className='row'>
