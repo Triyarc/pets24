@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../style/product.css";
+import apiCall from "../../apiCall";
+import { local_host } from "../../env";
 
 function ProductArea() {
+  const [data, setData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
   const shopItems = [
     {
       id: 1,
@@ -112,6 +117,26 @@ function ProductArea() {
       rating: 729,
     },
   ];
+
+  const loadMore = async () => {
+    apiCall({
+      method: "POST",
+      apiUrl: `${local_host}/api/v1/product_list?page=${page}`,
+    }).then((res) => {
+      const newData = res.parameters.data;
+      setData((prevData) => [...prevData, ...newData]);
+      setPage(page + 1);
+      if (newData.length < 10) {
+        setHasMore(false);
+      }
+    });
+  };
+  useEffect(() => {
+    return () => {
+      loadMore();
+    };
+  }, []);
+
   return (
     <div>
       <section id='our_shop_main' className='section_padding'>
@@ -389,7 +414,7 @@ function ProductArea() {
                 </div>
                 <div className='shop_item_wrapper'>
                   <div className='row'>
-                    {shopItems.map((item) => (
+                    {data.map((item) => (
                       <div
                         className='col-lg-4 col-md-6 col-sm-12 col-12'
                         key={item.id}
@@ -397,7 +422,7 @@ function ProductArea() {
                         <div className='shop_main_item'>
                           <div className='shop_item_img'>
                             <a href='shop-details.html'>
-                              <img src={item.imgSrc} alt='img' />
+                              <img src={item.image_url} alt='img' />
                             </a>
                             <span
                               className={`shop_badge ${
@@ -406,16 +431,16 @@ function ProductArea() {
                                   : "in_sold"
                               }`}
                             >
-                              {item.badge}
+                             Choice
                             </span>
                           </div>
                           <div className='shop_item_content'>
                             <h3>
-                              <a href='shop-details.html'>{item.name}</a>
+                              <a href='shop-details.html'>{item.product_name}</a>
                             </h3>
                             <div className='shop_item_price'>
                               <p>{item.originalPrice}</p>
-                              <h5>{item.discountedPrice}</h5>
+                              <h5>{item.sales_price}</h5>
                             </div>
                             <div className='shop_item_rating'>
                               {Array.from({ length: 5 }, (_, index) => (
@@ -428,6 +453,16 @@ function ProductArea() {
                       </div>
                     ))}
                   </div>
+                  {data.length !== 0 && hasMore && (
+                    <div className='mt-5 pt-lg-5'>
+                      <button
+                        className='btn  btn_theme_white btn_md loadMore px-5 py-2'
+                        onClick={loadMore}
+                      >
+                        Load More
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

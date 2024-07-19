@@ -7,22 +7,34 @@ import Skeleton from "react-loading-skeleton";
 
 function AdoptionPetsArea() {
   const [data, setData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+
   const navigate = useNavigate();
 
   const handleClick = (props) => {
     navigate(`/pet-details/adoption/${props}`);
   };
 
+  const loadMore = async () => {
+    apiCall({
+      method: "POST",
+      apiUrl: `${local_host}/api/v1/list_adoption?page=${page}`,
+    }).then((res) => {
+      const newData = res.parameters.data.data;
+      setData((prevData) => [...prevData, ...newData]);
+      setPage(page + 1);
+      if (newData.length < 10) {
+        setHasMore(false);
+      }
+    });
+  };
   useEffect(() => {
     return () => {
-      apiCall({
-        method: "POST",
-        apiUrl: `${local_host}/api/v1/list_adoption`,
-      }).then((res) => {
-        setData(res.parameters.data.data);
-      });
+      loadMore();
     };
   }, []);
+
   return (
     <div>
       {" "}
@@ -70,6 +82,16 @@ function AdoptionPetsArea() {
                             </div>
                           ))}
                   </div>
+                  {data.length !== 0 && hasMore && (
+                    <div className='mt-5 pt-lg-5'>
+                      <button
+                        className='btn  btn btn_theme_white btn_md loadMore px-5 py-2'
+                        onClick={loadMore}
+                      >
+                        Load More
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

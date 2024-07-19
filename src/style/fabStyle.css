@@ -45,3 +45,10 @@
   transform: translateY(-50%);
   white-space: nowrap;
 }
+
+.loadMore{
+  display: flex !important;
+  margin: auto !important;
+  justify-content: center !important;
+
+}

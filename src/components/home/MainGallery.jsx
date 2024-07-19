@@ -223,13 +223,13 @@ function MainGallery() {
       </div>
 
 <div style={{ width: '100%' }}>
-      {/* <Gallery
+      <Gallery
         images={images}
-        onClick={handleClick}
+        // onClick={handleClick}
         enableImageSelection={false}
         style={{ width: '100%' }}
-      /> */}
-      {console.log(currentImage?.src)}
+      />
+      {/* {console.log(currentImage?.src)}
       {!!currentImage?.src && (
         <Lightbox
           mainSrc={currentImage.src}
@@ -243,9 +243,9 @@ function MainGallery() {
           onMovePrevRequest={handleMovePrev}
           onMoveNextRequest={handleMoveNext}
         />
-      )}
+      )} */}
       </div>
-      <CardWithCheckbox />
+      {/* <CardWithCheckbox /> */}
     </div>
   );
 }
