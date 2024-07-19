@@ -88,8 +88,8 @@ function SearchBar() {
         <div className="col-lg-3">
           <div>
             <select
-              className="form-select form-select-lg mb-3 rounded-pill"
-              style={{ fontSize: '15px', padding: '9px 30px' }}
+              className="form-select form-select-lg "
+              style={{ fontSize: '15px', padding: '9px 25px' , borderRadius:"5px"}}
               aria-label=".form-select-lg example"
             >
               <option selected>Open this select menu</option>

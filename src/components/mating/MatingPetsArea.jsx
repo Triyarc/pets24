@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
 import SearchBar from "../common/SearchBar";
 import Skeleton from "react-loading-skeleton";
-
+import  "../../style/petShopList.css"
 function MatingPetsArea() {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -51,8 +51,8 @@ function MatingPetsArea() {
             Filter
           </button> */}
           <div className='row'>
-            <div className='autocomplete-wrapper' style={{ zIndex: "9999" }}>
-              <div className='col-12 col-lg-12'>
+            <div className='autocomplete-wrapper' style={{ zIndex: "4", borderRadius:"5px" }}>
+              <div className='col-12 col-lg-12 searchSection'>
                 <SearchBar />
               </div>
             </div>
