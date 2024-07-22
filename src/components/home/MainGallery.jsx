@@ -121,30 +121,30 @@ function MainGallery() {
         </div>
       </div>
 
-      <div style={{ width: '100%' }}>
-        {/* <Gallery
+<div style={{ width: '100%' }}>
+      <Gallery
         images={images}
-        onClick={handleClick}
+        // onClick={handleClick}
         enableImageSelection={false}
         style={{ width: '100%' }}
-      /> */}
-        {console.log(currentImage?.src)}
-        {!!currentImage?.src && (
-          <Lightbox
-            mainSrc={currentImage.src}
-            imageTitle={currentImage.caption}
-            mainSrcThumbnail={currentImage.src}
-            nextSrc={nextImage.original}
-            nextSrcThumbnail={nextImage.src}
-            prevSrc={prevImage.original}
-            prevSrcThumbnail={prevImage.src}
-            onCloseRequest={handleClose}
-            onMovePrevRequest={handleMovePrev}
-            onMoveNextRequest={handleMoveNext}
-          />
-        )}
+      />
+      {/* {console.log(currentImage?.src)}
+      {!!currentImage?.src && (
+        <Lightbox
+          mainSrc={currentImage.src}
+          imageTitle={currentImage.caption}
+          mainSrcThumbnail={currentImage.src}
+          nextSrc={nextImage.original}
+          nextSrcThumbnail={nextImage.src}
+          prevSrc={prevImage.original}
+          prevSrcThumbnail={prevImage.src}
+          onCloseRequest={handleClose}
+          onMovePrevRequest={handleMovePrev}
+          onMoveNextRequest={handleMoveNext}
+        />
+      )} */}
       </div>
-      <CardWithCheckbox />
+      {/* <CardWithCheckbox /> */}
     </div>
   );
 }
