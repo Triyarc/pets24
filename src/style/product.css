@@ -11,15 +11,26 @@
   position: absolute;
   z-index: 1;
   right: 0;
-  background-color: #f34100;
-  font-size: 10px;
+  background-color: #319848;
+  font-size: 13px;
   color: white;
-  padding: 2px 12px;
-  border-radius: 0px 7px;
+  padding: 6px 21px;
+  border-radius: 0px 9px;
+}
+.Petcert {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  font-size: 15px;
+  padding: 3px 21px;
+  border-radius: 0px 10px 0px 10px;
+  background-color: #e73b1d;
+  color: white;
 }
 .card-pet-area-uploaded p {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 18px;
+  margin: 5px 0px;
 }
 p.CartCerti {
   font-size: 10px;
@@ -34,7 +45,8 @@ p.CartCerti {
   font-size: 14px;
 }
 .card-pet-adobefee {
-  font-size: 16px;
+  font-size: 20px;
+  color: #777;
 }
 
 .image-checkbox {
@@ -96,5 +108,98 @@ p.CartCerti {
 }
 .petDOB{
   color: #444444;
-  font-size: 12px;
+  font-size: 14px;
+}
+.petNameClass span{
+  display: flex;
+  color: #444444;
+  font-size: 18px;
+}
+
+
+/* verification modal  */
+.modal-header {
+  border-bottom: none;
+}
+.modal-body {
+  padding: 2rem;
+}
+.modal-footer {
+  border-top: none;
+}
+.modal-content {
+  border-radius: 0.5rem;
+}
+.custom-checkbox {
+  margin: 1rem 0;
+}
+.advertise-section {
+  margin-top: 2rem;
+}
+.advertise-section .card {
+  border: 1px solid #f34100;
+  border-radius: 0.5rem;
+  padding: 9px;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.advertise-section .card h5 {
+  margin-bottom: 1rem;
+}
+.advertise-section .card p {
+  margin-bottom: 0.5rem;
+}
+.advertise-section .card p.text-danger {
+  margin-top: 0.5rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f34100 !important;
+}
+.verifyBG {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 53%;
+}
+.verifyTitle{
+  font-size: 23px;
+}
+.boostresposive{
+  width: 50%;
+}
+.verify-pay{
+  font-size: 18px;
+  font-weight: 550px;
+  background-color: #f34100;
+  color: #fff;
+  border:1px solid #f34100;
+}
+.verify-pay:hover{
+  background-color: #fff;
+  color: #f34100 !important;
+  border:1px solid #f34100;
+}
+.verify-cancel{
+  font-size: 18px;
+  font-weight: 550px;
+  color: #777;
+  text-decoration: underline !important;
+  background-color: #fff;
+  border: none;
+}
+
+.verify-cancel:hover{
+background-color: #fff !important;
+  color: #f34100 !important;
+}
+
+@media only screen and (max-width: 985px) {
+  .verifycard {
+   flex-wrap: wrap;
+  }
+  .boostresposive{
+    width: 100%;
+  }
 }

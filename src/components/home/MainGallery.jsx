@@ -4,6 +4,8 @@ import "react-image-lightbox/style.css";
 import { Gallery } from "react-grid-gallery";
 import { images } from "../../data/galleryImage";
 import "../../style/product.css";
+import veridyImg from "../../assets/img/verification/verificagtionCard.png";
+import veridyBG from "../../assets/img/verification/verifyBG.png";
 import VerificationImg from "../../assets/img/common/verification.jpg";
 
 const CardWithCheckbox = () => {
@@ -20,169 +22,69 @@ const CardWithCheckbox = () => {
 
   return (
     <>
-      <button
-        type='button'
-        className='btn btn-primary'
-        data-bs-toggle='modal'
-        data-bs-target='#exampleModal'
-      >
-        Launch demo modal
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
+        Launch Modal
       </button>
 
-      <div
-        className='modal fade '
-        id='exampleModal'
-        tabIndex='-1'
-        aria-labelledby='exampleModalLabel'
-        aria-hidden='true'
-      >
-        <div className='modal-dialog modal-dialog-centered modal-fullscreen'>
-          <div className='modal-content'>
-            <div className='modal-header border-0'>
-              <h1 className='modal-title fs-5' id='exampleModalLabel'>
-                Post Verfication and push forward
-              </h1>
-              <button
-                type='button'
-                className='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
+      <div class="modal fade" id="verifyPetModal" tabindex="-1" aria-labelledby="verifyPetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class=" text-center verifyBG">
+              <img src={veridyBG} class="img-fluid" alt="Cat and Dog Image" />
             </div>
-            <div className='modal-body'>
-              <div className='row'>
-                <div className='col-12 col-md-6 justify-content-center d-flex'>
+            <div class="modal-header">
+              <h5 class="modal-title verifyTitle" id="verifyPetModalLabel">Verify your pet get verify tag</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+              <div class="row">
+                <div class="d-flex verifycard gap-3 align-items-center">
+                  <img src={veridyImg} class="img-fluid mb-3" alt="Dog Image" />
                   <div>
-                    <h2 className='card-title' style={{ fontSize: "20px" }}>
-                      Verfication
-                    </h2>
-                    <label
-                      className={`card ${isChecked ? "checked" : ""}`}
-                      style={{ width: "18rem", cursor: "pointer" }}
-                    >
-                      <input
-                        type='checkbox'
-                        style={{ display: "none" }}
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                      />
-                      <img
-                        src={VerificationImg}
-                        className='card-img-top'
-                        alt='Verification'
-                      />
-                      <div
-                        className='card-body'
-                        style={{ color: "#485b48", fontSize: "15px" }}
-                      >
-                        <p
-                          className='card-text'
-                          style={{ color: "#485b48", fontSize: "14px" }}
-                        >
-                          Verify your post by video call mannualy and we provid
-                          TRUSTED bandge, its make trust of your post.
-                        </p>
-                        <h5 className='mt-3'>Cost of &nbsp;₹49 only</h5>
-                      </div>
-                    </label>
+                    <p>Occaecat ex consectetur eu irure non dolore in
+                      anim nostrud est veniam nisi. Tempor mollit velit
+                      nisi commodo reprehenderit proident.</p>
+                    <div class="form-check custom-checkbox">
+                      <input class="form-check-input" type="checkbox" id="verifyCheckbox" />
+                      <label class="form-check-label" for="verifyCheckbox">
+                        Checkbox
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <div className='col-12 col-md-6 justify-content-center d-flex'>
-                  <div>
-                    <h2 className='card-title' style={{ fontSize: "20px" }}>
-                      Post Reachable
-                    </h2>
-                    <label
-                      className={`card ${selectedRadio === "option1" ? "checked" : ""
-                        }`}
-                      style={{
-                        width: "18rem",
-                        cursor: "pointer",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      <input
-                        className='form-check-input'
-                        type='radio'
-                        name='options'
-                        id='option1'
-                        value='option1'
-                        style={{ display: "none" }}
-                        checked={selectedRadio === "option1"}
-                        onChange={handleRadioChange}
-                      />
-                      <div className='card-body'>
-                        <h5>3 X </h5>
-                        <p style={{ color: "#485b48", fontSize: "15px" }}>
-                          Post reachable 3times comparing to normal post
-                        </p>
+              </div>
+              <div class="advertise-section">
+                <h5 class="verifyTitle mb-3">Advertise your post</h5>
+                <div class="boostresposive">
+                  <div class="card">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <input type="radio" name="cardOption" class="me-3" />
+                        <p class=" mb-0 fw-bold">5 days</p>
                       </div>
-                    </label>
-                    <label
-                      className={`card ${selectedRadio === "option2" ? "checked" : ""
-                        }`}
-                      style={{
-                        width: "18rem",
-                        cursor: "pointer",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      <input
-                        className='form-check-input'
-                        type='radio'
-                        name='options'
-                        id='option2'
-                        value='option2'
-                        style={{ display: "none" }}
-                        checked={selectedRadio === "option2"}
-                        onChange={handleRadioChange}
-                      />
-                      <div className='card-body'>
-                        <h5>5 X</h5>
-                        <p style={{ color: "#485b48", fontSize: "15px" }}>
-                          Post reachable 5times comparing to normal pos
-                        </p>
+                      <p class="text-danger mb-0">Cost of ₹49 only</p>
+                    </div>
+                    <p class="ms-4">Occaecat ex consectetur eu irure</p>
+                  </div>
+                  <div class="card">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <input type="radio" name="cardOption" class="me-3" />
+                        <p class=" mb-0 fw-bold">5 days</p>
                       </div>
-                    </label>
-                    <label
-                      className={`card ${selectedRadio === "option3" ? "checked" : ""
-                        }`}
-                      style={{ width: "18rem", cursor: "pointer" }}
-                    >
-                      <input
-                        className='form-check-input'
-                        type='radio'
-                        name='options'
-                        id='option3'
-                        value='option3'
-                        style={{ display: "none" }}
-                        checked={selectedRadio === "option3"}
-                        onChange={handleRadioChange}
-                      />
-                      <div className='card-body'>
-                        <h5>7 X</h5>
-                        <p style={{ color: "#485b48", fontSize: "15px" }}>
-                          Post reachable 7times comparing to normal pos
-                        </p>
-                      </div>
-                    </label>
+                      <p class="text-danger mb-0">Cost of ₹49 only</p>
+                    </div>
+                    <p class="ms-4">Occaecat ex consectetur eu irure</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className='modal-footer border-0'>
-              <button
-                type='button'
-                className='btn btn-secondary'
-                data-bs-dismiss='modal'
-              >
-                Close
-              </button>
-              <button type='button' className='btn btn-primary'>
-                Save changes
-              </button>
+            <div class="modal-footer justify-content-start p-4">
+              <button type="button" class="btn btn-secondary verify-cancel " data-bs-dismiss="modal">No Thanks</button>
+              <button type="button" class="btn btn-primary verify-pay">Pay now</button>
             </div>
           </div>
+
         </div>
       </div>
     </>

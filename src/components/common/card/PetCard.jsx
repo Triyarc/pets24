@@ -29,33 +29,32 @@ function PetCard({ item, handleClick }) {
             className='_3vnjf'
           />
         </div>
-        {/* <span className='PetVerify1'>Trusted23</span> */}
+        <span className='Petcert'>certified</span>
       </div>
       <div className='shop_item_content'>
-        <h3 className='d-flex justify-content-between'>
+        <h3 className='d-flex justify-content-between my-2'>
           <a href='' alt='name' className='card-pet-name'>
-            {item?.pets_name ? item.pets_name : "Dog"}  <span className="petDOB">({item?.dob ? item.dob : "23"})</span>
+            {item?.pets_name ? item.pets_name : "Dog"}  <span className="petDOB">( {item?.dob ? item.dob : "23"} )</span>
           </a>
           <a className='card-pet-adobefee'>
             {item?.discountedPrice ? item.discountedPrice : "$768"}
           </a>
         </h3>
-        <div className='shop_item_price pt-2 d-flex justify-content-between'>
-          <h5>
-            <span>{item?.breeds_name ? item.breeds_name : ""}</span>
+        <div className='shop_item_price pt-0 d-flex justify-content-between'>
+          <h5 className="petNameClass">
+            <span>{item?.breeds_name ? item.breeds_name : ""} ( <span className='p-0'> {item?.gender ? item.gender : "male"}</span>)</span>
           </h5>
-          <h5>
+          {/* <h5>
             <span className='p-0'>{item?.dob ? item.dob : "23"}</span>
-          </h5>
+          </h5> */}
         </div>
-        <h3 className='d-flex justify-content-between align-items-center'>
+        {/* <h3 className='d-flex justify-content-between align-items-center'>
           <span className='card-pet-gender'>
             {item?.gender ? item.gender : "male"}
           </span>
-
           <p className='CartCerti'> Certificated</p>
-        </h3>
-        <div className='card-pet-area-uploaded d-flex justify-content-between'>
+        </h3> */}
+        <div className='card-pet-area-uploaded d-flex justify-content-between mb-1'>
           <p>Chennai 297686</p>
           <p>{item?.created_at.split(" ")[0]}</p>
         </div>
