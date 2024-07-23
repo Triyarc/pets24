@@ -34,9 +34,10 @@ function PetCard({ item, handleClick }) {
           />
         </div>
         {/* <span className='Petcert'>certified</span> */}
+        {/* <span className='Petcert'>Trusted</span> */}
       </div>
       <div className='shop_item_content'>
-        <h3 className='d-flex justify-content-between my-2'>
+        <h3 className='d-flex justify-content-between mt-2'>
           <a href='' alt='name' className='card-pet-name'>
             {item?.breeds_name ? item.breeds_name : "Breed"}{" "}
             {/* <span className='petDOB'>( {item?.dob ? item.dob : "23"} )</span> */}

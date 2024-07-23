@@ -6,7 +6,9 @@ import { images } from "../../data/galleryImage";
 import "../../style/product.css";
 import veridyImg from "../../assets/img/verification/verificagtionCard.png";
 import veridyBG from "../../assets/img/verification/verifyBG.png";
-import VerificationImg from "../../assets/img/common/verification.jpg";
+// import VerificationImg from "../../assets/img/common/verification.jpg";
+import VerificationImg from "../../assets/img/verification/veridybgimage.png";
+import VerificationBanner from "../../assets/img/verification/verifybanner.png";
 
 const CardWithCheckbox = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -22,11 +24,74 @@ const CardWithCheckbox = () => {
 
   return (
     <>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
-        Launch Modal
-      </button>
 
-      <div class="modal fade" id="verifyPetModal" tabindex="-1" aria-labelledby="verifyPetModalLabel" aria-hidden="true">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
+        Verify Your Pet
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advertisePostModal">
+        Open Modal
+      </button>
+      <div className="modal fade" id="verifyPetModal" tabIndex="-1" aria-labelledby="verifyPetModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" style={{ backgroundImage: `url(${VerificationImg})` }}>
+            <div class="modal-body">
+              <div class="verify-pet-container">
+                <h2>Verify your pet</h2>
+                <div class="position-relative">
+                  <img src={VerificationBanner} alt="Pet Image" />
+                  <span class="checked-icon"><i class="bi bi-check"></i></span>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit do ei amet, consectetur adipiscing elibore et Lorem ipsum dolor sit amet, consectetur.</p>
+                <div class="price">Just $49</div>
+                <button class="btn btn-primary w-100 mb-2">Add Payment</button>
+                <button class="btn btn-link">Skip</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="advertisePostModal" tabindex="-1" aria-labelledby="advertisePostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" style={{ backgroundImage: `url(${VerificationImg})` }}>
+            <div class="modal-body">
+              <div class="verify-pet-container">
+                <h2>Advertise your post</h2>
+                <div class="col-md-6">
+
+                  
+        <div class="card advertise-card">
+          <label class="advertise-radio-label">
+            <input type="radio" name="advertise-option" class="advertise-radio-input" checked/>
+            <div class="advertise-radio-content">
+              <h5 class="card-title">3X</h5>
+              <p class="card-text">Post reachable 3 times comparing to normal post</p>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card advertise-card">
+          <label class="advertise-radio-label">
+            <input type="radio" name="advertise-option" class="advertise-radio-input"/>
+            <div class="advertise-radio-content">
+              <h5 class="card-title">5X</h5>
+              <p class="card-text">Post reachable 5 times comparing to normal post</p>
+            </div>
+          </label>
+        </div>
+      </div>
+                <button class="btn btn-primary w-100 mb-2">Add Payment</button>
+                <button class="btn btn-link">Skip</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
+        Launch Modal
+      </button> */}
+
+      {/* <div class="modal fade" id="verifyPetModal" tabindex="-1" aria-labelledby="verifyPetModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class=" text-center verifyBG">
@@ -84,9 +149,8 @@ const CardWithCheckbox = () => {
               <button type="button" class="btn btn-primary verify-pay">Pay now</button>
             </div>
           </div>
-
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
@@ -121,14 +185,14 @@ function MainGallery() {
         </div>
       </div>
 
-<div style={{ width: '100%' }}>
-      <Gallery
-        images={images}
-        // onClick={handleClick}
-        enableImageSelection={false}
-        style={{ width: '100%' }}
-      />
-      {/* {console.log(currentImage?.src)}
+      <div style={{ width: '100%' }}>
+        <Gallery
+          images={images}
+          // onClick={handleClick}
+          enableImageSelection={false}
+          style={{ width: '100%' }}
+        />
+        {/* {console.log(currentImage?.src)}
       {!!currentImage?.src && (
         <Lightbox
           mainSrc={currentImage.src}
@@ -144,7 +208,7 @@ function MainGallery() {
         />
       )} */}
       </div>
-      {/* <CardWithCheckbox /> */}
+      <CardWithCheckbox />
     </div>
   );
 }
