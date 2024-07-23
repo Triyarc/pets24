@@ -8,38 +8,27 @@ import Skeleton from "react-loading-skeleton";
 import  "../../style/petShopList.css"
 function MatingPetsArea() {
   const [data, setData] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
-
   const navigate = useNavigate();
 
   const handleClick = (props) => {
     navigate(`/pet-details/mating/${props}`);
   };
 
-  const loadMore = async () => {
-    apiCall({
-      method: "POST",
-      apiUrl: `${local_host}/api/v1/list_mating?page=${page}`,
-    }).then((res) => {
-      const newData = res.parameters.data.data;
-      setData((prevData) => [...prevData, ...newData]);
-      setPage(page + 1);
-      if (newData.length < 10) {
-        setHasMore(false);
-      }
-    });
-  };
   useEffect(() => {
     return () => {
-      loadMore();
+      apiCall({
+        method: "POST",
+        apiUrl: `${local_host}/api/v1/list_mating`,
+      }).then((res) => {
+        setData(res.parameters.data.data);
+      });
     };
   }, []);
 
   return (
     <div>
       {" "}
-      <section id='our_shop_main' className=' pt-5 '>
+      <section id='our_shop_main' className='section_padding pt-5 '>
         <div className='container'>
           {/* <button
             className='btn btn-primary filter-btn d-lg-none pa_filter_btn'
@@ -51,7 +40,7 @@ function MatingPetsArea() {
             Filter
           </button> */}
           <div className='row'>
-            <div className='autocomplete-wrapper' style={{ zIndex: "4", borderRadius:"5px" }}>
+            <div className='autocomplete-wrapper' style={{ zIndex: "", borderRadius:"5px" }}>
               <div className='col-12 col-lg-12 searchSection'>
                 <SearchBar />
               </div>
@@ -69,7 +58,7 @@ function MatingPetsArea() {
                       ? data?.map((item, idx) => (
                           <div
                             key={idx}
-                            className='col-lg-3 col-md-6 col-sm-12 col-12 p-1'
+                            className='col-lg-3 col-md-6 col-sm-12 col-12'
                           >
                             <PetCard item={item} handleClick={handleClick} />
                           </div>
@@ -87,16 +76,6 @@ function MatingPetsArea() {
                             </div>
                           ))}
                   </div>
-                  {data.length !== 0 && hasMore && (
-                    <div className='mt-5 pt-lg-5'>
-                      <button
-                        className='btn  btn btn_theme_white btn_md loadMore px-5 py-2'
-                        onClick={loadMore}
-                      >
-                        Load More
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

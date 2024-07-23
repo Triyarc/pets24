@@ -14,36 +14,42 @@
   background-color: #319848;
   font-size: 13px;
   color: white;
-  padding: 6px 21px;
+  padding: 2px 21px;
   border-radius: 0px 9px;
 }
+
 .Petcert {
   position: absolute;
   z-index: 1;
   bottom: 0;
   font-size: 15px;
-  padding: 3px 21px;
-  border-radius: 0px 10px 0px 10px;
+  padding: 0px 21px;
+  border-radius: 0px 10px 0px 0px;
   background-color: #e73b1d;
   color: white;
 }
+
 .card-pet-area-uploaded p {
   font-size: 12px;
   line-height: 18px;
   margin: 5px 0px;
 }
+
 p.CartCerti {
   font-size: 10px;
   color: #329300;
   font-weight: 500;
 }
+
 .card-pet-name {
   font-size: 22px;
-  color:#f34100;
+  color: #f34100;
 }
+
 .card-pet-gender {
   font-size: 14px;
 }
+
 .card-pet-adobefee {
   font-size: 20px;
   color: #777;
@@ -70,7 +76,7 @@ p.CartCerti {
   border-radius: 5px;
 }
 
-.image-checkbox input[type="checkbox"]:checked + img {
+.image-checkbox input[type="checkbox"]:checked+img {
   border-color: #007bff;
 }
 
@@ -89,9 +95,10 @@ p.CartCerti {
   display: none;
 }
 
-.image-checkbox input[type="checkbox"]:checked + img + label::before {
+.image-checkbox input[type="checkbox"]:checked+img+label::before {
   display: block;
 }
+
 .autocomplete {
   width: 300px;
   height: 50px;
@@ -103,14 +110,16 @@ p.CartCerti {
   height: 70px;
 }
 
-.adopt_other_img{
+.adopt_other_img {
   width: 90px;
 }
-.petDOB{
+
+.petDOB {
   color: #444444;
   font-size: 14px;
 }
-.petNameClass span{
+
+.petNameClass span {
   display: flex;
   color: #444444;
   font-size: 18px;
@@ -121,21 +130,27 @@ p.CartCerti {
 .modal-header {
   border-bottom: none;
 }
+
 .modal-body {
   padding: 2rem;
 }
+
 .modal-footer {
   border-top: none;
 }
+
 .modal-content {
   border-radius: 0.5rem;
 }
+
 .custom-checkbox {
   margin: 1rem 0;
 }
+
 .advertise-section {
   margin-top: 2rem;
 }
+
 .advertise-section .card {
   border: 1px solid #f34100;
   border-radius: 0.5rem;
@@ -143,18 +158,22 @@ p.CartCerti {
   margin-bottom: 1rem;
   text-align: left;
 }
+
 .advertise-section .card h5 {
   margin-bottom: 1rem;
 }
+
 .advertise-section .card p {
   margin-bottom: 0.5rem;
 }
+
 .advertise-section .card p.text-danger {
   margin-top: 0.5rem;
   font-size: 14px;
   font-weight: 600;
   color: #f34100 !important;
 }
+
 .verifyBG {
   position: absolute;
   right: 0;
@@ -163,25 +182,30 @@ p.CartCerti {
   justify-content: flex-end;
   width: 53%;
 }
-.verifyTitle{
+
+.verifyTitle {
   font-size: 23px;
 }
-.boostresposive{
+
+.boostresposive {
   width: 50%;
 }
-.verify-pay{
+
+.verify-pay {
   font-size: 18px;
   font-weight: 550px;
   background-color: #f34100;
   color: #fff;
-  border:1px solid #f34100;
+  border: 1px solid #f34100;
 }
-.verify-pay:hover{
+
+.verify-pay:hover {
   background-color: #fff;
   color: #f34100 !important;
-  border:1px solid #f34100;
+  border: 1px solid #f34100;
 }
-.verify-cancel{
+
+.verify-cancel {
   font-size: 18px;
   font-weight: 550px;
   color: #777;
@@ -190,16 +214,154 @@ p.CartCerti {
   border: none;
 }
 
-.verify-cancel:hover{
-background-color: #fff !important;
+.verify-cancel:hover {
+  background-color: #fff !important;
   color: #f34100 !important;
 }
 
 @media only screen and (max-width: 985px) {
   .verifycard {
-   flex-wrap: wrap;
+    flex-wrap: wrap;
   }
-  .boostresposive{
+
+  .boostresposive {
     width: 100%;
+  }
+}
+
+
+
+.verify-pet-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: rgba(217, 217, 217, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 40px 80px;
+}
+
+.verify-pet-container img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.verify-pet-container .checked-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.verify-pet-container h2 {
+  color: #ff4500;
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 600;
+  font-family: poppins;
+}
+
+.verify-pet-container p {
+  color: #6c757d;
+  margin-bottom: 20px;
+  line-height: normal;
+}
+
+.verify-pet-container .price {
+  color: #ff4500;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.verify-pet-container .btn-primary {
+  background-color: #ff4500;
+  border: none;
+  padding: 13px;
+}
+
+.verify-pet-container .btn-primary:hover {
+  background-color: #e63e00;
+}
+
+.verify-pet-container .btn-link {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.verify-pet-container .btn-link:hover {
+  text-decoration: underline;
+}
+
+.advertise-card {
+  border: 2px solid #f53b3b;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.advertise-radio-label {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 0;
+  cursor: pointer;
+}
+.advertise-radio-input {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+  border: 2px solid #f53b3b;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+}
+.advertise-radio-input:checked::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #f53b3b;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+.advertise-radio-input:checked + .advertise-radio-content .card-title {
+  color: #f53b3b;
+}
+.advertise-radio-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.advertise-radio-content .card-title {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .verify-pet-container {
+    max-width: 600px;
+    margin: 0px;
+    background-color: rgba(217, 217, 217, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px 10px;
+  }
+
+  .verify-pet-container h2 {
+    color: #ff4500;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: poppins;
+  }
+
+  .modal-body {
+    padding: 1rem;
   }
 }

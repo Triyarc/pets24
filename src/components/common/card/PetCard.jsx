@@ -29,10 +29,10 @@ function PetCard({ item, handleClick }) {
             className='_3vnjf'
           />
         </div>
-        <span className='Petcert'>certified</span>
+        <span className='Petcert'>Trusted</span>
       </div>
       <div className='shop_item_content'>
-        <h3 className='d-flex justify-content-between my-2'>
+        <h3 className='d-flex justify-content-between mt-2'>
           <a href='' alt='name' className='card-pet-name'>
             {item?.pets_name ? item.pets_name : "Dog"}  <span className="petDOB">( {item?.dob ? item.dob : "23"} )</span>
           </a>
