@@ -69,7 +69,7 @@ function MatingPetsArea() {
                       ? data?.map((item, idx) => (
                           <div
                             key={idx}
-                            className='col-lg-3 col-md-6 col-sm-12 col-12 p-1'
+                            className='col-lg-3 col-md-6 col-sm-12 col-12 '
                           >
                             <PetCard item={item} handleClick={handleClick} />
                           </div>

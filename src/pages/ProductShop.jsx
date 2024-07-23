@@ -7,7 +7,7 @@ function ProductShop() {
   var pageName = "Shop"
   return (
     <div>
-      <Banner pageName={pageName}/>
+      {/* <Banner pageName={pageName}/> */}
       <ProductArea />
       <SubscribeArea />
     </div>
