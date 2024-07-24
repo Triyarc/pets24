@@ -56,30 +56,23 @@ const CardWithCheckbox = () => {
             <div class="modal-body">
               <div class="verify-pet-container">
                 <h2>Advertise your post</h2>
-                <div class="col-md-6">
 
-                  
-        <div class="card advertise-card">
-          <label class="advertise-radio-label">
-            <input type="radio" name="advertise-option" class="advertise-radio-input" checked/>
-            <div class="advertise-radio-content">
-              <h5 class="card-title">3X</h5>
-              <p class="card-text">Post reachable 3 times comparing to normal post</p>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card advertise-card">
-          <label class="advertise-radio-label">
-            <input type="radio" name="advertise-option" class="advertise-radio-input"/>
-            <div class="advertise-radio-content">
-              <h5 class="card-title">5X</h5>
-              <p class="card-text">Post reachable 5 times comparing to normal post</p>
-            </div>
-          </label>
-        </div>
-      </div>
+                <div class="container mt-5 p-0">
+                  <div class="adv-card d-flex">
+                    <input class="form-check-input" type="radio" name="postReach" id="threeX" />
+                    <label class="form-check-label d-block" for="threeX">
+                      <div class="adv-title text-start">3X</div>
+                      <div class="adv-description text-start">Post reachable 3 times comparing to normal post</div>
+                    </label>
+                  </div>
+                  <div class="adv-card d-flex">
+                    <input class="form-check-input" type="radio" name="postReach" id="fiveX" />
+                    <label class="form-check-label d-block" for="fiveX">
+                      <div class="adv-title text-start">5X</div>
+                      <div class="adv-description text-start">Post reachable 3 times comparing to normal post</div>
+                    </label>
+                  </div>
+                </div>
                 <button class="btn btn-primary w-100 mb-2">Add Payment</button>
                 <button class="btn btn-link">Skip</button>
               </div>
@@ -90,6 +83,7 @@ const CardWithCheckbox = () => {
       {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
         Launch Modal
       </button> */}
+
 
       {/* <div class="modal fade" id="verifyPetModal" tabindex="-1" aria-labelledby="verifyPetModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
