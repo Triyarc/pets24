@@ -11,8 +11,17 @@
   position: absolute;
   z-index: 1;
   right: 0;
-  background-color: #319848;
+  background-color: white;
   font-size: 13px;
+  font-weight: 600;
+  color: #4f7afc;
+  padding: 4px 9px;
+  border-radius: 0px 19px 0px 9px;
+}
+.PetVerify img {
+  height: 16px;
+  width: auto;
+  margin-right: 3px;
   color: white;
   padding: 2px 21px;
   border-radius: 0px 9px;
@@ -42,6 +51,10 @@ p.CartCerti {
 }
 
 .card-pet-name {
+  font-size: 17px;
+  color: var(--black-color);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
   font-size: 22px;
   color: #f34100;
 }
@@ -118,13 +131,27 @@ p.CartCerti {
   color: #444444;
   font-size: 14px;
 }
-
-.petNameClass span {
+.petNameClass {
   display: flex;
-  color: #444444;
-  font-size: 18px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.card-pet-area-uploaded p {
+  color: #949695;
+  font-weight: 500;
+  margin-top: 8px;
 }
 
+.card-pet-area-uploaded {
+  border-top: 1px solid #ededed;
+}
+.cretificated {
+  color: #f34100 !important;
+  font-weight: 400;
+  font-size: 12px !important;
+}
 
 /* verification modal  */
 .modal-header {
@@ -181,6 +208,12 @@ p.CartCerti {
   display: flex;
   justify-content: flex-end;
   width: 53%;
+}
+.verifyTitle {
+  font-size: 23px;
+}
+.boostresposive {
+  width: 50%;
 }
 
 .verifyTitle {
