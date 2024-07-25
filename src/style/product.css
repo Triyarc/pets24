@@ -327,51 +327,35 @@ p.CartCerti {
   text-decoration: underline;
 }
 
-.advertise-card {
-  border: 2px solid #f53b3b;
+
+.adv-card {
+  border: 2px solid #FF5722; /* Orange border color */
   border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
-  overflow: hidden;
-}
-.advertise-radio-label {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  margin: 0;
-  cursor: pointer;
-}
-.advertise-radio-input {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  margin-right: 15px;
-  border: 2px solid #f53b3b;
-  border-radius: 50%;
-  display: inline-block;
+  background-color: #fff;
   position: relative;
-  outline: none;
-  cursor: pointer;
+  cursor: pointer; /* Add cursor pointer for better UX */
 }
-.advertise-radio-input:checked::before {
-  content: '';
-  width: 12px;
-  height: 12px;
-  background-color: #f53b3b;
-  border-radius: 50%;
+.adv-card .adv-radio {
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 20px;
+  left: 20px;
 }
-.advertise-radio-input:checked + .advertise-radio-content .card-title {
-  color: #f53b3b;
+.adv-card .adv-title {
+  font-weight: bold;
+  margin-left: 22px;
 }
-.advertise-radio-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.adv-card .adv-description {
+  margin-left: 22px;
 }
-.advertise-radio-content .card-title {
-  margin-bottom: 0;
+
+.adv-card .form-check-input:checked {
+  background-color: #dc3545;
+  border-color: #f34100;
+}
+.adv-card.active-card {
+  background-color: #FFF3E0; /* Light orange background */
 }
 
 @media only screen and (max-width: 500px) {

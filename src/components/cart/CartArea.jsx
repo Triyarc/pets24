@@ -48,6 +48,20 @@ const Cart = () => {
   };
 
 
+  const cart_title ={
+    fontSize: "22px",
+    fontWeight: 500,
+  }
+
+  const cartQty ={
+    width:"35px",
+    height:"35px",
+    fontWeight:700,
+    color:"#fff",
+    backgroundColor:"#f34100",
+    borderRadius:"100px"
+  }
+
   // GST percentage
   const gstPercentage = 1.8; // Change this to your actual GST percentage
 
@@ -65,6 +79,26 @@ const Cart = () => {
 
   const handleQuantityChange = (itemId, quantity) => {
     dispatch(updateQuantity({ itemId, quantity }));
+  };
+
+
+
+
+   const [quantity, setQuantity] = useState(1);
+
+  const handleIncrement = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
+
+  const handleDecrement = () => {
+    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  const handleChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value >= 1) {
+      setQuantity(value);
+    }
   };
 
   return (
@@ -152,9 +186,52 @@ const Cart = () => {
                 </div>
               </div>
 
-
             </div>
           </div>
+          <div className="container mt-4 p-0">
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="card mb-3  p-3">
+                  <div className="row g-0">
+                    <div className="col-4 col-md-3 d-flex align-items-center justify-content-center">
+                      <img src='https://m.media-amazon.com/images/I/71NrhVNqHhL._AC_UL480_FMwebp_QL65_.jpg' className="img-fluid rounded product-img" alt="Product" style={{ maxHeight: '193px' }} />
+                    </div>
+                    <div className="col-8 col-md-9">
+                      <div className="card-body">
+                        <h5 className="card-title" style={cart_title}>Drools Adult Dry Dog Food Chicken and Egg, 3kg with Free 1.2kg, Total 4.2 kg Pack</h5>
+                        <p className="card-text"><small className="text-muted">Seller: Triyarc</small></p>
+                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                          <div>
+                            <p className="card-text text-decoration-line-through">₹18,999</p>
+                            <p className="card-text fs-5">₹14,999 <span className="text-success">21% Off</span></p>
+                          </div>
+                        </div>
+                        <div className="d-flex flex-column flex-md-row align-items-md-center">
+                          <div className="input-group mb-2 mb-md-0 me-md-3 d-flex align-items-center" style={{ width: '132px' }}>
+                            <button className="btn " type="button" style={cartQty} onClick={handleDecrement}>-</button>
+                            <input
+                              type="text"
+                              className="form-control border-0 text-center"
+                              value={quantity}
+                              onChange={handleChange}
+                            />
+                            <button className="btn " type="button" style={cartQty} onClick={handleIncrement}>+</button>
+                          </div>
+                          <button className="btn btn-outline-danger">REMOVE</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4">
+
+              </div>
+            </div>
+
+
+          </div>
+
           <div className="card" style={cardStyle}>
             <img
               src="https://via.placeholder.com/100"
