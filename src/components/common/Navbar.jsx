@@ -104,15 +104,6 @@ function Navbar() {
                   <ul className='navbar-nav'>
                     <li className={`nav-item`}>
                       <Link
-                        to='/'
-                        className={`nav-link ${isActive("/")}`}
-                        onClick={handleNavLinkClick}
-                      >
-                        Home
-                      </Link>
-                    </li>
-                    <li className={`nav-item`}>
-                      <Link
                         to='/mating'
                         className={`nav-link ${isActive("/mating")}`}
                         onClick={handleNavLinkClick}

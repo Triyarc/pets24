@@ -1,28 +1,7 @@
 import React, { useState } from "react";
 
-function ProductDetails() {
-  const [images] = useState([
-    {
-      id: 1,
-      url: "assets/img/shop/big-item.png",
-      description: "Dog Image 1",
-    },
-    {
-      id: 2,
-      url: "assets/img/shop/small-item-1.png",
-      description: "Dog Image 2",
-    },
-    {
-      id: 3,
-      url: "assets/img/shop/small-item-2.png",
-      description: "Dog Image 3",
-    },
-    {
-      id: 4,
-      url: "assets/img/shop/small-item-3.png",
-      description: "Dog Image 4",
-    },
-  ]);
+function ProductDetails({ data }) {
+  const [images] = useState(data?.product_image);
   const [selectedImage, setSelectedImage] = useState(images[0]); // Set default to the first image
 
   const handleImageSelect = (image) => {
@@ -39,8 +18,8 @@ function ProductDetails() {
                 <div className='slider slider-for'>
                   {selectedImage && (
                     <img
-                      src={selectedImage.url}
-                      alt={selectedImage.description}
+                      src={selectedImage.image_url}
+                      alt='product image'
                       className='img-fluid '
                       style={{
                         height: "250px",
@@ -55,8 +34,8 @@ function ProductDetails() {
                     {images.map((image) => (
                       <img
                         key={image.id}
-                        src={image.url}
-                        alt={image.description}
+                        src={image.image_url}
+                        alt='product imgage'
                         className='img-thumbnail mx-2 '
                         style={{
                           cursor: "pointer",
@@ -76,14 +55,19 @@ function ProductDetails() {
               <div className='shop_details_wrapper'>
                 <div className='shop_details_top_content'>
                   <h2>Automatic dog blue leash</h2>
-                  <div className='reviews_rating'>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <span>729</span>
+                  <p style={{ lineHeight: "15px" }}>Reviews of Seller</p>
+                  <div className='d-flex align-items-center'>
+                    {" "}
+                    <div className='reviews_rating d-flex me-2'>
+                      <i className='fas fa-star'></i>
+                      <i className='fas fa-star'></i>
+                      <i className='fas fa-star'></i>
+                      <i className='fas fa-star'></i>
+                      <i className='fas fa-star'></i>
+                    </div>
+                    <p className='p-0'>(729)</p>
                   </div>
+
                   <h3>$99.99</h3>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -94,7 +78,7 @@ function ProductDetails() {
                   </p>
                 </div>
 
-                <div className='variable-single-item'>
+                {/* <div className='variable-single-item'>
                   <span>Color</span>
                   <div className='product-variable-color'>
                     <label for='modal-product-color-red'>
@@ -144,8 +128,8 @@ function ProductDetails() {
                       <span className='product-color-light-blue'></span>
                     </label>
                   </div>
-                </div>
-                <div className='product_count_wrapper'>
+                </div> */}
+                {/* <div className='product_count_wrapper'>
                   <form action='#!' className='product_count_form_two'>
                     <div className='product_count_one'>
                       <div className='plus-minus-input'>
@@ -178,28 +162,29 @@ function ProductDetails() {
                       </div>
                     </div>
                   </form>
-                </div>
+                </div> */}
                 <div className='shop_details_cart_submit_wrapper'>
                   <div className='product_cart_btn'>
                     <a href='cart.html' className='btn btn_theme btn_md'>
                       Add to cart
                     </a>
                   </div>
-                  <div className='product_wishlist_btn'>
+                  {/* <div className='product_wishlist_btn'>
                     <a href='#!'>
                       <i className='far fa-heart'></i> Add to wishlist
                     </a>
-                  </div>
+                  </div> */}
                 </div>
-                <div className='product_tags_area'>
+                {/* <div className='product_tags_area'>
                   <p>
                     <span>Tags:</span> Fresh, Top, Best, Recent
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
-          <div className='row'>
+
+          <div className='row d-none'>
             <div className='col-lg-12'>
               <div className='shop_details_tabs_wrapper'>
                 <div className='shop_details_tab_nav'>
@@ -406,6 +391,35 @@ function ProductDetails() {
           </div>
         </div>
       </section>
+      <div className='container'>
+        {" "}
+        <div className='row justify-content-start d-flex'>
+          <div className='sidebar_boxed_wrapper  col-lg-8'>
+            <div className='sidebar_common_heading'>
+              <h3>Seller Details</h3>
+            </div>
+            <div className='sidebar_adoption_info_content'>
+              <img src='assets/img/adoption/adoptin-info.png' alt='img' />
+              <div className='sidebar_adoption_info_content_inner'>
+                <h3>Dino adoption ltd.</h3>{" "}
+                <div className='d-md-flex justify-content-between'>
+                  <p>
+                    <i className='fas fa-map-marker-alt' /> Etiam rhoncus leo a
+                    dolor plac
+                  </p>{" "}
+                  <div
+                    alt='handle info'
+                    className='btn btn_theme_white btn_sm'
+                    style={{ height: "39px  " }}
+                  >
+                    Contact info
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

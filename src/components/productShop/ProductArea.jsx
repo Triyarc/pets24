@@ -4,11 +4,18 @@ import apiCall from "../../apiCall";
 import { local_host } from "../../env";
 import Skeleton from "react-loading-skeleton";
 import CartOffcanvas from "../common/CartOffcanvas";
+import ProductCard from "../common/card/ProductCard";
+import { useNavigate } from "react-router-dom";
 
 function ProductArea() {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+
+  const handleNavigate = (props) => {
+    navigate(`/product-detail/${props}`);
+  };
 
   const loadMore = async () => {
     apiCall({
@@ -33,7 +40,6 @@ function ProductArea() {
     <div>
       <section id='our_shop_main' className='section_padding pt-5'>
         <div className='container'>
-          <CartOffcanvas />
           <div className='row'>
             <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>
@@ -50,39 +56,10 @@ function ProductArea() {
                             className='col-lg-3 col-md-4 col-sm-12 col-12 '
                             key={item.id}
                           >
-                            <div className='shop_main_item '>
-                              <div className='shop_item_img'>
-                                <a href='shop-details.html'>
-                                  <img src={item.image_url} alt='img' />
-                                </a>
-                                {/* <span
-                                  className={`shop_badge ${
-                                    item.badge === "In stock"
-                                      ? "in_stock"
-                                      : "in_sold"
-                                  }`}
-                                >
-                                  Choice
-                                </span> */}
-                              </div>
-                              <div className='shop_item_content'>
-                                <h3>
-                                  <a href='shop-details.html'>
-                                    {item.product_name}
-                                  </a>
-                                </h3>
-                                <p className='product_shop_name'>
-                                  kkr Pet Shop
-                                </p>
-                                <div class='shop_item_price pt-0 '>
-                                  <p>Tk. 500.00</p>
-                                  <h5>Tk. 300.00</h5>
-                                </div>
-                                <button class='btn btn_theme_white btn_sm w-100 my-3'>
-                                  Add Cart
-                                </button>
-                              </div>
-                            </div>
+                            <ProductCard
+                              item={item}
+                              handleNavigate={handleNavigate}
+                            />
                           </div>
                         ))
                       : Array(16)
