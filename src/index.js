@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./assets/css/animate.min.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/fontawesome.all.min.css";
 import "./assets/css/navber copy.css";
 import "./assets/css/navber.css";
@@ -18,6 +18,7 @@ import "./assets/css/style.css";
 import "aos/dist/aos.css";
 import "react-multi-carousel/lib/styles.css";
 import "react-loading-skeleton/dist/skeleton.css";
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -69,7 +69,7 @@ function AdoptionPetsArea() {
                             <PetCard item={item} handleClick={handleClick} />
                           </div>
                         ))
-                      : Array(16)
+                      : Array(8)
                           .fill()
                           .map((item, idx) => (
                             <div

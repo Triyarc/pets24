@@ -6,7 +6,7 @@ function PetCard({ item, handleClick }) {
   return (
     <div
       className='shop_main_item'
-      style={{ borderRadius: "21px" }}
+      style={{ borderRadius: "21px 21px 0px 0px" }}
       key={item?.id}
       onClick={() => {
         handleClick(item.id);

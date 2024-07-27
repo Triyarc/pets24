@@ -1259,6 +1259,7 @@ textarea.form-control {
   height: 47px;
   object-fit: cover;
   border: 1px solid grey;
+  object-fit: contain;
 }
 .adoption_details_main_content {
   padding: 4px 39px;
@@ -1371,6 +1372,7 @@ textarea.form-control {
   position: relative;
   /* border-bottom: 1px solid #e4e4e4; */
   overflow: hidden;
+  border-radius: inherit;
 }
 .shop_badge {
   border-radius: 4px;
@@ -1380,6 +1382,11 @@ textarea.form-control {
   left: 15px;
   font-weight: 600;
   font-size: 11px;
+}
+.DeliveryStyle{
+  font-size: 15px;
+  font-weight: 500;
+  color: #4f824f;
 }
 .in_stock {
   background: rgba(251, 213, 35, 0.5);

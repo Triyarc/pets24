@@ -52,7 +52,7 @@ function MatingPetsArea() {
             Filter
           </button> */}
           <div className='row'>
-            <div className='autocomplete-wrapper' style={{ zIndex: "", borderRadius:"5px" }}>
+            <div className='autocomplete-wrapper mb-5' style={{ zIndex: "", borderRadius:"100px" }}>
               <div className='col-12 col-lg-12 searchSection'>
                 <SearchBar />
               </div>

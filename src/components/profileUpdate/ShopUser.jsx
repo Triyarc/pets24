@@ -1,5 +1,6 @@
 import React from "react";
 import PetCard from "../common/card/PetCard";
+import { FaShippingFast } from 'react-icons/fa';
 
 function ShopUser() {
   return (
@@ -31,15 +32,16 @@ function ShopUser() {
               alt='Pet Care Veterinary Clinic'
             />
             <div className='d-flex flex-column justify-content-end name_detail'>
-              <h1 className='shopTitle'>Pet Care Veterinary Clinic</h1>
+              <h1 className='shopTitle'>Pet Care Veterinary </h1>
               <p>Timing: 10 AM - 8 PM</p>
+              <p className="DeliveryStyle"><FaShippingFast size={24} color="rgb(17 162 71)" /> Online Delivery Available</p>
             </div>
           </div>
         </div>
       </div>
       <section className='container mt-4'>
         <div className='row'>
-        <PetCard/>
+          {/* <PetCard /> */}
           <div className='col-lg-9 col-md-8 col-sm-12'>
             <div className='bestSeller mt-5'>
               <p className='SectionTitle'>Best Seller</p>

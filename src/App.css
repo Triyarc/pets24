@@ -22,7 +22,11 @@ span.mobile-toggle {
 }
 
 .App-header div div div.wrapper{
-  border-radius: 5px;
+  border-radius: 14px;
+  z-index: 9;
+}
+.App-header div div div.wrapper .dYrfwz{
+  min-height: 46px;
 }
 
 .cart_title_card{

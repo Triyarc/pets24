@@ -325,6 +325,7 @@ p.CartCerti {
 
 .verify-pet-container .btn-link:hover {
   text-decoration: underline;
+  color: #dc3545;
 }
 
 
