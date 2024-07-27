@@ -24,3 +24,80 @@ span.mobile-toggle {
 .App-header div div div.wrapper{
   border-radius: 5px;
 }
+
+.cart_title_card{
+  font-size: 22px;
+  font-weight: 500;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.qty_button{
+  width: 35px;
+  height: 35px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #f34100;
+  border-radius: 100px !important
+}
+
+.cart-price {
+  font-size: 19px;
+}
+.cart-Disprice{
+  font-size: 19px;
+}
+
+.cart_qtySection{
+  width: 132px
+}
+
+
+@media only screen and (max-width: 500px) {
+  .cart_title_card {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+  .boostresposive {
+    width: 100%;
+  }
+  .cart-price {
+    font-size: 12px;
+    line-height: normal;
+  }
+  .cart-Disprice{
+    font-size: 12px;
+    line-height: normal;
+  }
+  .removeDelete{
+    display: none;
+  }
+  .cart-pricesection{
+    display: flex;
+    gap: 5px;
+  }
+  .cart_qtyInput {
+    flex: none !important;
+    padding: 7px !important;
+    width: 36px !important;
+}
+.cart_qtySection{
+  width: 104px
+}
+.cart-Delete{
+  position: absolute !important;
+  right: 0px;
+  top: 0px;
+  margin: 5px;
+  padding: 5px;
+  color: gray;
+  border: navajowhite;
+}
+.qty_button{
+  width: 31px;
+  height: 31px;
+  padding: 3px;
+}
+}
