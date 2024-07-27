@@ -8,6 +8,7 @@ function ProductShop() {
   return (
     <div>
       {/* <Banner pageName={pageName}/> */}
+      
       <ProductArea />
       <SubscribeArea />
     </div>

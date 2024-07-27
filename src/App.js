@@ -34,6 +34,7 @@ import { getCookieValue } from "./cokkies";
 import { useDispatch } from "react-redux";
 import EditPorfileDetails from "./pages/formInfo/EditPorfileDetails";
 import EditShopDetails from "./pages/formInfo/EditShopDetails";
+import CartOffcanvas from "./components/common/CartOffcanvas";
 
 function App() {
   const [timmer, setTimmer] = useState(true);
@@ -53,9 +54,10 @@ function App() {
   }, []);
   return (
     <div className='App'>
-      {timmer && <Loader />}
+      {/* {timmer && <Loader />} */}
       <>
         <Navbar />
+        <CartOffcanvas />
           <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
@@ -87,7 +89,7 @@ function App() {
             <Route path='/service-post' element={<ServicePost />} />
             {/* product */}
             <Route path='/product' element={<ProductShop />} />
-            <Route path='/product-detail' element={<ProductDetails />} />
+            <Route path='/product-detail/:slug' element={<ProductDetails />} />
             <Route
               path='/cart'
               element={

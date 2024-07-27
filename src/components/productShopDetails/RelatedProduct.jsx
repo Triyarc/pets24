@@ -1,9 +1,28 @@
 import React from "react";
+import ProductCard from "../common/card/ProductCard";
+import Carousel from "react-multi-carousel";
 
-function RelatedProduct() {
+function RelatedProduct( {related}) {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 3, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
   return (
     <div>
-      <section id='related_product_area' className='section_padding_bottom'>
+      <section id='related_product_area' className='pt-4 pt-lg-5'>
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6 offset-lg-3'>
@@ -17,175 +36,39 @@ function RelatedProduct() {
             </div>
           </div>
           <div className='row'>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
-              <div className='shop_main_item'>
-                <div className='shop_item_img'>
-                  <a href='shop-details.html'>
-                    <img src='assets/img/shop/shop-1.png' alt='img' />
-                  </a>
-                  <span className='shop_badge in_stock'>In stock</span>
-                </div>
-                <div className='shop_item_content'>
-                  <h3>
-                    <a href='shop-details.html'>Automatic dog blue leash</a>
-                  </h3>
-                  <div className='shop_item_price'>
-                    <p>Tk. 500.00/KG</p>
-                    <h5>Tk. 300.00/KG</h5>
-                  </div>
-                  <div className='shop_item_rating'>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <span>729</span>
-                  </div>
-                  <div className='shop_quent_wrapper'>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-minus-circle'></i>
-                      </button>
-                    </div>
-                    <div className='shop_quentiy_item_shows'>
-                      <input type='number' value='1' />
-                    </div>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-plus-circle'></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <Carousel
+                    swipeable={true}
+                    draggable={true}
+                    showDots={false}
+                    arrows={true}
+                    responsive={responsive}
+                    ssr={true} // means to render carousel on server-side.
+                    infinite={false}
+                    autoPlay={true}
+                    autoPlaySpeed={5000}
+                    keyBoardControl={true}
+                    customTransition='transform 300ms ease-in-out'
+                    transitionDuration={1000}
+                    containerClass='carousel-container'
+                    sliderClass='react-multi-carousel-track'
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    // deviceType={this.props.deviceType}
+                    dotListClass='custom-dot-list-style'
+                    itemClass='carousel-item-padding-40-px'
+                    rewind={true}
+                    rewindWithAnimation={true}
+                    renderDotsOutside={true}
+                    minimumTouchDrag={50}
+                  >
+                    {related?.map((item, idx) => (
+                      <div className='col-11'>
+                        <ProductCard
+                          item = {item}
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
             </div>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
-              <div className='shop_main_item'>
-                <div className='shop_item_img'>
-                  <a href='shop-details.html'>
-                    <img src='assets/img/shop/shop-2.png' alt='img' />
-                  </a>
-                  <span className='shop_badge in_sold'>Sold</span>
-                </div>
-                <div className='shop_item_content'>
-                  <h3>
-                    <a href='shop-details.html'>Cat toilet bowl</a>
-                  </h3>
-                  <div className='shop_item_price'>
-                    <p>Tk. 500.00/KG</p>
-                    <h5>Tk. 300.00/KG</h5>
-                  </div>
-                  <div className='shop_item_rating'>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <span>729</span>
-                  </div>
-                  <div className='shop_quent_wrapper'>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-minus-circle'></i>
-                      </button>
-                    </div>
-                    <div className='shop_quentiy_item_shows'>
-                      <input type='number' value='1' />
-                    </div>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-plus-circle'></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
-              <div className='shop_main_item'>
-                <div className='shop_item_img'>
-                  <a href='shop-details.html'>
-                    <img src='assets/img/shop/shop-3.png' alt='img' />
-                  </a>
-                  <span className='shop_badge in_offer'>20% off</span>
-                </div>
-                <div className='shop_item_content'>
-                  <h3>
-                    <a href='shop-details.html'>Bowl with rubber toy</a>
-                  </h3>
-                  <div className='shop_item_price'>
-                    <p>Tk. 500.00/KG</p>
-                    <h5>Tk. 300.00/KG</h5>
-                  </div>
-                  <div className='shop_item_rating'>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <span>729</span>
-                  </div>
-                  <div className='shop_quent_wrapper'>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-minus-circle'></i>
-                      </button>
-                    </div>
-                    <div className='shop_quentiy_item_shows'>
-                      <input type='number' value='1' />
-                    </div>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-plus-circle'></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
-              <div className='shop_main_item'>
-                <div className='shop_item_img'>
-                  <a href='shop-details.html'>
-                    <img src='assets/img/shop/shop-4.png' alt='img' />
-                  </a>
-                  <span className='shop_badge in_stock'>In stock</span>
-                </div>
-                <div className='shop_item_content'>
-                  <h3>
-                    <a href='shop-details.html'>Automatic dog blue leash</a>
-                  </h3>
-                  <div className='shop_item_price'>
-                    <p>Tk. 500.00/KG</p>
-                    <h5>Tk. 300.00/KG</h5>
-                  </div>
-                  <div className='shop_item_rating'>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <i className='fas fa-star'></i>
-                    <span>729</span>
-                  </div>
-                  <div className='shop_quent_wrapper'>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-minus-circle'></i>
-                      </button>
-                    </div>
-                    <div className='shop_quentiy_item_shows'>
-                      <input type='number' value='1' />
-                    </div>
-                    <div className='shop_quentiy_item'>
-                      <button>
-                        <i className='fas fa-plus-circle'></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>

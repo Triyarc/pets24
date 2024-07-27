@@ -18,7 +18,6 @@ export default function apiCall({ method, apiUrl, payload, id }) {
       Authorization: "Bearer " + authToken,
     },
   };
-  console.log(header, "header");
 
   return new Promise(async (resolve, reject) => {
     try {

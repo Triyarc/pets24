@@ -103,82 +103,145 @@ function Navbar() {
                 >
                   <ul className='navbar-nav'>
                     <li className={`nav-item`}>
-                      <Link to='/' className={`nav-link ${isActive("/")}`} onClick={handleNavLinkClick}>
-                        Home
-                      </Link>
-                    </li>
-                    <li className={`nav-item`}>
-                      <Link to='/mating' className={`nav-link ${isActive("/mating")}`} onClick={handleNavLinkClick}>
+                      <Link
+                        to='/mating'
+                        className={`nav-link ${isActive("/mating")}`}
+                        onClick={handleNavLinkClick}
+                      >
                         Mating
                       </Link>
                     </li>
                     <li className={`nav-item`}>
-                      <Link to='/adoption' className={`nav-link ${isActive("/adoption")}`} onClick={handleNavLinkClick}>
+                      <Link
+                        to='/adoption'
+                        className={`nav-link ${isActive("/adoption")}`}
+                        onClick={handleNavLinkClick}
+                      >
                         Adoption
                       </Link>
                     </li>
                     <li className={`nav-item dropdown `}>
-                      <a className={`nav-link ${isDropdownActive(["/service", "/service-details.html"])}`}>
+                      <a
+                        className={`nav-link ${isDropdownActive([
+                          "/service",
+                          "/service-details.html",
+                        ])}`}
+                      >
                         Services
                         <i className='fas fa-angle-down'></i>
                       </a>
                       <ul className='dropdown-menu'>
                         <li className={`nav-item `}>
-                          <Link to='/service' className={`nav-link ${isActive("/service")}`} onClick={handleNavLinkClick}>
+                          <Link
+                            to='/service'
+                            className={`nav-link ${isActive("/service")}`}
+                            onClick={handleNavLinkClick}
+                          >
                             Service
                           </Link>
                         </li>
                         <li className={`nav-item `}>
-                          <Link to='/service-details.html' className={`nav-link ${isActive("/service-details.html")}`} onClick={handleNavLinkClick}>
+                          <Link
+                            to='/service-details.html'
+                            className={`nav-link ${isActive(
+                              "/service-details.html"
+                            )}`}
+                            onClick={handleNavLinkClick}
+                          >
                             Service Details
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className={`nav-item dropdown`}>
-                      <a className={`nav-link ${isDropdownActive(["/product", "/product-detail", "/cart"])}`}>
+                      <a
+                        className={`nav-link ${isDropdownActive([
+                          "/product",
+                          "/product-detail",
+                          "/cart",
+                        ])}`}
+                      >
                         Shop
                         <i className='fas fa-angle-down'></i>
                       </a>
                       <ul className='dropdown-menu'>
                         <li className={`nav-item`}>
-                          <Link to='/product' className={`nav-link ${isActive("/product")}`} onClick={handleNavLinkClick}>
+                          <Link
+                            to='/product'
+                            className={`nav-link ${isActive("/product")}`}
+                            onClick={handleNavLinkClick}
+                          >
                             Shop
                           </Link>
                         </li>
                         <li className={`nav-item`}>
-                          <Link to='/product-detail' className={`nav-link ${isActive("/product-detail")}`} onClick={handleNavLinkClick}>
+                          <Link
+                            to='/product-detail'
+                            className={`nav-link ${isActive(
+                              "/product-detail"
+                            )}`}
+                            onClick={handleNavLinkClick}
+                          >
                             Shop Details
                           </Link>
                         </li>
                         <li className={`nav-item ${isActive("/cart")}`}>
-                          <Link to='/cart' className={`nav-link ${isActive("/cart")}`} onClick={handleNavLinkClick}>
+                          <Link
+                            to='/cart'
+                            className={`nav-link ${isActive("/cart")}`}
+                            onClick={handleNavLinkClick}
+                          >
                             Cart
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className={`nav-item`}>
-                      <Link to='/pet-shop-list' className={`nav-link ${isActive("/pet-shop-list")}`} onClick={handleNavLinkClick}>
+                      <Link
+                        to='/pet-shop-list'
+                        className={`nav-link ${isActive("/pet-shop-list")}`}
+                        onClick={handleNavLinkClick}
+                      >
                         Pet Shop
                       </Link>
                     </li>
                     <li className={`nav-item`}>
-                      <Link to='/about-us' className={`nav-link ${isActive("/about-us")}`} onClick={handleNavLinkClick}>
+                      <Link
+                        to='/about-us'
+                        className={`nav-link ${isActive("/about-us")}`}
+                        onClick={handleNavLinkClick}
+                      >
                         About us
                       </Link>
                     </li>
                     <li className={`nav-item ${isActive("/contact-us")}`}>
-                      <Link to='/contact-us' className={`nav-link ${isActive("/contact-us")}`} onClick={handleNavLinkClick}>
+                      <Link
+                        to='/contact-us'
+                        className={`nav-link ${isActive("/contact-us")}`}
+                        onClick={handleNavLinkClick}
+                      >
                         Contact
                       </Link>
                     </li>
                   </ul>
+                  <a
+                    class='btn btn-primary'
+                    data-bs-toggle='offcanvas'
+                    href='#offcanvasExample'
+                    role='button'
+                    aria-controls='offcanvasExample'
+                  >
+                    Cart
+                  </a>
                   <div className='others-options d-flex align-items-center'>
                     <ul className='navbar-nav'>
                       {isAuthenticated ? (
                         <li className='nav-item'>
-                          <Link to='/profile' className='nav-link' onClick={handleNavLinkClick}>
+                          <Link
+                            to='/profile'
+                            className='nav-link'
+                            onClick={handleNavLinkClick}
+                          >
                             <FaRegUserCircle style={{ fontSize: "35px" }} />
                           </Link>
                           <ul className='dropdown-menu'>
@@ -192,16 +255,10 @@ function Navbar() {
                       ) : (
                         <>
                           <button
-                            className='btn btn-outline-dark me-2'
+                            className='btn btn_theme btn_sm py-2 px-4'
                             onClick={() => (window.location.href = "/login")}
                           >
                             Login
-                          </button>
-                          <button
-                            className='btn btn-outline-dark'
-                            onClick={() => (window.location.href = "/signup")}
-                          >
-                            Signup
                           </button>
                         </>
                       )}
@@ -242,23 +299,37 @@ function Navbar() {
               >
                 <ul className='navbar-nav'>
                   <li className={`nav-item `}>
-                    <Link to='/' className={`nav-link ${isActive("/")}`} onClick={handleNavLinkClick}>
+                    <Link
+                      to='/'
+                      className={`nav-link ${isActive("/")}`}
+                      onClick={handleNavLinkClick}
+                    >
                       Home
                     </Link>
                   </li>
                   <li className={`nav-item ${isActive("/mating")}`}>
-                    <Link to='/mating' className={`nav-link ${isActive("/mating")}`} onClick={handleNavLinkClick}>
+                    <Link
+                      to='/mating'
+                      className={`nav-link ${isActive("/mating")}`}
+                      onClick={handleNavLinkClick}
+                    >
                       Mating
                     </Link>
                   </li>
                   <li className={`nav-item `}>
-                    <Link to='/adoption' className={`nav-link ${isActive("/adoption")}`} onClick={handleNavLinkClick}>
+                    <Link
+                      to='/adoption'
+                      className={`nav-link ${isActive("/adoption")}`}
+                      onClick={handleNavLinkClick}
+                    >
                       Adoption
                     </Link>
                   </li>
                   <li className={`nav-item dropdown`}>
                     <span
-                      className={`nav-link dropdown-toggle mobile-toggle ${isDropdownActive(["/service", "/service-details.html"])}`}
+                      className={`nav-link dropdown-toggle mobile-toggle ${isDropdownActive(
+                        ["/service", "/service-details.html"]
+                      )}`}
                       id='servicesDropdown'
                       role='button'
                       data-bs-toggle='dropdown'
@@ -271,12 +342,22 @@ function Navbar() {
                       aria-labelledby='servicesDropdown'
                     >
                       <li className={`nav-item `}>
-                        <Link to='/service' className={`nav-link ${isActive("/service")}`} onClick={handleNavLinkClick}>
+                        <Link
+                          to='/service'
+                          className={`nav-link ${isActive("/service")}`}
+                          onClick={handleNavLinkClick}
+                        >
                           Service
                         </Link>
                       </li>
                       <li className={`nav-item`}>
-                        <Link to='/service-details.html' className={`nav-link ${isActive("/service-details.html")}`} onClick={handleNavLinkClick}>
+                        <Link
+                          to='/service-details.html'
+                          className={`nav-link ${isActive(
+                            "/service-details.html"
+                          )}`}
+                          onClick={handleNavLinkClick}
+                        >
                           Service Details
                         </Link>
                       </li>
@@ -284,7 +365,9 @@ function Navbar() {
                   </li>
                   <li className={`nav-item dropdown`}>
                     <span
-                      className={`nav-link mobile-toggle dropdown-toggle ${isDropdownActive(["/product", "/product-detail", "/cart"])}`}
+                      className={`nav-link mobile-toggle dropdown-toggle ${isDropdownActive(
+                        ["/product", "/product-detail", "/cart"]
+                      )}`}
                       id='shopDropdown'
                       role='button'
                       data-bs-toggle='dropdown'
@@ -297,34 +380,58 @@ function Navbar() {
                       aria-labelledby='shopDropdown'
                     >
                       <li className={`nav-item `}>
-                        <Link to='/product' className={`nav-link ${isActive("/product")}`} onClick={handleNavLinkClick}>
+                        <Link
+                          to='/product'
+                          className={`nav-link ${isActive("/product")}`}
+                          onClick={handleNavLinkClick}
+                        >
                           Shop
                         </Link>
                       </li>
                       <li className={`nav-item`}>
-                        <Link to='/product-detail' className={`nav-link ${isActive("/product-detail")}`} onClick={handleNavLinkClick}>
+                        <Link
+                          to='/product-detail'
+                          className={`nav-link ${isActive("/product-detail")}`}
+                          onClick={handleNavLinkClick}
+                        >
                           Shop Details
                         </Link>
                       </li>
                       <li className={`nav-item`}>
-                        <Link to='/cart' className={`nav-link ${isActive("/cart")}`} onClick={handleNavLinkClick}>
+                        <Link
+                          to='/cart'
+                          className={`nav-link ${isActive("/cart")}`}
+                          onClick={handleNavLinkClick}
+                        >
                           Cart
                         </Link>
                       </li>
                     </ul>
                   </li>
                   <li className={`nav-item`}>
-                    <Link to='/pet-shop-list' className={`nav-link ${isActive("/pet-shop-list")}`} onClick={handleNavLinkClick}>
+                    <Link
+                      to='/pet-shop-list'
+                      className={`nav-link ${isActive("/pet-shop-list")}`}
+                      onClick={handleNavLinkClick}
+                    >
                       Pet Shop
                     </Link>
                   </li>
                   <li className={`nav-item`}>
-                    <Link to='/about-us' className={`nav-link ${isActive("/pet-shop-list")}`} onClick={handleNavLinkClick}>
+                    <Link
+                      to='/about-us'
+                      className={`nav-link ${isActive("/pet-shop-list")}`}
+                      onClick={handleNavLinkClick}
+                    >
                       About us
                     </Link>
                   </li>
                   <li className={`nav-item`}>
-                    <Link to='/contact-us' className={`nav-link ${isActive("/contact-us")}`} onClick={handleNavLinkClick}>
+                    <Link
+                      to='/contact-us'
+                      className={`nav-link ${isActive("/contact-us")}`}
+                      onClick={handleNavLinkClick}
+                    >
                       Contact
                     </Link>
                   </li>
