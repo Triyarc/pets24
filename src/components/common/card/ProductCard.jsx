@@ -1,13 +1,10 @@
 import React from "react";
 
-function ProductCard({ item, handleNavigate }) {
+function ProductCard({ item, handleNavigate,addToCart }) {
   
   return (
     <div
       className='shop_main_item '
-      onClick={() => {
-        handleNavigate(item.product_slug);
-      }}
     >
       <div className='shop_item_img'>
         <a
@@ -33,7 +30,7 @@ function ProductCard({ item, handleNavigate }) {
           <p>Tk. 500.00</p>
           <h5>Tk. 300.00</h5>
         </div>
-        <button class='btn btn_theme_white btn_sm w-100 my-3'>Add Cart</button>
+        <button class='btn btn_theme_white btn_sm w-100 my-3' onClick={() => addToCart(item)}>Add Cart</button>
       </div>
     </div>
   );

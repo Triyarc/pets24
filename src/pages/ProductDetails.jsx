@@ -7,7 +7,7 @@ import apiCall from "../apiCall";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function ProductDetails() {
+function ProductDetails( {addToCart}) {
   const { slug } = useParams();
   const [data, setData] = useState();
   const [dataReturn, setDataReturn] = useState(false);
@@ -54,7 +54,7 @@ function ProductDetails() {
   return (
     <div>
       {dataReturn ? (
-        <Details data={data} />
+        <Details data={data} addToCart={addToCart}/>
       ) : (
         <h2
           style={{ height: "60vh" }}

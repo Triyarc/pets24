@@ -37,9 +37,13 @@ import EditShopDetails from "./pages/formInfo/EditShopDetails";
 import CartOffcanvas from "./components/common/CartOffcanvas";
 
 function App() {
-  const [timmer, setTimmer] = useState(true);
+  // const [timmer, setTimmer] = useState(true);
   const dispatch = useDispatch();
   const loginAuth = getCookieValue("loggedIn");
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
 
   if (loginAuth == "true") {
     dispatch(loginConfrimation(true));
@@ -47,63 +51,123 @@ function App() {
     dispatch(loginConfrimation(false));
   }
 
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     setTimmer(false);
+  //   }, 2000);
+  // }, []);
+
   useEffect(() => {
-    setTimeout(function () {
-      setTimmer(false);
-    }, 2000);
-  }, []);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (item) => {
+    setCart((prevCart) => {
+      const itemInCart = prevCart.find((cartItem) => cartItem.id === item.id);
+      if (itemInCart) {
+        return prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
+  };
+
+  const removeFromCart = (itemId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const incrementQuantity = (itemId) => {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem.id === itemId
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      )
+    );
+  };
+
+  const decrementQuantity = (itemId) => {
+    setCart((prevCart) =>
+      prevCart.map((cartItem) =>
+        cartItem.id === itemId && cartItem.quantity > 1
+          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          : cartItem
+      )
+    );
+  };
+
   return (
     <div className='App'>
       {/* {timmer && <Loader />} */}
       <>
         <Navbar />
-        <CartOffcanvas />
-          <Routes>
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<SignUp />} />
-            <Route path='/' element={<Home />} />
-            
-            {/* profile */}
-            <Route path='/profile-post' element={<ProfileDetails />} />
-            <Route path='/profile' element={<UserProfile />} />
-            <Route path='/profileTwo' element={<ProfileUpdate />} />
-            <Route path='/edit-profile-info' element={<EditPorfileDetails />} />
+        <CartOffcanvas
+          cart={cart}
+          incrementQuantity={incrementQuantity}
+          decrementQuantity={decrementQuantity}
+          removeFromCart={removeFromCart}
+          clearCart={clearCart}
+        />
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/' element={<Home />} />
 
-            {/* shop */}
-            <Route path='/pet-shop-list' element={<ShopList />} />
-            <Route path='/shop-post' element={<ShopDetails />} />
-            <Route path='/shop-registration' element={<ShopRegistration />} />
-            <Route path='/edit-shop-info' element={<EditShopDetails />} />
+          {/* profile */}
+          <Route path='/profile-post' element={<ProfileDetails />} />
+          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/profileTwo' element={<ProfileUpdate />} />
+          <Route path='/edit-profile-info' element={<EditPorfileDetails />} />
 
-            {/* adoption */}
-            <Route path='/adoption' element={<Adoption />} />
-            <Route path='/adoption-post' element={<AdoptionPost />} />
-            <Route path='/pet-details/adoption/:id' element={<PetDetails />} />
-            <Route path='/pet-details/Mating/:id' element={<PetDetails />} />
+          {/* shop */}
+          <Route path='/pet-shop-list' element={<ShopList />} />
+          <Route path='/shop-post' element={<ShopDetails />} />
+          <Route path='/shop-registration' element={<ShopRegistration />} />
+          <Route path='/edit-shop-info' element={<EditShopDetails />} />
 
-            {/* mating */}
-            <Route path='/mating' element={<Mating />} />
-            <Route path='/mating-post' element={<MatingPost />} />
-            {/* service */}
-            <Route path='/service' element={<Service />} />
-            <Route path='/service-post' element={<ServicePost />} />
-            {/* product */}
-            <Route path='/product' element={<ProductShop />} />
-            <Route path='/product-detail/:slug' element={<ProductDetails />} />
-            <Route
-              path='/cart'
-              element={
-                <ProtectedRoute>
-                  <Cart />
-                </ProtectedRoute>
-              }
-            />
-            <Route path='/pet-gallery' element={<PetGallery />} />
-            <Route path='/about-us' element={<About />} />
-            <Route path='/contact-us' element={<Contact />} />
-            <Route path='/404' element={<ErrorBoundry />} />
-            <Route path='*' element={<ErrorBoundry />} />
-          </Routes>
+          {/* adoption */}
+          <Route path='/adoption' element={<Adoption />} />
+          <Route path='/adoption-post' element={<AdoptionPost />} />
+          <Route path='/pet-details/adoption/:id' element={<PetDetails />} />
+          <Route path='/pet-details/Mating/:id' element={<PetDetails />} />
+
+          {/* mating */}
+          <Route path='/mating' element={<Mating />} />
+          <Route path='/mating-post' element={<MatingPost />} />
+          {/* service */}
+          <Route path='/service' element={<Service />} />
+          <Route path='/service-post' element={<ServicePost />} />
+          {/* product */}
+          <Route
+            path='/product'
+            element={<ProductShop addToCart={addToCart} />}
+          />
+          <Route
+            path='/product-detail/:slug'
+            element={<ProductDetails addToCart={addToCart} />}
+          />
+          <Route
+            path='/cart'
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/pet-gallery' element={<PetGallery />} />
+          <Route path='/about-us' element={<About />} />
+          <Route path='/contact-us' element={<Contact />} />
+          <Route path='/404' element={<ErrorBoundry />} />
+          <Route path='*' element={<ErrorBoundry />} />
+        </Routes>
         <Footer />
       </>
     </div>

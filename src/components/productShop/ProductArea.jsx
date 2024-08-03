@@ -7,7 +7,7 @@ import CartOffcanvas from "../common/CartOffcanvas";
 import ProductCard from "../common/card/ProductCard";
 import { useNavigate } from "react-router-dom";
 
-function ProductArea() {
+function ProductArea({addToCart}) {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -29,6 +29,7 @@ function ProductArea() {
         setHasMore(false);
       }
     });
+   
   };
   useEffect(() => {
     return () => {
@@ -59,6 +60,7 @@ function ProductArea() {
                             <ProductCard
                               item={item}
                               handleNavigate={handleNavigate}
+                              addToCart={addToCart}
                             />
                           </div>
                         ))

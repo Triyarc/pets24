@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import AuthModal from "./AuthModal";
+import AuthModal from "./modal/AuthModal";
 import { FaPlus } from "react-icons/fa";
 
 const Tooltip = ({ children, content }) => {

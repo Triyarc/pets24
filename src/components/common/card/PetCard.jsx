@@ -1,12 +1,13 @@
 import React from "react";
 import "../../../style/product.css";
 import verify from "../../../assets/img/common/Default.png";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 function PetCard({ item, handleClick }) {
   return (
     <div
       className='shop_main_item'
-      style={{ borderRadius: "21px 21px 0px 0px" }}
+      style={{ borderRadius: "19px 19px 19px 19px" }}
       key={item?.id}
       onClick={() => {
         handleClick(item.id);
@@ -14,7 +15,10 @@ function PetCard({ item, handleClick }) {
     >
       <div className='shop_item_img'>
         <span className='PetVerify'>
-          <img src={verify} alt='verify'></img>Trusted
+          {/* <img src={verify} alt='verify'>
+          </img> */}
+          <RiVerifiedBadgeFill className="PetVerify_img"/>
+          Trusted
         </span>
         <div className='_3UrC5'>
           <img

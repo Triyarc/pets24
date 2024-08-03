@@ -9,77 +9,16 @@ import veridyBG from "../../assets/img/verification/verifyBG.png";
 // import VerificationImg from "../../assets/img/common/verification.jpg";
 import VerificationImg from "../../assets/img/verification/veridybgimage.png";
 import VerificationBanner from "../../assets/img/verification/verifybanner.png";
+import VerificationModal from "../common/modal/VerificationModal";
+import AdsVisibilityModal from "../common/modal/AdsVisibilityModal";
 
 const CardWithCheckbox = () => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [selectedRadio, setSelectedRadio] = useState("");
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
-  const handleRadioChange = (event) => {
-    setSelectedRadio(event.target.value);
-  };
 
   return (
     <>
-
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
-        Verify Your Pet
-      </button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advertisePostModal">
-        Open Modal
-      </button>
-      <div className="modal fade" id="verifyPetModal" tabIndex="-1" aria-labelledby="verifyPetModalLabel" aria-hidden="true" >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content" style={{ backgroundImage: `url(${VerificationImg})` }}>
-            <div class="modal-body">
-              <div class="verify-pet-container">
-                <h2>Verify your pet</h2>
-                <div class="position-relative">
-                  <img src={VerificationBanner} alt="Pet Image" />
-                  <span class="checked-icon"><i class="bi bi-check"></i></span>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit do ei amet, consectetur adipiscing elibore et Lorem ipsum dolor sit amet, consectetur.</p>
-                <div class="price">Just $49</div>
-                <button class="btn btn-primary w-100 mb-2">Add Payment</button>
-                <button class="btn btn-link">Skip</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal fade" id="advertisePostModal" tabindex="-1" aria-labelledby="advertisePostModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content" style={{ backgroundImage: `url(${VerificationImg})` }}>
-            <div class="modal-body">
-              <div class="verify-pet-container">
-                <h2>Advertise your post</h2>
-
-                <div class="container mt-5 p-0">
-                  <div class="adv-card d-flex">
-                    <input class="form-check-input" type="radio" name="postReach" id="threeX" />
-                    <label class="form-check-label d-block" for="threeX">
-                      <div class="adv-title text-start">3X</div>
-                      <div class="adv-description text-start">Post reachable 3 times comparing to normal post</div>
-                    </label>
-                  </div>
-                  <div class="adv-card d-flex">
-                    <input class="form-check-input" type="radio" name="postReach" id="fiveX" />
-                    <label class="form-check-label d-block" for="fiveX">
-                      <div class="adv-title text-start">5X</div>
-                      <div class="adv-description text-start">Post reachable 3 times comparing to normal post</div>
-                    </label>
-                  </div>
-                </div>
-                <button class="btn btn-primary w-100 mb-2">Add Payment</button>
-                <button class="btn btn-link">Skip</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<VerificationModal/>
+<AdsVisibilityModal/>
       {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifyPetModal">
         Launch Modal
       </button> */}

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-function ProductDetails({ data }) {
+function ProductDetails({ data , addToCart }) {
   const [images] = useState(data?.product_image);
   const [selectedImage, setSelectedImage] = useState(images[0]); // Set default to the first image
 
   const handleImageSelect = (image) => {
     setSelectedImage(image);
   };
+
+  console.log("details",data)
 
   return (
     <div>
@@ -165,7 +167,7 @@ function ProductDetails({ data }) {
                 </div> */}
                 <div className='shop_details_cart_submit_wrapper'>
                   <div className='product_cart_btn'>
-                    <a href='cart.html' className='btn btn_theme btn_md'>
+                    <a  className='btn btn_theme btn_md' onClick={()=>{addToCart(data)}}>
                       Add to cart
                     </a>
                   </div>

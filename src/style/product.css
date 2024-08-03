@@ -8,7 +8,7 @@
 }
 
 .PetVerify {
-  position: absolute;
+  /* position: absolute;
   z-index: 1;
   right: 0;
   background-color: white;
@@ -16,13 +16,24 @@
   font-weight: 600;
   color: #4f7afc;
   padding: 4px 9px;
-  border-radius: 0px 19px 0px 9px;
+  border-radius: 0px 19px 0px 9px; */
+  position: absolute;
+    z-index: 1;
+    right: 0;
+    background-color: #ffffffc7;
+    font-size: 12px;
+    font-weight: 600;
+    color: #f34100;
+    padding: 4px 9px;
+    border-radius: 19px 19px 19px 19px;
+    margin-right: 6px;
+    margin-top: 6px;
+    opacity: 1;
 }
-.PetVerify img {
+.PetVerify_img{
   height: 16px;
   width: auto;
   margin-right: 3px;
-  color: white;
  
 }
 
@@ -50,7 +61,7 @@ p.CartCerti {
 }
 
 .card-pet-name {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--black-color);
   font-family: "Poppins", sans-serif;
   font-weight: 600;

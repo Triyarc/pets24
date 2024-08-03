@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../../assets/img/common/about.png";
+import img from "../../../assets/img/common/about.png";
 import { useNavigate } from "react-router-dom";
 
 function AuthModal({redirectionPath}) {
