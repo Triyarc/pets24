@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import PetCard from "../common/card/PetCard";
 import { FaShippingFast } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 
 function ShopUser() {
+
+  const [selectedStars, setSelectedStars] = useState(0);
+
+  let totalStars = 5
+
+  const handleStarClick = (starIndex) => {
+    setSelectedStars(starIndex + 1);
+  };
   return (
     <div>
       <div className='clinic-info'>
@@ -303,12 +312,29 @@ function ShopUser() {
             <div className='bestSeller mt-5'>
               <p className='SectionTitle'>Customer Reviews</p>
               <div className='review-container'>
-                <input
+                <textarea
                   type='text'
+                  rows={4}
                   className='review-input'
                   placeholder='Write your review'
                 />
-                <button className='review-button'>Write Review</button>
+                <div className="WriteReviewSection">
+                  <div className="d-flex justify-content-evenly">
+                    {[...Array(totalStars)].map((_, index) => (
+                      <FaStar
+                        key={index}
+                        onClick={() => handleStarClick(index)}
+                        style={{
+                          cursor: 'pointer',
+                          color: index < selectedStars ? '#FFD700' : '#CCCCCC',
+                          fontSize: '1.4rem',
+                          
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <button className='review-button'>Write Review</button>
+                </div>
               </div>
               <div className='mt-4'>
                 <div className='review-containercontent'>

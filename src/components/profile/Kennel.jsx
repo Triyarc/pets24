@@ -7,22 +7,7 @@ function Kennel() {
     <div>
       <section id='shop_details_area' className=''>
         <div className='container'>
-          <div className='row'>
-            <div className=' col-lg-3'>
-            </div>
-            <div className='col-secong col-md-7'>
-              <div className='shop_details_wrapper'>
-                <div className='shop_details_top_content'>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam asperiores beatae fuga harum gui laboriosam maiores
-                    quasi quidem quo repudiandae voluptate. Lorem ipsum dolor
-                    sit amet, denos consectetur adipisicing elit. 
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <div className='row'>
             <div className='col-lg-12'>
               <div className='shop_details_tabs_wrapper'>
@@ -57,12 +42,7 @@ function Kennel() {
                   </nav>
                 </div>
                 <div className='tab-content' id='nav-tabContent'>
-                  <div
-                    className='tab-pane fade show active'
-                    id='nav-home'
-                    role='tabpanel'
-                    aria-labelledby='nav-home-tab'
-                  >
+                  <div className='tab-pane fade show active' id='nav-home'role='tabpanel' aria-labelledby='nav-home-tab'>
                     <div className='row p-4'>
                       <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
                         <div className='adoption_card_wrapper'>
@@ -210,6 +190,7 @@ function Kennel() {
                         </div>
                       </div>
                     </div>
+                    <button className="btn_theme btn_md d-flex" style={{margin:"20px auto"}}>View More</button>
                   </div>
                   <div
                     className='tab-pane fade'
@@ -423,6 +404,7 @@ function Kennel() {
                           </div>
                         </div>
                       </div>
+                      <button className="btn_theme btn_md d-flex" style={{margin:"20px auto"}}>View More</button>
                     </div>
                   </div>
                 </div>
@@ -864,7 +846,165 @@ function Kennel() {
             </div>
           </div>
 
-          <div className='row mt-3'>
+
+          <div className='bestSeller mt-5'>
+              <p className='SectionTitle'>Customer Reviews</p>
+              {/* <div className='review-container'>
+                <input
+                  type='text'
+                  className='review-input'
+                  placeholder='Write your review'
+                />
+                <button className='review-button'>Write Review</button>
+              </div> */}
+              <div className='mt-4'>
+                <div className='review-containercontent'>
+                  <img
+                    src='path/to/profile-pic.jpg'
+                    alt='Sofia Harvetz'
+                    className='profile-pic'
+                  />
+                  <div className='review-content'>
+                    <div className='reviewer-name'>Sofia Harvetz</div>
+                    <div className='stars'>★★★★★</div>
+                    <div className='review-text'>
+                      I bought it 3 weeks ago and now come back just to say
+                      “Awesome Product”. I really enjoy it. At vero eos et
+                      accusamus et iusto odio dignissimos ducimus qui blanditiis
+                      praesentium voluptatum deleniti atque corrupt et quas
+                      molestias excepturi sint non provident.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='container mt-5'>
+              <div className='row'>
+                <div className='col-md-8'>
+                  <h5 className='fw-bold'>Get In Touch</h5>
+                  <hr />
+                  <form>
+                    <div className='row'>
+                      <div className='mb-3 col-6'>
+                        <label
+                          htmlFor='name'
+                          className='form-label contact_lable'
+                        >
+                          Your Name
+                        </label>
+                        <input
+                          type='text'
+                          className='form-control'
+                          id='name'
+                          name='name'
+                        />
+                      </div>
+                      <div className='mb-3 col-6'>
+                        <label
+                          htmlFor='email'
+                          className='form-label contact_lable'
+                        >
+                          Email Address
+                        </label>
+                        <input
+                          type='email'
+                          className='form-control'
+                          id='email'
+                          name='email'
+                        />
+                      </div>
+                      <div className='mb-3 col-6'>
+                        <label
+                          htmlFor='phone'
+                          className='form-label contact_lable'
+                        >
+                          Phone Number
+                        </label>
+                        <input
+                          type='tel'
+                          className='form-control'
+                          id='phone'
+                          name='phone'
+                        />
+                      </div>
+                      <div className='mb-3 col-6'>
+                        <label
+                          htmlFor='subject'
+                          className='form-label contact_lable'
+                        >
+                          Subject
+                        </label>
+                        <input
+                          type='text'
+                          className='form-control'
+                          id='subject'
+                          name='subject'
+                        />
+                      </div>
+                      <div className='mb-3'>
+                        <label
+                          htmlFor='message'
+                          className='form-label contact_lable'
+                        >
+                          Message...
+                        </label>
+                        <textarea
+                          className='form-control'
+                          id='message'
+                          name='message'
+                          rows={5}
+                          defaultValue={""}
+                        />
+                      </div>
+                      <div className='mb-3 form-check'>
+                        <input
+                          type='checkbox'
+                          className='form-check-input'
+                          id='terms'
+                          name='terms'
+                        />
+                        <label className='form-check-label' htmlFor='terms'>
+                          Accept Terms of Services and Privacy Policy
+                        </label>
+                      </div>
+                    </div>
+                    <button type='submit' className='btn btn-primary'>
+                      Send Message
+                    </button>
+                  </form>
+                </div>
+                <div className='col-md-4'>
+                  <h5 className='fw-bold'>Contact Information</h5>
+                  <hr />
+                  <p className='contact_info'>
+                    <strong className='contact_lable fw-bold'>Hotline:</strong>{" "}
+                    12855
+                  </p>
+                  <p className='contact_info'>
+                    <strong className='contact_lable fw-bold'>
+                      Tech support:
+                    </strong>{" "}
+                    +1 (514) 312-5678
+                  </p>
+                  <p className='contact_info'>
+                    <strong className='contact_lable fw-bold'>Email:</strong>
+                    hello@patoi.com
+                  </p>
+                  <p className='contact_info'>
+                    <strong className='contact_lable fw-bold'>Address:</strong>{" "}
+                    1523 Cook Hill Road New Haven, CT
+                  </p>
+                  <p className='contact_info'>
+                    <strong className='contact_lable fw-bold'>
+                      Available:
+                    </strong>{" "}
+                    Monday - Friday 8:00am - 8:00pm
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          {/* <div className='row mt-3'>
             <div className='col-lg-6'>
               <div className='mb-5'>
                 <h1 className='h3'>Contact Information</h1>
@@ -956,7 +1096,7 @@ function Kennel() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
