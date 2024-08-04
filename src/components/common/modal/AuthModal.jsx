@@ -18,6 +18,7 @@ function AuthModal({redirectionPath}) {
       tabIndex={-1}
       aria-labelledby='exampleModalLabel'
       aria-hidden='true'
+      data-bs-backdrop="static" data-bs-keyboard="false" 
     >
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content'>

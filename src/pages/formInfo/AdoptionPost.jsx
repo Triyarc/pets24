@@ -9,13 +9,16 @@ import PetGallery from "./PetGallery";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import "../../style/fabStyle.css"
+import "../../style/fabStyle.css";
+import VerificationModal from "../../components/common/modal/VerificationModal";
 
 function AdoptionPost() {
   const [cityValue, setCityValue] = useState(false);
   const [images, setImages] = useState([]);
   const [petData, setPetData] = useState([]);
   const [imageItems, setImageItems] = useState([]); // State to manage selected images
+  const [showVerficationModal, setShowVerficationModal] = useState(false);
+
   const maxNumber = 4;
 
   const form = useForm({
@@ -77,7 +80,7 @@ function AdoptionPost() {
     if (data.dob) {
       let date = new Date(data.dob);
       let formattedDate = moment(date).format("DD-MM-YYYY");
-      data.dob = formattedDate
+      data.dob = formattedDate;
     }
     data.petPhoto = imageItems;
     console.log(data.petPhoto, " data.petPhoto");
@@ -116,6 +119,7 @@ function AdoptionPost() {
         if (res?.success == true) {
           toast.success("submitted Successfully");
           reset();
+          setShowVerficationModal(true);
         } else if (res?.success == false) {
           toast.error("Something went wrong");
         }
@@ -127,7 +131,7 @@ function AdoptionPost() {
 
   useEffect(() => {
     setValue("breeds_id", "");
-  }, [watchPets , setValue]);
+  }, [watchPets, setValue]);
 
   useEffect(() => {
     apiCall({
@@ -139,310 +143,322 @@ function AdoptionPost() {
     });
   }, []);
 
+  // Verification modal
+
+  const handleVerificationModalProcess = () => {
+    setShowVerficationModal(false);
+  };
   return (
     <>
-    <div className='container '>
-      <div className='shipping_addres_area_main'>
-        <div className='shipping_addres_main_form_area'>
-          <div className='section_heading mt-5'>
-            <h2>Adoption Post</h2>
-            <p>
-              Tempor aute culpa consectetur labore deserunt cupidatat voluptate.
-              Esse adipisicing in deserunt adipisicing duis.
-            </p>
-          </div>
-          <PetGallery
-            setImages={setImages}
-            images={images}
-            imageItems={imageItems}
-            setImageItems={setImageItems}
-            maxNumber={maxNumber}
-          />
+      <div className='container '>
+        <div className='shipping_addres_area_main'>
+          <div className='shipping_addres_main_form_area'>
+            <div className='section_heading mt-5'>
+              <h2>Adoption Post</h2>
+              <p>
+                Tempor aute culpa consectetur labore deserunt cupidatat
+                voluptate. Esse adipisicing in deserunt adipisicing duis.
+              </p>
+            </div>
+            <PetGallery
+              setImages={setImages}
+              images={images}
+              imageItems={imageItems}
+              setImageItems={setImageItems}
+              maxNumber={maxNumber}
+            />
 
-          <h2>Pet Details</h2>
-          <div className='shipping_address_form'>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
-              <div className='row'>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='zipCode' className='p-1'>
-                      Pet
-                    </label>
-
-                    <Controller
-                      name='pets_id'
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          options={petOptions}
-                          value={petOptions.find(
-                            (c) => c.value === field.value
-                          )}
-                          onChange={(val) => field.onChange(val.value)}
-                        />
-                      )}
-                      rules={{ required: true }}
-                    />
-                    {errors.pets_id && (
-                      <p className='text-danger'>Select Pets</p>
-                    )}
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='profile_image' className='p-1'>
-                      Breed
-                    </label>
-                    <Controller
-                      name='breeds_id'
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          options={breedOptions}
-                          value={breedOptions.find(
-                            (c) => c.value === field.value
-                          )}
-                          onChange={(val) => {
-                            field.onChange(val.value);
-                          }}
-                        />
-                      )}
-                      rules={{ required: true }}
-                    />
-                    {errors.breeds_id && (
-                      <p className='text-danger'>Select Breed Correctly</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='name' className='p-1'>
-                      name
-                    </label>
-
-                    <input
-                      type='text'
-                      id='name'
-                      className='form-control'
-                      {...register("name", {
-                        required: {
-                          value: true,
-                          message: "name required",
-                        },
-                        pattern: {
-                          value: /^[a-zA-Z ]{3,}$/,
-                          message: "Only in Alphabetic of 3 letter ",
-                        },
-                      })}
-                    />
-
-                    <p className='text-danger'>{errors.name?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='gender' className='p-1'>
-                      Gender*
-                    </label>
-                    <select
-                      as='select' // Updated to use select for dropdown
-                      className='form-control'
-                      name='gender'
-                      {...register("gender", {
-                        required: {
-                          value: true,
-                          message: "Gender required",
-                        },
-                      })}
-                    >
-                      <option value=''>Select Gender</option>
-                      <option value='male'>Male</option>
-                      <option value='female'>Female</option>
-                    </select>
-                    <p className='text-danger '>{errors.gender?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='dob' className='p-1'>
-                      Birth in year
-                    </label>
-                    <Controller
-                      className='w-100'
-                      name='dob'
-                      control={control}
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "Select Date Of Birth",
-                        },
-                      }}
-                      render={({ field }) => (
-                        <DatePicker
-                          {...field}
-                          selected={field.value}
-                          onChange={(date) => {
-                            setValue("dob", date, { shouldValidate: true }); // Update the value and trigger validation
-                          }}
-                          dateFormat='MM/yyyy'
-                          className='form-control w-100'
-                          showMonthYearPicker
-                        />
-                      )}
-                    />
-                    <p className='text-danger '>{errors.dob?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='height' className='p-1'>
-                      Height in cm
-                    </label>
-                    <input
-                      type='number'
-                      id='height'
-                      className='form-control'
-                      {...register("height", {
-                        required: {
-                          value: true,
-                          message: "Height required",
-                        },
-                      })}
-                    />
-                    <p className='text-danger'>{errors.height?.message}</p>
-                  </div>
-                </div>
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='weight' className='p-1'>
-                      Weight in Kg
-                    </label>
-                    <input
-                      type='number'
-                      id='weight'
-                      className='form-control'
-                      {...register("weight", {
-                        required: {
-                          value: true,
-                          message: "Weight required",
-                        },
-                      })}
-                    />
-                    <p className='text-danger'>{errors.weight?.message}</p>
-                  </div>
-                </div>
-
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='certificate' className='p-1'>
-                      Certificate*
-                    </label>
-                    <select
-                      as='select' // Updated to use select for dropdown
-                      className='form-control'
-                      name='certificate'
-                      {...register("certificate", {
-                        required: {
-                          value: true,
-                          message: "Certificate required",
-                        },
-                      })}
-                    >
-                      <option value=''>Select Certificate</option>
-                      <option value='yes'>Yes</option>
-                      <option value='No'>No</option>
-                    </select>
-                    <p className='text-danger '>
-                      {errors.certificate?.message}
-                    </p>
-                  </div>
-                </div>
-                {watchCertificate === "yes" && (
+            <h2>Pet Details</h2>
+            <div className='shipping_address_form'>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <div className='row'>
                   <div className='col-lg-6'>
                     <div className='form-group'>
-                      <label for='certificateImage' className='p-1'>
-                        Certificate Image (optional)
+                      <label for='zipCode' className='p-1'>
+                        Pet
+                      </label>
+
+                      <Controller
+                        name='pets_id'
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            options={petOptions}
+                            value={petOptions.find(
+                              (c) => c.value === field.value
+                            )}
+                            onChange={(val) => field.onChange(val.value)}
+                          />
+                        )}
+                        rules={{ required: true }}
+                      />
+                      {errors.pets_id && (
+                        <p className='text-danger'>Select Pets</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='profile_image' className='p-1'>
+                        Breed
+                      </label>
+                      <Controller
+                        name='breeds_id'
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            options={breedOptions}
+                            value={breedOptions.find(
+                              (c) => c.value === field.value
+                            )}
+                            onChange={(val) => {
+                              field.onChange(val.value);
+                            }}
+                          />
+                        )}
+                        rules={{ required: true }}
+                      />
+                      {errors.breeds_id && (
+                        <p className='text-danger'>Select Breed Correctly</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='name' className='p-1'>
+                        name
                       </label>
 
                       <input
-                        type='file'
-                        id='certificateImage'
+                        type='text'
+                        id='name'
                         className='form-control'
-                        accept='.jpg, .jpeg, .png'
-                        {...register("certificateImage", {
+                        {...register("name", {
                           required: {
                             value: true,
-                            message: "Certificate Image required",
+                            message: "name required",
+                          },
+                          pattern: {
+                            value: /^[a-zA-Z ]{3,}$/,
+                            message: "Only in Alphabetic of 3 letter ",
                           },
                         })}
                       />
-                      <p className='text-danger'>
-                        {errors.certificateImage?.message}
+
+                      <p className='text-danger'>{errors.name?.message}</p>
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='gender' className='p-1'>
+                        Gender*
+                      </label>
+                      <select
+                        as='select' // Updated to use select for dropdown
+                        className='form-control'
+                        name='gender'
+                        {...register("gender", {
+                          required: {
+                            value: true,
+                            message: "Gender required",
+                          },
+                        })}
+                      >
+                        <option value=''>Select Gender</option>
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                      </select>
+                      <p className='text-danger '>{errors.gender?.message}</p>
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='dob' className='p-1'>
+                        Birth in year
+                      </label>
+                      <Controller
+                        className='w-100'
+                        name='dob'
+                        control={control}
+                        rules={{
+                          required: {
+                            value: true,
+                            message: "Select Date Of Birth",
+                          },
+                        }}
+                        render={({ field }) => (
+                          <DatePicker
+                            {...field}
+                            selected={field.value}
+                            onChange={(date) => {
+                              setValue("dob", date, { shouldValidate: true }); // Update the value and trigger validation
+                            }}
+                            dateFormat='MM/yyyy'
+                            className='form-control w-100'
+                            showMonthYearPicker
+                          />
+                        )}
+                      />
+                      <p className='text-danger '>{errors.dob?.message}</p>
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='height' className='p-1'>
+                        Height in cm
+                      </label>
+                      <input
+                        type='number'
+                        id='height'
+                        className='form-control'
+                        {...register("height", {
+                          required: {
+                            value: true,
+                            message: "Height required",
+                          },
+                        })}
+                      />
+                      <p className='text-danger'>{errors.height?.message}</p>
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='weight' className='p-1'>
+                        Weight in Kg
+                      </label>
+                      <input
+                        type='number'
+                        id='weight'
+                        className='form-control'
+                        {...register("weight", {
+                          required: {
+                            value: true,
+                            message: "Weight required",
+                          },
+                        })}
+                      />
+                      <p className='text-danger'>{errors.weight?.message}</p>
+                    </div>
+                  </div>
+
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='certificate' className='p-1'>
+                        Certificate*
+                      </label>
+                      <select
+                        as='select' // Updated to use select for dropdown
+                        className='form-control'
+                        name='certificate'
+                        {...register("certificate", {
+                          required: {
+                            value: true,
+                            message: "Certificate required",
+                          },
+                        })}
+                      >
+                        <option value=''>Select Certificate</option>
+                        <option value='yes'>Yes</option>
+                        <option value='No'>No</option>
+                      </select>
+                      <p className='text-danger '>
+                        {errors.certificate?.message}
                       </p>
                     </div>
                   </div>
-                )}
+                  {watchCertificate === "yes" && (
+                    <div className='col-lg-6'>
+                      <div className='form-group'>
+                        <label for='certificateImage' className='p-1'>
+                          Certificate Image (optional)
+                        </label>
 
-                <div className='col-lg-6'>
-                  <div className='form-group'>
-                    <label for='amount' className='p-1'>
-                      Adoption Charge
-                    </label>
-                    <input
-                      type='number'
-                      id='amount'
-                      className='form-control'
-                      {...register("amount", {
-                        required: {
-                          value: true,
-                          message: "amount required",
-                        },
-                      })}
-                    />
-                    <p className='text-danger'>{errors.amount?.message}</p>
+                        <input
+                          type='file'
+                          id='certificateImage'
+                          className='form-control'
+                          accept='.jpg, .jpeg, .png'
+                          {...register("certificateImage", {
+                            required: {
+                              value: true,
+                              message: "Certificate Image required",
+                            },
+                          })}
+                        />
+                        <p className='text-danger'>
+                          {errors.certificateImage?.message}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='amount' className='p-1'>
+                        Adoption Charge
+                      </label>
+                      <input
+                        type='number'
+                        id='amount'
+                        className='form-control'
+                        {...register("amount", {
+                          required: {
+                            value: true,
+                            message: "amount required",
+                          },
+                        })}
+                      />
+                      <p className='text-danger'>{errors.amount?.message}</p>
+                    </div>
+                  </div>
+
+                  <div className='col-lg-12'>
+                    <div className='form-group'>
+                      <label for='state' className='p-1'>
+                        Pet Description (Optional)
+                      </label>
+
+                      <textarea
+                        type='text'
+                        id='description'
+                        className='form-control'
+                        {...register("description", {
+                          required: {
+                            value: true,
+                            message: "Description required",
+                          },
+                        })}
+                      />
+                      {errors.state && (
+                        <p className='text-danger'>
+                          {errors.description?.message}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                <div className='col-lg-12'>
-                  <div className='form-group'>
-                    <label for='state' className='p-1'>
-                      Pet Description (Optional)
-                    </label>
-
-                    <textarea
-                      type='text'
-                      id='description'
-                      className='form-control'
-                      {...register("description", {
-                        required: {
-                          value: true,
-                          message: "Description required",
-                        },
-                      })}
-                    />
-                    {errors.state && (
-                      <p className='text-danger'>
-                        {errors.description?.message}
-                      </p>
-                    )}
+                <div className='modal-footer'>
+                  <div className='my_acount_submit'>
+                    <button
+                      type='submit'
+                      className='btn btn_theme btn_md w-100'
+                    >
+                      Submit
+                    </button>
                   </div>
                 </div>
-              </div>
-
-              <div className='modal-footer'>
-                <div className='my_acount_submit'>
-                  <button type='submit' className='btn btn_theme btn_md w-100'>
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </form>
-            <DevTool control={control} />
+              </form>
+              <DevTool control={control} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <VerificationModal
+        handleVerificationModalProcess={handleVerificationModalProcess}
+        showVerficationModal={showVerficationModal}
+      />
     </>
   );
 }
