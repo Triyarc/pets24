@@ -1,0 +1,95 @@
+.product-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 400px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-image {
+    width: 80px;
+    height: auto;
+    margin-right: 16px;
+  }
+  
+  .product-details {
+    flex-grow: 1;
+  }
+
+  .quantity-controls input.quantity-input {
+    margin: 0 8px;
+    font-size: 16px;
+    width: 48px;
+    text-align: center;
+  }
+  
+  .product-title {
+    font-size: 18px;
+    font-weight: bold;
+    font-weight: 500;
+    width: 215px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .product-description {
+    color: green;
+  }
+  
+  
+  .product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin: 0 0 8px;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-controls button {
+    background-color: #f34100;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .quantity-controls span {
+    margin: 0 8px;
+    font-size: 16px;
+  }
+  .deleteCart{
+    color: red;
+    font-size: 30px;
+    font-weight: 400;
+    position: absolute;
+    right: 26px;
+  }
+  
+  .delete-icon {
+    margin-left: 16px;
+    cursor: pointer;
+  }
+  .offcanvas_positionCart{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .CartnavButton {
+    width: 100%;
+    background-color: #f34100;
+    color: #fff;
+    height: 47px;
+    border: none;
+    border-radius: 6px;
+}

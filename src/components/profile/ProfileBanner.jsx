@@ -1,5 +1,6 @@
 import React from "react";
 import PetCard from "../common/card/PetCard";
+import { FaShippingFast } from 'react-icons/fa';
 
 function ProfileBanner() {
   return (
@@ -33,6 +34,8 @@ function ProfileBanner() {
             <div className='d-flex flex-column justify-content-end name_detail'>
               <h1 className='shopTitle'>Pet Care Veterinary Clinic</h1>
               <p>Timing: 10 AM - 8 PM</p>
+              <p className="DeliveryStyle"><FaShippingFast size={24} color="rgb(17 162 71)" /> Online Delivery Available</p>
+
             </div>
           </div>
         </div>

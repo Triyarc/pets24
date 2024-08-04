@@ -338,6 +338,12 @@ p.profile_name {
   font-weight: 500;
   color: #2a2b39;
 }
+.WriteReviewSection{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 105px;
+}
 
 p.contact_info {
   font-weight: 500;
