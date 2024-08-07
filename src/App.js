@@ -35,6 +35,7 @@ import { useDispatch } from "react-redux";
 import EditPorfileDetails from "./pages/formInfo/EditPorfileDetails";
 import EditShopDetails from "./pages/formInfo/EditShopDetails";
 import CartOffcanvas from "./components/common/CartOffcanvas";
+import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
   // const [timmer, setTimmer] = useState(true);
@@ -108,67 +109,67 @@ function App() {
     <div className='App'>
       {/* {timmer && <Loader />} */}
       <>
-        <Navbar />
-        <CartOffcanvas
-          cart={cart}
-          incrementQuantity={incrementQuantity}
-          decrementQuantity={decrementQuantity}
-          removeFromCart={removeFromCart}
-          clearCart={clearCart}
-        />
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/' element={<Home />} />
-
-          {/* profile */}
-          <Route path='/profile-post' element={<ProfileDetails />} />
-          <Route path='/profile' element={<UserProfile />} />
-          <Route path='/profileTwo' element={<ProfileUpdate />} />
-          <Route path='/edit-profile-info' element={<EditPorfileDetails />} />
-
-          {/* shop */}
-          <Route path='/pet-shop-list' element={<ShopList />} />
-          <Route path='/shop-post' element={<ShopDetails />} />
-          <Route path='/shop-registration' element={<ShopRegistration />} />
-          <Route path='/edit-shop-info' element={<EditShopDetails />} />
-
-          {/* adoption */}
-          <Route path='/adoption' element={<Adoption />} />
-          <Route path='/adoption-post' element={<AdoptionPost />} />
-          <Route path='/pet-details/adoption/:id' element={<PetDetails />} />
-          <Route path='/pet-details/Mating/:id' element={<PetDetails />} />
-
-          {/* mating */}
-          <Route path='/mating' element={<Mating />} />
-          <Route path='/mating-post' element={<MatingPost />} />
-          {/* service */}
-          <Route path='/service' element={<Service />} />
-          <Route path='/service-post' element={<ServicePost />} />
-          {/* product */}
-          <Route
-            path='/product'
-            element={<ProductShop addToCart={addToCart} />}
+        <ErrorBoundary>
+          <Navbar />
+          <CartOffcanvas
+            cart={cart}
+            incrementQuantity={incrementQuantity}
+            decrementQuantity={decrementQuantity}
+            removeFromCart={removeFromCart}
+            clearCart={clearCart}
           />
-          <Route
-            path='/product-detail/:slug'
-            element={<ProductDetails addToCart={addToCart} />}
-          />
-          <Route
-            path='/cart'
-            element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
-            }
-          />
-          <Route path='/pet-gallery' element={<PetGallery />} />
-          <Route path='/about-us' element={<About />} />
-          <Route path='/contact-us' element={<Contact />} />
-          <Route path='/404' element={<ErrorBoundry />} />
-          <Route path='*' element={<ErrorBoundry />} />
-        </Routes>
-        <Footer />
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/' element={<Home />} />
+
+            {/* profile */}
+            <Route path='/profile-post' element={<ProfileDetails />} />
+            <Route path='/profile' element={<UserProfile />} />
+            <Route path='/profileTwo' element={<ProfileUpdate />} />
+            <Route path='/edit-profile-info' element={<EditPorfileDetails />} />
+
+            {/* shop */}
+            <Route path='/pet-shop-list' element={<ShopList />} />
+            <Route path='/shop-post' element={<ShopDetails />} />
+            <Route path='/shop-registration' element={<ShopRegistration />} />
+            <Route path='/edit-shop-info' element={<EditShopDetails />} />
+
+            {/* adoption */}
+            <Route path='/adoption' element={<Adoption />} />
+            <Route path='/pet-details/adoption/:id' element={<PetDetails />} />
+            <Route path='/pet-details/Mating/:id' element={<PetDetails />} />
+
+            {/* mating */}
+            <Route path='/mating' element={<Mating />} />
+            <Route path='/mating-post' element={<MatingPost />} />
+            {/* service */}
+            <Route path='/service' element={<Service />} />
+            <Route path='/service-post' element={<ServicePost />} />
+            {/* product */}
+            <Route
+              path='/product'
+              element={<ProductShop addToCart={addToCart} />}
+            />
+            <Route
+              path='/product-detail/:slug'
+              element={<ProductDetails addToCart={addToCart} />}
+            />
+
+            {/* protected route */}
+            <Route element={<ProtectedRoute />}>
+              <Route path='/cart' element={<Cart />} />
+              <Route path='/adoption-post' element={<AdoptionPost />} />
+            </Route>
+
+            <Route path='/pet-gallery' element={<PetGallery />} />
+            <Route path='/about-us' element={<About />} />
+            <Route path='/contact-us' element={<Contact />} />
+            <Route path='/404' element={<ErrorBoundry />} />
+            <Route path='*' element={<ErrorBoundry />} />
+          </Routes>
+          <Footer />
+        </ErrorBoundary>
       </>
     </div>
   );

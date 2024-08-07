@@ -11,13 +11,22 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import "../../style/fabStyle.css";
 import VerificationModal from "../../components/common/modal/VerificationModal";
+import AdsVisibilityModal from "../../components/common/modal/AdsVisibilityModal";
+import { useSelector } from "react-redux";
 
 function AdoptionPost() {
   const [cityValue, setCityValue] = useState(false);
   const [images, setImages] = useState([]);
   const [petData, setPetData] = useState([]);
   const [imageItems, setImageItems] = useState([]); // State to manage selected images
+
+  // verification and visibility modal
   const [showVerficationModal, setShowVerficationModal] = useState(false);
+  const [showVisibilityModal, setShowVisibilityModal] = useState(false);
+
+  // state Value
+  const serviceProcess = useSelector((state) => state.form);
+  console.log(serviceProcess, "serviceProcess");
 
   const maxNumber = 4;
 
@@ -32,6 +41,7 @@ function AdoptionPost() {
       weight: "",
       certificate: "",
       certificateImage: null,
+      is_vaccinated: null,
       petPhoto: [],
       amount: "",
       description: "",
@@ -148,8 +158,31 @@ function AdoptionPost() {
   const handleVerificationModalProcess = () => {
     setShowVerficationModal(false);
   };
+
+  const handleVerificationModalClose = () => {
+    setShowVerficationModal(false);
+    setShowVisibilityModal(true);
+  };
+
+  const handleVisibilityModalProcess = () => {
+    setShowVisibilityModal(false);
+  };
+
+  const handleVisibilityModalClose = () => {
+    setShowVisibilityModal(false);
+  };
   return (
     <>
+      <VerificationModal
+        handleVerificationModalProcess={handleVerificationModalProcess}
+        showVerficationModal={showVerficationModal}
+        handleVerificationModalClose={handleVerificationModalClose}
+      />
+      <AdsVisibilityModal
+        handleVisibilityModalProcess={handleVisibilityModalProcess}
+        handleVisibilityModalClose={handleVisibilityModalClose}
+        showVisibilityModal={showVisibilityModal}
+      />
       <div className='container '>
         <div className='shipping_addres_area_main'>
           <div className='shipping_addres_main_form_area'>
@@ -392,7 +425,31 @@ function AdoptionPost() {
                       </div>
                     </div>
                   )}
-
+                  <div className='col-lg-6'>
+                    <div className='form-group'>
+                      <label for='is_vaccinated' className='p-1'>
+                        Vaccinated
+                      </label>
+                      <select
+                        as='select' // Updated to use select for dropdown
+                        className='form-control'
+                        name='is_vaccinated'
+                        {...register("is_vaccinated", {
+                          required: {
+                            value: true,
+                            message: "Vaccinated required",
+                          },
+                        })}
+                      >
+                        <option value=''>Select Vaccinated</option>
+                        <option value='1'>Yes</option>
+                        <option value='0'>No</option>
+                      </select>
+                      <p className='text-danger '>
+                        {errors.is_vaccinated?.message}
+                      </p>
+                    </div>
+                  </div>
                   <div className='col-lg-6'>
                     <div className='form-group'>
                       <label for='amount' className='p-1'>
@@ -455,10 +512,6 @@ function AdoptionPost() {
           </div>
         </div>
       </div>
-      <VerificationModal
-        handleVerificationModalProcess={handleVerificationModalProcess}
-        showVerficationModal={showVerficationModal}
-      />
     </>
   );
 }

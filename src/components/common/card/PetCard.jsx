@@ -2,6 +2,9 @@ import React from "react";
 import "../../../style/product.css";
 import verify from "../../../assets/img/common/Default.png";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { IoMdMale } from "react-icons/io";
+import { IoMdFemale } from "react-icons/io";
+import DateComponent from "../DateComponent";
 
 function PetCard({ item, handleClick }) {
   return (
@@ -17,7 +20,7 @@ function PetCard({ item, handleClick }) {
         <span className='PetVerify'>
           {/* <img src={verify} alt='verify'>
           </img> */}
-          <RiVerifiedBadgeFill className="PetVerify_img"/>
+          <RiVerifiedBadgeFill className='PetVerify_img' />
           Trusted
         </span>
         <div className='_3UrC5'>
@@ -42,7 +45,7 @@ function PetCard({ item, handleClick }) {
       </div>
       <div className='shop_item_content'>
         <h3 className='d-flex justify-content-between mt-2'>
-          <a href='' alt='name' className='card-pet-name'>
+          <a href='' alt='name' className='card-pet-name mt-2'>
             {item?.breeds_name ? item.breeds_name : "Breed"}{" "}
             {/* <span className='petDOB'>( {item?.dob ? item.dob : "23"} )</span> */}
           </a>
@@ -50,11 +53,15 @@ function PetCard({ item, handleClick }) {
             {item?.discountedPrice ? item.discountedPrice : "$768"}
           </a> */}
 
-          <span className='petNameClass'>
-            {item?.pets_name ? item.pets_name : ""}
-            <span className='p-0'>
-              {" "}
-              ({item?.gender[0] ? item.gender[0] : "male"})
+          <span className='petNameClass mb-0'>
+            <span className='p-0 gender-icon-background'>
+              {item?.gender.toLowerCase() == "male" ? (
+                <IoMdMale className='petCard_male_icon' />
+              ) : (
+                item?.gender.toLowerCase() == "female" && (
+                  <IoMdFemale className='petCard_female_icon' />
+                )
+              )}
             </span>
           </span>
         </h3>
@@ -62,7 +69,7 @@ function PetCard({ item, handleClick }) {
           <h5 className='petNameClass'>
             <span>
               Age : &nbsp;
-              {"2.1"}
+              {"2.1"} yr
               {/* {item?.dob ? item.dob : "2.1"} */}
             </span>
             <span className='cretificated'>
@@ -80,9 +87,9 @@ function PetCard({ item, handleClick }) {
           </span>
           <p className='CartCerti'> Certificated</p>
         </h3> */}
-        <div className='card-pet-area-uploaded d-flex justify-content-between my-1'>
-          <p>Chennai 297686</p>
-          <p>{item?.created_at.split(" ")[0]}</p>
+        <div className='card-pet-area-uploaded d-flex justify-content-between my-0'>
+          <p>coimbatore, TN</p>
+          <p>{<DateComponent dateString={item?.created_at.split(" ")[0]} />}</p>
         </div>
       </div>
     </div>

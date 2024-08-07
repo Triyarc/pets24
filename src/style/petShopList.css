@@ -1,22 +1,40 @@
-
-
 @media only screen and (max-width: 500px) {
-
-    .pet_shop_img a img{
-        height: 150px;
-    }
+  .pet_shop_img a img {
+    height: 150px;
+  }
 }
 
-.shop-Logo-Image{
-    width: auto;
-    height: 56px;
+.shop-Logo-Image {
+  width: auto;
+  height: 56px;
 }
 
-.searchSection{
-    /* padding: 18px; */
-    /* border: 1px solid gray; */
-    /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
-    /* margin-bottom: 35px;
+.searchSection {
+  /* padding: 18px; */
+  /* border: 1px solid gray; */
+  /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+  /* margin-bottom: 35px;
     border-radius: 8px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px -1px 3px 1px; */
+}
+.petCard_male_icon {
+  color: #4784fc;
+  font-size: 16px; /* font-weight: 600; */
+  background-color: #dbdbdb;
+}
+.petCard_female_icon{
+    color: #fd7cdd;
+    font-size: 17px; /* font-weight: 600; */
+    background-color: #dbdbdb;
+}
+.gender-icon-background {
+  background: #e4e4e4; /* padding: 13px; */
+  height: 34px;
+  width: 32px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  margin-right: 7px;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children, ...rest }) => {
   // Check if the user is authenticated (e.g., check for the presence of the loggedIn cookie)
@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
   }, [isAuthenticated]);
 
   // If authenticated, render the children; otherwise, redirect to the login page
-  return isAuthenticated ? children : <Navigate to='/login' />;
+  return isAuthenticated ? <Outlet/> : <Navigate to='/login' />;
 };
 
 export default ProtectedRoute;

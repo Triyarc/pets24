@@ -1411,7 +1411,7 @@ textarea.form-control {
   font-family: "Poppins", sans-serif;
 }
 .shop_item_content h3 a {
-  color: var(--black-color);
+  color:var(--black-color)
 }
 .shop_main_item:hover  {
   color: var(--main-color);
@@ -1428,8 +1428,8 @@ textarea.form-control {
 }
 .shop_item_price span {
   text-align: center;
-  color: #192f61;
-  font-size: 14px;
+  color: var(--black-color);
+  font-size: 13px;
   line-height: 20px;
   padding-right: 10px;
 }

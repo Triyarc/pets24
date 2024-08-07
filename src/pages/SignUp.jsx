@@ -61,8 +61,8 @@ function SignUp() {
     } else if (/^\d/.test(registrationData.username)) {
       newErrors.username = "Username only in alphabetic";
       isValid = false;
-    } else if (!/^[a-zA-Z]{3,}$/.test(registrationData.username)) {
-      newErrors.username = "Username must be at least 2 characters long";
+    } else if (!/^[a-zA-Z ]{3,}$/.test(registrationData.username)) {
+      newErrors.username = "Minimum three letter of alphabets";
       isValid = false;
     } else {
       newErrors.username = "";

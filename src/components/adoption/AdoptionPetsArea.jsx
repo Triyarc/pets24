@@ -4,6 +4,8 @@ import { local_host } from "../../env";
 import { useNavigate } from "react-router-dom";
 import PetCard from "../common/card/PetCard";
 import Skeleton from "react-loading-skeleton";
+import SearchBar from "../common/SearchBar";
+import RequestPetModal from "../common/modal/RequestPetModal";
 
 function AdoptionPetsArea() {
   const [data, setData] = useState([]);
@@ -50,6 +52,22 @@ function AdoptionPetsArea() {
             Filter
           </button>
           <div className='row'>
+          <div
+              className='autocomplete-wrapper mb-5'
+              style={{ zIndex: "", borderRadius: "100px" }}
+            >
+              <div className='col-12 col-lg-12 searchSection'>
+                {" "}
+                <div className='row'>
+                  <div className='col-lg-10'>
+                    <SearchBar />
+                  </div>
+                  <div className='col-lg-2 d-flex justify-content-end'>
+                    <RequestPetModal />
+                  </div>
+                </div>
+              </div>
+            </div>
             {/* product */}
             <div className='col-lg-12'>
               <div className='shop_main_area_wrapper'>

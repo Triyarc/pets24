@@ -6,7 +6,7 @@ import { setCheckbox } from "../../../redux/formSlice";
 
 function VerificationModal({
   showVerficationModal,
-  handleVerificationModalProcess,
+  handleVerificationModalProcess,handleVerificationModalClose
 }) {
   const [checkboxChecked, setCheckboxChecked] = useState("");
   const openRef = useRef(null);
@@ -21,10 +21,8 @@ function VerificationModal({
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(setCheckbox({ id: "1", value: checkboxChecked }));
-    setTimeout(() => {
-      handleVerificationModalProcess();
       modalCloseRef.current.click();
-    }, 300);
+      handleVerificationModalProcess();
   };
 
   useEffect(() => {
@@ -41,7 +39,7 @@ function VerificationModal({
       {" "}
       <button
         type='button'
-        class='btn btn-primary bg-white border-0'
+        class='btn bg-white border-0'
         ref={openRef}
         data-bs-toggle='modal'
         data-bs-target='#verificationModal'
@@ -100,7 +98,7 @@ function VerificationModal({
                         class='btn btn_theme_white btn_md w-100  mt-3'
                         data-bs-dismiss='modal'
                         ref={modalCloseRef}
-                        onClick={() => handleVerificationModalProcess()}
+                        onClick={() => handleVerificationModalClose()}
                       >
                         Skip
                       </button>
